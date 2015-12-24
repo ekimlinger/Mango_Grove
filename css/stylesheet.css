@@ -1,0 +1,63 @@
+#container {
+  
+  width: 200px;
+
+  margin: 0 auto;
+  float: right;
+
+
+}
+
+#picture {
+  width: 100%;
+
+
+}
+
+
+
+p {
+  font-size:17px;
+  font-family: arial ;
+
+}
+
+h1 {
+  font-size:40px;
+  font-weight: bold;
+  font-family: arial;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size:25px;
+  margin-bottom: 1px;
+
+}
+
+body {
+  background-image: url("http://stephenmitchellbooks.com/wp-content/uploads/2013/05/subtle_white_feathers.png");
+  
+
+  margin-left: 250px;
+  margin-right: 250px;
+  margin-top: 50px;
+}
+
+div h4 {
+  font-size: 15px;
+  font-family: arial;
+  text-align: right;
+
+  
+}
+
+li {
+  font-family: arial;
+
+}
+
+quote {
+  text-align: right;
+}
+
