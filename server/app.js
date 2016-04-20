@@ -24,7 +24,6 @@ MongoDB.once("open", function(err){
 });
 
 
-
 //BODYPARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -24,12 +24,19 @@ module.exports = function(grunt){
       }
     },
     jshint:{
-      files:'client/scripts/app.js'
+      files:['client/scripts/app.js', 'server/app.js']
     },
     watch: {
-      scripts:{
+      client:{
         files:'client/scripts/app.js',
         tasks: ['jshint', 'uglify'],
+        options:{
+          spawn: false
+        }
+      },
+      server:{
+        files:'server/app.js',
+        tasks: ['jshint'],
         options:{
           spawn: false
         }
@@ -75,7 +82,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('watch', ['watch'])
+
   grunt.registerTask('default', ['jshint','copy','uglify']);
 
 }
