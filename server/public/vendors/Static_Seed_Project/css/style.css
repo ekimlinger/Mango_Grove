@@ -51,7 +51,7 @@ h5 {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  background-color: #293846;
+  background-color: #2F4050;
   color: white;
 }
 .nav .open > a,
@@ -168,7 +168,7 @@ h5 {
 }
 .nav > li.active {
   border-left: 4px solid #19aa8d;
-  background: #293846;
+  background: #2F4050;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -265,7 +265,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   font-size: 12px;
 }
 .canvas-menu.mini-navbar .nav-second-level {
-  background: #293846;
+  background: #2F4050;
 }
 .mini-navbar li.active .nav-second-level {
   left: 65px;
