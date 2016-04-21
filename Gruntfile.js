@@ -24,7 +24,7 @@ module.exports = function(grunt){
       }
     },
     jshint:{
-      files:['client/scripts/app.js', 'server/app.js']
+      files:['client/scripts/app.js', 'server/app.js', 'server/modules/*.js', 'server/models/*.js']
     },
     watch: {
       client:{
@@ -35,7 +35,7 @@ module.exports = function(grunt){
         }
       },
       server:{
-        files:'server/app.js',
+        files:['server/app.js', 'server/modules/*.js', 'server/models/*.js'],
         tasks: ['jshint'],
         options:{
           spawn: false

@@ -8,4 +8,4 @@ var Post = new Schema({
     date_created: {type: Date, }
 });
 
-module.exports = mongoose.model("Post", Post)
+module.exports = mongoose.model("Post", Post);
