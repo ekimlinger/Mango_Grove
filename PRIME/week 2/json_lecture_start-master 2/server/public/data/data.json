@@ -1,0 +1,20 @@
+{
+  "people":[
+    {
+        "name":"tommy",
+        "favColor": "purple",
+        "kids":0,
+        "favFood":"burgers"
+
+
+    },
+
+    {
+      "name":"michelle",
+      "favColor":"blue",
+      "kids":1,
+      "favFood":"iceCream"
+
+    }
+  ]
+}

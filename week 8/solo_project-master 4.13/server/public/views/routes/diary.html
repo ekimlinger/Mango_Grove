@@ -1,0 +1,43 @@
+<md-content layout-padding>
+    <div style="width : 90%; margin: 0 auto; padding-bottom: 30px;">
+      <div layout-align="center center" layout="column">
+        <h1 class="md-display-2" > Diary Total: {{diaryNum.response}}</h1>
+    </div>
+    <div ng-repeat="diary in diaryEntered.response | orderBy: '-date'">
+
+          <md-card class = "diaryCard">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Date: {{ diary.date | date:'M/d/yyyy'}}</span>
+                </md-card-title-text>
+              </md-card-title>
+
+              <md-card-content>
+                <div>
+                  <h3>
+                      Title: {{ diary.title }}
+                  </h3>
+                </div>
+                <div>
+                  <h3>
+                      Weather: {{ diary.weather }}
+                  </h3>
+                </div>
+
+                <div>
+                  <h3>
+                      Content:
+                  </h3>
+                  <p>
+                      {{ diary.content }}
+                  </p>
+                </div>
+              </md-card-content>
+
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button  class="md-primary md-warn" ng-click="deleteDiary(diary)">Delete</md-button>
+              </md-card-actions>
+          </md-card>
+        </div>
+      </div>
+  </md-content>
