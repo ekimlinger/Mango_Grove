@@ -3,15 +3,16 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 
+//ROUTES
 var router = require('./modules/index.js');
-
+var postRouter = require('./modules/postRouter.js');
 
 //MONGO
 var mongoose = require("mongoose");
 var mongoURI =
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/parent_journal';
+  'mongodb://localhost/mango_grove';
 
 var MongoDB = mongoose.connect(mongoURI).connection;
 
@@ -29,8 +30,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-app.use('/', router);
 
+app.use('/post', postRouter);
+app.use('/', router);
 
 
 app.set("port",(process.env.PORT || 3000));
