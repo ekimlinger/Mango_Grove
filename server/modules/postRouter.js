@@ -22,7 +22,20 @@ router.get('/', function(req,res){
 router.post('/', function(req,res){
   console.log(req.body);
   var newPost = new Post({
-    // Post keys go here
+    type: "shoutout",
+    content: "great success",
+    date_created : 04/20/2016,
+    comments : [{
+      commentName : "Michelle",
+      commentEmail : "shell0720@gmail.com",
+      commentText : "yeah!!",
+      commentLike : 1
+    }],
+    name : "Brady",
+    email: "brady@gmail.com",
+    location: "Prime",
+    global : true
+
   });
   newPost.save(function(err, entry){
     if(err){
