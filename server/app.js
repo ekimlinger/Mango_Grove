@@ -7,22 +7,17 @@ var bodyParser = require('body-parser');
 var router = require('./modules/index.js');
 var postRouter = require('./modules/postRouter.js');
 
-//MONGO
-var mongoose = require("mongoose");
-var mongoURI =
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/mango_grove';
 
-var MongoDB = mongoose.connect(mongoURI).connection;
+var db = require('./modules/db');
+var router = require('./modules/index.js');
 
-MongoDB.on("error", function(err){
-    console.log("Mongo Connection Error: ", err);
-});
+//models
+var Post = require('./models/posts');
 
-MongoDB.once("open", function(err){
-    console.log("Mongo Connection Open");
-});
+
+//ROUTES
+var router = require('./modules/index.js');
+var postRouter = require('./modules/postRouter.js');
 
 
 //BODYPARSER
