@@ -15,11 +15,14 @@ var router = require('./modules/index.js');
 var Post = require('./models/posts');
 
 
+<<<<<<< HEAD
 //ROUTES
 var router = require('./modules/index.js');
 var postRouter = require('./modules/postRouter.js');
 
 
+=======
+>>>>>>> 0194009a17c212cbfa833e0be172ff8dacd9770a
 //BODYPARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

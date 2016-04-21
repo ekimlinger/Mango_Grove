@@ -1,7 +1,10 @@
 {
   "name": "mango_grove",
   "version": "1.0.0",
+<<<<<<< HEAD
   "description": "",
+=======
+>>>>>>> 0194009a17c212cbfa833e0be172ff8dacd9770a
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,5 +26,18 @@
     "jshint": "^2.9.2",
     "mongoose": "^4.4.12",
     "path": "^0.12.7"
+<<<<<<< HEAD
   }
+=======
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekimlinger/Mango_Grove.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ekimlinger/Mango_Grove/issues"
+  },
+  "homepage": "https://github.com/ekimlinger/Mango_Grove#readme",
+  "description": ""
+>>>>>>> 0194009a17c212cbfa833e0be172ff8dacd9770a
 }

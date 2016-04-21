@@ -22,6 +22,7 @@ router.get('/', function(req,res){
 router.post('/', function(req,res){
   console.log(req.body);
   var newPost = new Post({
+
     type: "shoutout",
     content: "great success",
     date_created : 04/20/2016,
