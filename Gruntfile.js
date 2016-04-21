@@ -71,8 +71,7 @@ module.exports = function(grunt){
          expand: true,
          cwd: 'client/views/',
          src: [
-            "index.html",
-            "minor.html" //added by tlvh for template testing
+            "*/*"
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
           "dest": "server/public/assets/views/"
