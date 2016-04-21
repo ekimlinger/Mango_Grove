@@ -6,7 +6,7 @@ var commentDetails = new Schema ({
   commentName : {type: String, require: true},
   commentEmail : {type : String, require: true},
   commentText : {type: String, require: true},
-  commentFlag : {type: Boolean, require: false},
+  commentFlag : {type: Number, require: false},
   commentLike : {type: Number, require: false},
 
 });
@@ -19,8 +19,8 @@ var Post = new Schema({
     comments : [commentDetails],
     name : {type: String, require: true},
     email : {type: String, require: true},
-    location: {type: String, require: true},
-    global : {type: Boolean, require: false}
+    location: {type: String, require: false},
+    global : {type: Boolean, require: true}
 
 });
 
