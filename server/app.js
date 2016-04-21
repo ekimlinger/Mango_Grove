@@ -2,14 +2,12 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-
+var db = require('./modules/db');
 var router = require('./modules/index.js');
 
 //models
 var Post = require('./models/posts');
 
-//routes
-var db = require('./routes/db');
 
 //ROUTES
 var router = require('./modules/index.js');
