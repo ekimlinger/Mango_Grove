@@ -7,7 +7,6 @@ var Post = require('../models/posts.js');
 
 
 
-
 router.get("/*", function(req,res){
   var file = req.params[0] || "/assets/views/index.html";
   res.sendFile(path.join(__dirname,"../public/", file));

@@ -24,7 +24,7 @@ module.exports = function(grunt){
       }
     },
     jshint:{
-      files:['client/scripts/app.js', 'server/app.js']
+      files:['client/scripts/app.js', 'server/app.js', 'server/modules/*.js', 'server/models/*.js']
     },
     watch: {
       client:{
@@ -35,7 +35,7 @@ module.exports = function(grunt){
         }
       },
       server:{
-        files:'server/app.js',
+        files:['server/app.js', 'server/modules/*.js', 'server/models/*.js'],
         tasks: ['jshint'],
         options:{
           spawn: false
@@ -71,7 +71,8 @@ module.exports = function(grunt){
          expand: true,
          cwd: 'client/views/',
          src: [
-            "index.html"
+            "index.html",
+            "minor.html" //added by tlvh for template testing
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
           "dest": "server/public/assets/views/"
