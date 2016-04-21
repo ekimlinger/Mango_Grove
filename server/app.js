@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var router = require('./modules/index.js');
 var postRouter = require('./modules/postRouter.js');
 
+<<<<<<< HEAD
 //MONGO
 var mongoose = require("mongoose");
 var mongoURI =
@@ -23,6 +24,19 @@ MongoDB.on("error", function(err){
 MongoDB.once("open", function(err){
     console.log("Mongo Connection Open");
 });
+=======
+
+var db = require('./modules/db');
+var router = require('./modules/index.js');
+
+//models
+var Post = require('./models/posts');
+
+
+//ROUTES
+var router = require('./modules/index.js');
+var postRouter = require('./modules/postRouter.js');
+>>>>>>> a4dfd80d7237a005b24ca4f4e0eba769de65ee4e
 
 
 //BODYPARSER
