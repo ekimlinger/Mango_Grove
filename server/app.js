@@ -5,20 +5,14 @@ var bodyParser = require('body-parser');
 
 //ROUTES
 var router = require('./modules/index.js');
-var postRouter = require('./modules/postRouter.js');
+var messageRouter = require('./modules/messageRouter.js');
 
 
 var db = require('./modules/db');
 var router = require('./modules/index.js');
 
-//models
-var Post = require('./models/posts');
-
-
-//ROUTES
-var router = require('./modules/index.js');
-var postRouter = require('./modules/postRouter.js');
-
+// Models
+var Message = require('./models/messages.js');
 
 
 //BODYPARSER
@@ -27,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-app.use('/post', postRouter);
+app.use('/message', messageRouter);
 app.use('/', router);
 
 

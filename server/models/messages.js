@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 //set up the comment info details for data embed purpose
-var commentDetails = new Schema ({
+var Comment = new Schema ({
   commentName : {type: String, require: true},
   commentEmail : {type : String, require: true},
   commentText : {type: String, require: true},
@@ -13,11 +13,11 @@ var commentDetails = new Schema ({
 });
 
 //set up the post schema
-var Post = new Schema({
+var Message = new Schema({
     type: {type: String, required: true},
     content: {type: String, required: true},
     date_created: {type: Date, default : Date.now},
-    comments : [commentDetails],
+    comments : {type: Array, default: []},
     name : {type: String, require: true},
     email : {type: String, require: true},
     location: {type: String, require: false},
@@ -25,4 +25,4 @@ var Post = new Schema({
 
 });
 
-module.exports = mongoose.model("Post", Post);
+module.exports = mongoose.model("Message", Message);
