@@ -16,7 +16,13 @@ var newMessage = {};//New Message object to be sent down to the database
 $(document).ready(function(){
     //when submit button is pressed in the postMessageForm
     $('#postMessageForm').on('submit', createPost);
+    //Filters global
+    $('#shoutOut').on('click',getGlobalMessages);
+    $('#mangoMoment').on('click',getGlobalMessages);
+    $('#affirmation').on('click',getGlobalMessages);
+    $('#all').on('click',getGlobalMessages);
 
+    getGlobalMessages();
 });
 
 //Create Post
@@ -37,32 +43,33 @@ function createPost(event){
       type: 'POST',
       url: '/message',
       data: newMessage, //Pass newMessage to the Database
-      success: function(){
-        console.log("Successful Post!");
-      } //Calls the showGLobalFeed function to display the new post
+      success: getGlobalMessages
     });
     //ALL ABOVE CODE IN THIS FUNCTION IS WORKING
 }
 //Function Grabs all Global Messages
 function getGlobalMessages(){
+  var type = $(this).data('type') || 'all';
+  //When function is called pass in type of "all", "so", "mm","af"
   //start of get all messages ajax call
+  var amount = 1;
+  var time = new Date(Date.now());
   $.ajax({
     type: 'GET',
     //MAKE SURE TO CHANGE THE URL ROUTE --change
-    url: '/global/',
-    success: loadGlobalFeed
+    url: '/message/global/'+type+'/'+amount+'/'+time,
+    success: function(response){
+      console.log("Successful Get Request: ", response);
+    }
       //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
       //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
-    }
   });
 }
 
 function loadGlobalFeed(response){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
   //empty out the div container on the DOM that stores the messages to refresh
   //append comments to the DOM
-
+  console.log("Response from get route is: ", response);
   //loop through the array and append INFO
-  for(var i = 0; i < response.length: i++){
 
-  }
-};
+}
