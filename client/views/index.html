@@ -15,7 +15,9 @@
     <link href="/vendors/Static_Seed_Project/css/animate.css" rel="stylesheet">
     <link href="/vendors/Static_Seed_Project/css/style.css" rel="stylesheet">
 
-    <!-- forgot to keep from Evan's index.html setup - delete note after merges done -->
+    <!-- local css file added by Mango Grove for parts not included in template tlvh -->
+    <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
+
     <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
 
 </head>
@@ -72,7 +74,7 @@
 
             </nav>
         </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
+        <!-- <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center m-t-lg">
@@ -85,10 +87,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- inserting forum code here tlvh -->
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <!-- <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>Forum - post view</h2>
                 <ol class="breadcrumb">
@@ -100,16 +102,20 @@
                     </li>
                 </ol>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox-content forum-post-container">
                         <div class="forum-post-info">
-                            <h4><span class="text-navy"><i class="fa fa-globe"></i>
+                            <h4><span class="text-navy"><i class="fa fa-sun-o"></i>
                               <!-- General discussion - original section tlvh -->
                               Mango Moments
-                            </span> - Announcements - <span class="text-muted">Free talks</span></h4>
+                            </span>
+                            <!-- prob not needed tlvh -->
+                            <!-- - Announcements - <span class="text-muted">Free talks</span> -->
+                          </h4>
+
                         </div>
                         <div class="media">
                             <a class="forum-avatar" href="#">
@@ -121,13 +127,24 @@
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">The standard chunk of Lorem Ipsum</h4>
-                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                                <br/><br/>
+                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                                </p>
+                                <p>
                                 Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                <br/><br/>
+                                </p>
+                                <p>
                                 - Mike Smith
                                 CEO, Zender Inc.
+                                </p>
+
+                                <div class="media-body react-options">
+                                    <button class="react-button fa fa-thumbs-o-up" title="Like"></button>
+                                    <button class="react-button fa fa-comment-o" title="Comment"></button>
+                                    <button class="react-button flag-button fa fa-flag" title="Flag"> <span class="small-type">Flag as inappropriate</span></button>
+                                </div>
+
                             </div>
+
                         </div>
                         <div class="media">
                             <a class="forum-avatar" href="#">
