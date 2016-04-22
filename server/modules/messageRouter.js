@@ -71,7 +71,7 @@ router.post('/comment/:messageID', function(req,res){
 
 //Posts new message
 router.post('/', function(req,res){
-  console.log(req.body);
+  console.log("Message Being Posted Server Side: ", req.body);
   var newMessage = new Message({
     // Message keys go here
   });
