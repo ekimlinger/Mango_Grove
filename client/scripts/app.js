@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 });
 
-
+//Create Post
 function createPost(event){
 
     event.preventDefault();
@@ -49,7 +49,7 @@ function getGlobalMessages(){
   $.ajax({
     type: 'GET',
     //MAKE SURE TO CHANGE THE URL ROUTE --change
-    url: '/globbal/',
+    url: '/global/',
     success: loadGlobalFeed
       //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
       //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
