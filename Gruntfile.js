@@ -71,7 +71,10 @@ module.exports = function(grunt){
          expand: true,
          cwd: 'client/views/',
          src: [
-            "*/*"
+            "*/*",
+            //adding back in - my html files aren't updating - tlvh
+            "index.html",
+            "minor.html"
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
           "dest": "server/public/assets/views/"
