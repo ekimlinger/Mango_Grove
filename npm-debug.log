@@ -9,8 +9,13 @@
 6 silly lifecycle mango_grove@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle mango_grove@1.0.0~start: mango_grove@1.0.0
 8 verbose lifecycle mango_grove@1.0.0~start: unsafe-perm in lifecycle true
+<<<<<<< HEAD
 9 verbose lifecycle mango_grove@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/joettepoehler/Atom Projects/mango_grove/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle mango_grove@1.0.0~start: CWD: /Users/joettepoehler/Atom Projects/mango_grove
+=======
+9 verbose lifecycle mango_grove@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/tvhAir/AtomProjects/mango_grove/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+10 verbose lifecycle mango_grove@1.0.0~start: CWD: /Users/tvhAir/AtomProjects/mango_grove
+>>>>>>> 8ed99f458f6c70cb8410acc7300095164eab80c8
 11 silly lifecycle mango_grove@1.0.0~start: Args: [ '-c', 'grunt && node server/app.js' ]
 12 silly lifecycle mango_grove@1.0.0~start: Returned: code: 3  signal: null
 13 info lifecycle mango_grove@1.0.0~start: Failed to exec start script

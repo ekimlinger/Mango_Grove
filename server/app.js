@@ -5,24 +5,14 @@ var bodyParser = require('body-parser');
 
 //ROUTES
 var router = require('./modules/index.js');
-var postRouter = require('./modules/postRouter.js');
+var messageRouter = require('./modules/messageRouter.js');
 
-//MONGO
-var mongoose = require("mongoose");
-var mongoURI =
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/mango_grove';
 
-var MongoDB = mongoose.connect(mongoURI).connection;
+var db = require('./modules/db');
+var router = require('./modules/index.js');
 
-MongoDB.on("error", function(err){
-    console.log("Mongo Connection Error: ", err);
-});
-
-MongoDB.once("open", function(err){
-    console.log("Mongo Connection Open");
-});
+// Models
+var Message = require('./models/messages.js');
 
 
 //BODYPARSER
@@ -31,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-app.use('/post', postRouter);
+app.use('/message', messageRouter);
 app.use('/', router);
 
 
