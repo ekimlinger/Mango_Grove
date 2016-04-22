@@ -72,8 +72,10 @@ module.exports = function(grunt){
          cwd: 'client/views/',
          src: [
 
+            "*/*",
+            //adding back in - my html files aren't updating - tlvh
             "index.html",
-            "minor.html" //added by tlvh for template testing
+            "minor.html"
 
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
