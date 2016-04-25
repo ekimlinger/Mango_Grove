@@ -3,15 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>User Comment Modal</title>
-<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap-theme.min.css">
+<link href="/vendors/Static_Seed_Project/css/bootstrap.min.css" rel="stylesheet">
+<link href="/vendors/Static_Seed_Project/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<link href="/vendors/Static_Seed_Project/css/animate.css" rel="stylesheet">
+<link href="/vendors/Static_Seed_Project/css/style.css" rel="stylesheet">
+
+<script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
+<script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
+<script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
+<script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
+
+<script type="text/javascript" src="/assets/scripts/app.min.js"></script>
+
 
 </head>
+<body>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="userCommentModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#userCommentModal">
   Share
 </button>
 
@@ -23,24 +36,27 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userCommentLabel">User Comments</h4>
       </div>
+      <form id="postUserMessageForm">
       <div class="modal-body">
-        <form>
-
         <p>What would you like to share?</p>
-        <label class="radio-inline"><input type="radio" name="optradio">Mango Moment</label>
-        <label class="radio-inline"><input type="radio" name="optradio">Shout-Out</label>
-        <label class="radio-inline"><input type="radio" name="optradio">Affirmation</label>
+        <label class="radio-inline"><input type="radio" name="type" value="mm" >Mango Moment</label>
+        <label class="radio-inline"><input type="radio" name="type" value="so" >Shout-Out</label>
+        <label class="radio-inline"><input type="radio" name="type" value="af" >Affirmation</label>
 
         <fieldset class="form-group">
-          <label for="userTextarea">Type here</label>
-          <textarea class="form-control" id="userTextarea" rows="3"></textarea>
+          <label for="guestTextarea">Type here</label>
+          <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
         </fieldset>
 
-        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Post</button>
+        <button type="button" id="createUserPost" class="btn btn-default" data-dismiss="modal">Post</button>
       </div>
+    </form>
+
     </div>
   </div>
 </div>
+
+</body>
+</html>
