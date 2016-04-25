@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 
@@ -20,11 +18,13 @@
     <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
     <!-- Custom and plugin javascript -->
     <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
     <!-- forgot to keep from Evan's index.html setup - delete note after merges done -->
+    <!-- local css file added by Mango Grove for parts not included in template tlvh -->
+    <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
+
     <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
 
 </head>
@@ -81,7 +81,7 @@
 
             </nav>
         </div>
-        <div class="wrapper wrapper-content animated fadeInRight">
+        <!-- <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center m-t-lg">
@@ -94,38 +94,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- inserting forum code here tlvh -->
-        <div class="row wrapper border-bottom white-bg page-heading">
-          <!--MY DUMMY CODE-->
-          <form id="postMessageForm">
-            <p>What would you like to share?</p>
-            <label class="radio-inline"><input type="radio" name="type" value="mm" >Mango Moment</label>
-            <label class="radio-inline"><input type="radio" name="type" value="so" >Shout-Out</label>
-            <label class="radio-inline"><input type="radio" name="type" value="af" >Affirmation</label>
-
-            <fieldset class="form-group">
-              <label for="exampleTextarea">Example textarea</label>
-              <textarea class="form-control" id="exampleTextarea" name="content" rows="3"></textarea>
-            </fieldset>
-            <fieldset class="form-group">
-              <label for="guestEmail">Email address</label>
-              <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
-              <small class="text-muted">We'll never share your email with anyone else.</small>
-            </fieldset>
-
-            <fieldset class="form-group">
-              <label for="username">User Name</label>
-              <input type="text" class="form-control" id="username" name="name" placeholder="User Name">
-            </fieldset>
-            <input type="submit"  />
-          </form>
-          <button data-type="so" id="shoutOut">Shout Outs</button>
-          <button data-type="mm" id="mangoMoment">Mango Moments</button>
-          <button data-type="af" id="affirmation">Affirmations</button>
-          <button data-type="all" id="all">All</button>
-          <!--END OF DUMMY CODE-->
+        <!-- <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>Forum - post view</h2>
                 <ol class="breadcrumb">
@@ -137,20 +109,33 @@
                     </li>
                 </ol>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-lg-12">
+              <!--TEST BUTTONS-->
+              <div>
+                <!--data-type IMPORTANT PLEASE DO NOT REMOVE. Used for filtering-->
+                <button data-type="so" id="shoutOut">Shout Outs</button>
+                <button data-type="mm" id="mangoMoment">Mango Moments</button>
+                <button data-type="af" id="affirmation">Affirmations</button>
+                <button data-type="all" id="all">All</button>
+              </div>
+              <!--END OF TEST BUTTONS-->
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox-content forum-post-container">
                         <div class="forum-post-info">
-                            <h4><span class="text-navy"><i class="fa fa-globe"></i>
+                            <h4><span class="text-navy"><i class="fa fa-sun-o"></i>
                               <!-- General discussion - original section tlvh -->
                               Mango Moments
-                            </span> - Announcements - <span class="text-muted">Free talks</span></h4>
+                            </span>
+                            <!-- prob not needed tlvh -->
+                            <!-- - Announcements - <span class="text-muted">Free talks</span> -->
+                          </h4>
+
                         </div>
+
                         <!--Append New Comments here to the comment-container class-->
                         <div class="comment-container">
-
 
                         </div>
                     </div>
@@ -178,3 +163,114 @@
 </body>
 
 </html>
+
+
+
+
+<!--SAMPLE FEED FROM TEMPLATE-->
+<!--<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a1.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 542<br/>
+            <strong>Joined:</strong> April 11.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">The standard chunk of Lorem Ipsum</h4>
+        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+        <br/><br/>
+        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        <br/><br/>
+        - Mike Smith
+        CEO, Zender Inc.
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a2.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 32<br/>
+            <strong>Joined:</strong> Dec 11.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">There are many variations of passages of Lorem Ipsum available</h4>
+        Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - Alex Kunter
+        Designer, Kurtner Company
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 543<br/>
+            <strong>Joined:</strong> June 21.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
+         All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - Monica Jackson
+        UX developer
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a4.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 72<br/>
+            <strong>Joined:</strong> March 08.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">Suffered alteration in some form,</h4>
+        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - John Ken
+        UX/UI developer
+
+        <div class="media">
+            <a class="forum-avatar" href="#">
+                <img src="/vendors/Static_Seed_Project/img/a7.jpg" class="img-circle" alt="image">
+                <div class="author-info">
+                    <strong>Posts:</strong> 253<br/>
+                    <strong>Joined:</strong> Oct 08.2015<br/>
+                </div>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"> Latin words, combined with a handful of mode</h4>
+                Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+
+
+
+                Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                <br/><br/>
+                - Adam Smith
+                CEO
+            </div>
+        </div>
+        <div class="media">
+            <a class="forum-avatar" href="#">
+                <img src="/vendors/Static_Seed_Project/img/a8.jpg" class="img-circle" alt="image">
+                <div class="author-info">
+                    <strong>Posts:</strong> 431<br/>
+                    <strong>Joined:</strong> March 25.2015<br/>
+                </div>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Virginia, looked up one of the more obscure Latin words</h4>
+                Distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+                <br/><br/>
+                Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words
+                <br/><br/>
+                - Sandra Jackson
+                UI developer
+            </div>
+        </div>
+    </div>
+
+</div>-->
