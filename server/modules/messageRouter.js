@@ -11,11 +11,11 @@ var Comment = require('../models/messages.js');
 router.get('/global/:type/:ammount/:time', function(req,res){
 
   console.log(req.params);
-  var ammount = req.params.ammount;
+  var ammount = parseInt(req.params.ammount);
   var time = req.params.time;
   var type = req.params.type;
 
-  Message.find({global: true, time: {$lt: time}}, function(err, data){
+  Message.find({global: true, time: {$lt: new Date(time)}}, function(err, data){
     if(err){
       console.log(err);
       res.send();

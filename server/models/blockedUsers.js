@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var BlockedUsers = new Schema ({
-  list : {type: Array, required: true, default: []}
+  list : {type: Array, default: []}
 });
 
 

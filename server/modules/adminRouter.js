@@ -6,6 +6,23 @@ var Message = require('../models/messages.js');
 var Comment = require('../models/comment.js');
 var BlockedUsers = require('../models/blockedUsers.js');
 
+
+// Creates new BlockedUsers list if none exists
+BlockedUsers.find({},function(err,data){
+  if(err){
+    console.log(err);
+  } else{
+    if (!data.length){
+      var newList = new BlockedUsers({});
+      newList.save(function(err){
+        if(err){
+          console.log(err);
+        }
+      });
+    }
+  }
+});
+
 // GETS
 
 router.get('/blockedUsers', function(req, res){
