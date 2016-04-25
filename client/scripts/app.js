@@ -65,9 +65,6 @@ function showAllGlobalFeed(response){//response is the data coming back from the
   console.log("Successful Get Request: ", response);
   $('.comment-container').empty();
   console.log("Response from get route is: ", response);
-
-    success: showAllGlobalFeed //show all messages on the success of the ajax call
-  });
 }
 //Shows all messages
 function showAllGlobalFeed(response){
@@ -91,16 +88,6 @@ function showAllGlobalFeed(response){
   }
 }
 //function that justs shows Mango Moments when called
-function showAllMangoMoments(){
-    //empty out the div container on the DOM that stores the messages to refresh
-    $('.comment-container').empty();
-    //loop through the array and append INFO
-    //append info to comment-container
-    for(var i = 0; i <allMessages.length; i++){
-      var comment = allMessages[i];//store response into comment for readability
-      if(comment.type == 'mm'){
-      $('.comment-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
-      var $el = $('.comment-container').children().last();
 
 function showAllMangoMoments(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
     //empty out the div container on the DOM that stores the messages to refresh
@@ -119,22 +106,7 @@ function showAllMangoMoments(){//response is the data coming back from the datab
   }
 }
 
-function showAllShoutOuts(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
-  //empty out the div container on the DOM that stores the messages to refresh
-  $('.comment-container').empty();
-  //loop through the array and append INFO
-  //append info to comment-container
-  for(var i = 0; i <allMessages.length; i++){
-    var comment = allMessages[i];//store response into comment for readability
-    if(comment.type == 'so'){
-    $('.comment-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
-    var $el = $('.comment-container').children().last();
 
-      $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-      $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
-    }
-  }
-}
 //Function that shows just Shout Outs when Called
 function showAllShoutOuts(){
   //empty out the div container on the DOM that stores the messages to refresh

@@ -12,11 +12,6 @@
 <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap-theme.min.css">
 
-
-<script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
 <script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
 <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
 <script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -30,7 +25,6 @@
 
 </head>
 <body>
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestCommentModal">
   Share
@@ -44,37 +38,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="userCommentLabel">Guest Comments</h4>
       </div>
-
-      <div class="modal-body">
-        <form>
-
-        <p>What would you like to share?</p>
-        <label class="radio-inline"><input type="radio" name="optradio">Mango Moment</label>
-        <label class="radio-inline"><input type="radio" name="optradio">Shout-Out</label>
-        <label class="radio-inline"><input type="radio" name="optradio">Affirmation</label>
-
-        <fieldset class="form-group">
-          <label for="guestTextarea">Type here</label>
-          <textarea class="form-control" id="guestTextarea" rows="3"></textarea>
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="guestEmail">Email address</label>
-          <input type="email" class="form-control" id="guestEmail" placeholder="Enter email">
-          <small class="text-muted">We'll never share your email with anyone else.</small>
-        </fieldset>
-
-        <fieldset class="form-group">
-          <label for="username">User Name</label>
-          <input type="text" class="form-control" id="username" placeholder="User Name">
-        </fieldset>
-
         <div class="modal-body">
         <form id="postMessageForm">
           <p>What would you like to share?</p>
           <label class="radio-inline"><input type="radio" name="type" value="mm" >Mango Moment</label>
           <label class="radio-inline"><input type="radio" name="type" value="so" >Shout-Out</label>
           <label class="radio-inline"><input type="radio" name="type" value="af" >Affirmation</label>
-
 
           <fieldset class="form-group">
             <label for="guestTextarea">Type here</label>
