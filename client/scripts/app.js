@@ -74,6 +74,7 @@ function getGlobalMessages(){
 //Shows all messages
 function showAllGlobalFeed(response){
   allMessages = response;//stores the response from the database into a global variable allMessages to be used in other functions
+
   //empty out the div container on the DOM that stores the messages to refresh
   $('.comment-container').empty();
   //loop through the array and append INFO
