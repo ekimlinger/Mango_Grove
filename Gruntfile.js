@@ -74,14 +74,10 @@ module.exports = function(grunt){
          expand: true,
          cwd: 'client/views',
          src: [
+            "*/*/*",  //four levels deep
+            "*/*",    //two levels deep
+            "*"       //one level deep
 
-            "*/*",
-            //adding back in - my html files aren't updating - tlvh
-            "index.html",
-            "minor.html",
-            "admin.html"
-
-            //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
           "dest": "server/public/assets/views/"
        }

@@ -69,7 +69,7 @@ router.get('/allFeedback',function(req, res){
 router.post('/blockUser', function(req, res){
   var userName = req.body.userName;
 
-  BlockedUsers.update({}, {$push:{list: userName}}, function(err, data){
+  BlockedUsers.update({}, {$addToSet: {list: userName}}, function(err, data){
     if(err){
       console.log(err);
       res.send();

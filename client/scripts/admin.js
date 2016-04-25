@@ -2,13 +2,26 @@ $(document).ready(function(){
 
   console.log("Jquery is working!");
   getBlockedUsers();
-  blockUser("ekimlinger@gmail.com");
+  unblockUser("ekimlinger@gmail.com");
   getFlaggedMessages();
   getFlaggedComments();
   viewFeedback();
 });
 
+// APPENDING DOM
 
+function appendBlockedUsers(data){
+  for (var i = 0; i < data.length; i++) {
+    var user = data[i];
+    $('.blockedUsersList').append("<li>"+user+"</li>");
+  }
+}
+
+
+
+
+
+//AJAX CALLS
 function getBlockedUsers(){
   $.ajax({
     type: 'GET',
@@ -24,6 +37,17 @@ function blockUser(userName){
     data: body,
     success: function(data){
       console.log("Blocked user: ", data);
+    }
+  });
+}
+function unblockUser(userName){
+  var body = {userName: userName};
+  $.ajax({
+    type: 'PUT',
+    url: '/admin/unblockUser',
+    data: body,
+    success: function(data){
+      console.log("Unblocked user: ", data);
     }
   });
 }
