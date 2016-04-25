@@ -1,8 +1,10 @@
 var newMessage = {};//New Message object to be sent down to the database
+var newComment = {};
 var allMessages;
 $(document).ready(function(){
     //when submit button is pressed in the guest_comment_modals
     $('#createGuestPost').on('click', createPost);
+    $('#createGuestComment').on('click', createComment);
     //WILL NEED #createUserPost event handler
     //Event Handlers that will Filter global messages
     $('#shoutOut').on('click',showAllShoutOuts);
@@ -85,6 +87,7 @@ function showAllGlobalFeed(response){
 
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+    $el.append('<button id ="messageComment" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestMessageCommentModal"> Comment </button>');
   }
 }
 //function that justs shows Mango Moments when called
@@ -145,6 +148,35 @@ function showAllAffirmations(){
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
   }
 }
+}
+
+function createComment(event){
+
+    event.preventDefault();
+
+    //grab the information from the compose message modal NEED THE ID FROM THE FORM --CHANGE
+    var commentArray = $('#postCommentForm').serializeArray();
+    //grab information off the form and stores it into the newMessage variable
+    $.each(commentArray, function(index, element){
+      newComment[element.name] = element.value;
+    });
+    newMessage.comments = newComment
+
+    //start of post new message ajax call
+    $.ajax({
+      type: 'POST',
+      url: '/comment/'+messageID,
+      data: newComment, //Pass newMessage to the Database
+      success: function(data){
+        console.log(data);
+      }
+    });
+
+    //reset input field values
+    $('#guestTextarea').val('');
+    $('#guestEmail').val('');
+    $('#username').val('');
+
 }
 
   //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
