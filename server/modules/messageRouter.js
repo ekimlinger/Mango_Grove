@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 
 var Message = require('../models/messages.js');
-var Comment = require('../models/messages.js');
+var Comment = require('../models/comment.js');
 
 
 // GET REQUESTS
@@ -11,19 +11,30 @@ var Comment = require('../models/messages.js');
 router.get('/global/:type/:ammount/:time', function(req,res){
 
   console.log(req.params);
-  var ammount = req.params.ammount;
+  var ammount = parseInt(req.params.ammount);
   var time = req.params.time;
   var type = req.params.type;
 
-  Message.find({global: true, time: {$lt: time}}, function(err, data){
-    if(err){
-      console.log(err);
-      res.send();
-    } else{
-      res.send(data);
+  if (type == 'all') {
+      Message.find({global: true, date_created:{'$lt' : new Date(time)}}, function(err, data){
+        if(err){
+          console.log(err);
+          res.send();
+        } else{
+          res.send(data);
+        }
+      }).sort({_id: -1}).limit(ammount);
     }
-  }).sort({_id: -1}).limit(ammount);
-
+    else{
+      Message.find({global: true, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
+        if(err){
+          console.log(err);
+          res.send();
+        } else{
+          res.send(data);
+        }
+      }).sort({_id: -1}).limit(ammount);
+    }
 });
 
 router.get('/:location/:type/:ammount/:time', function(req,res){
@@ -83,7 +94,7 @@ router.post('/comment/:messageID', function(req,res){
 
 //Posts new message
 router.post('/', function(req,res){
-  console.log(req.body);
+  console.log("Message Being Posted Server Side: ", req.body);
   var newMessage = new Message({
     type: req.body.type,
     content: req.body.content,
