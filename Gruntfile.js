@@ -19,16 +19,19 @@ module.exports = function(grunt){
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'client/scripts/app.js',
-        dest: 'server/public/assets/scripts/app.min.js'
+        expand: true,
+        cwd: 'client/scripts/',
+        src: '*.js',
+        dest: 'server/public/assets/scripts/',
+        ext: '.min.js'
       }
     },
     jshint:{
-      files:['client/scripts/app.js', 'server/app.js', 'server/modules/*.js', 'server/models/*.js']
+      files:['client/scripts/*.js', 'server/app.js', 'server/modules/*.js', 'server/models/*.js']
     },
     watch: {
       client:{
-        files:'client/scripts/app.js',
+        files:'client/scripts/*.js',
         tasks: ['jshint', 'uglify'],
         options:{
           spawn: false
@@ -75,7 +78,8 @@ module.exports = function(grunt){
             "*/*",
             //adding back in - my html files aren't updating - tlvh
             "index.html",
-            "minor.html"
+            "minor.html",
+            "admin.html"
 
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
