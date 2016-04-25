@@ -19,3 +19,8 @@
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
 }
+
+.trio-div {
+  /*width: 150px;*/
+  background-color: #fff;
+}

@@ -1,34 +1,33 @@
 var newMessage = {};//New Message object to be sent down to the database
 var allMessages;
 $(document).ready(function(){
-//Next 16 Lines are used to set the Do Not Show Cookie not to show if checked
-  var my_cookie = $.cookie($('.dismiss').attr('name'));
-  if (my_cookie && my_cookie == "true") {
-      $(this).prop('checked', my_cookie);
-      console.log('checked checkbox');
-  }
-  else{
-      $('#welcomeModal').modal('show');
-      console.log('uncheck checkbox');
-  }
 
-  $(".dismiss").change(function() {
-      $.cookie($(this).attr("name"), $(this).prop('checked'), {
-          path: '/',
-          expires: 1
-      });
-  });
-  //END OF DO NOT SHOW COOKIE
-    //when submit button is pressed in the guest_comment_modals
-    $('#createGuestPost').on('click', createPost);
-    //WILL NEED #createUserPost event handler
+    dismissCheckbox();//checks if do not show again button is checked
+
+    //When Compose Buttons are clicked for guests
+    $('#composeSO').on('click', function(){
+      $('#so').replaceWith('<input type="radio" checked name="type" value="so" id="so">');
+      $('#guestCommentModal').modal('show');
+    });
+    $('#composeAF').on('click', function(){
+      $('#af').replaceWith('<input type="radio" checked name="type" value="af" id="af">');
+      $('#guestCommentModal').modal('show');
+    });
+    $('#composeMM').on('click', function(){
+      $('#mm').replaceWith('<input type="radio" checked name="type" value="mm" id="mm">');
+      $('#guestCommentModal').modal('show');
+    });
+
     //Event Handlers that will Filter global messages
     $('#shoutOut').on('click',showAllShoutOuts);
     $('#mangoMoment').on('click',showAllMangoMoments);
     $('#affirmation').on('click',showAllAffirmations);
-    $('#all').on('click',getGlobalMessages);
-    //Load
-    getGlobalMessages();
+    $('#all').on('click',showAllMessages);
+
+    //when submit button is pressed in the guest_comment_modals
+    $('#createGuestPost').on('click', createPost);
+    //WILL NEED #createUserPost event handler
+    showAllMessages();
 
 });
 
@@ -36,7 +35,6 @@ $(document).ready(function(){
 function createPost(event){
 
     event.preventDefault();
-
     //grab the information from the compose message modal NEED THE ID FROM THE FORM --CHANGE
     var messageArray = $('#postMessageForm').serializeArray();
     //grab information off the form and stores it into the newMessage variable
@@ -46,33 +44,25 @@ function createPost(event){
     newMessage.global = true;
     console.log("Data coming off form: ", newMessage);
     //start of post new message ajax call
-    $.ajax({
-      type: 'POST',
-      url: '/message',
-      data: newMessage, //Pass newMessage to the Database
-      success: getGlobalMessages
-    });
     //reset input field values
     $('#guestTextarea').val('');
     $('#guestEmail').val('');
     $('#username').val('');
+
+    $.ajax({
+      type: 'POST',
+      url: '/message',
+      data: newMessage, //Pass newMessage to the Database
+      success: showAllMessages,
+      async: false
+    });
+
 }
-//Function Grabs all Global Messages
-function getGlobalMessages(){
-  var type = $(this).data('type') || 'all';
-  //When function is called pass in type of "all", "so", "mm","af"
-  //start of get all messages ajax call
-  var amount = 20;//Limits how many messages are displayed on the dom at any given time
-  var time = new Date(Date.now());
-  $.ajax({
-    type: 'GET',
-    //MAKE SURE TO CHANGE THE URL ROUTE --change
-    url: '/message/global/'+type+'/'+amount+'/'+time,
-    success: showAllGlobalFeed //show all messages on the success of the ajax call
-  });
-}
+
+
 //Shows all messages
-function showAllGlobalFeed(response){
+function loadGlobalFeed(response){
+
   allMessages = response;//stores the response from the database into a global variable allMessages to be used in other functions
 
   //empty out the div container on the DOM that stores the messages to refresh
@@ -87,6 +77,20 @@ function showAllGlobalFeed(response){
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
   }
+}
+//Function Grabs all Global Messages
+function showAllMessages(){
+  var type = $(this).data('type') || 'all';
+  //When function is called pass in type of "all", "so", "mm","af"
+  //start of get all messages ajax call
+  var amount = 20;//Limits how many messages are displayed on the dom at any given time
+  var time = new Date(Date.now());
+  $.ajax({
+    type: 'GET',
+    //MAKE SURE TO CHANGE THE URL ROUTE --change
+    url: '/message/global/'+type+'/'+amount+'/'+time,
+    success: loadGlobalFeed //show all messages on the success of the ajax call
+  });
 }
 //function that justs shows Mango Moments when called
 function showAllMangoMoments(){
@@ -136,9 +140,29 @@ function showAllAffirmations(){
     var $el = $('.comment-container').children().last();
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+    }
   }
 }
+//dismiss Checkbox fucntion for Welcome modal
+function dismissCheckbox(){
+  var my_cookie = $.cookie($('.dismiss').attr('name'));
+  if (my_cookie && my_cookie == "true") {
+      $(this).prop('checked', my_cookie);
+      console.log('checked checkbox');
+  }
+  else{
+      $('#welcomeModal').modal('show');
+      console.log('uncheck checkbox');
+  }
+
+  $(".dismiss").change(function() {
+      $.cookie($(this).attr("name"), $(this).prop('checked'), {
+          path: '/',
+          expires: 1
+      });
+  });
 }
+
   //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
   // <div class="media">
   //     <a class="forum-avatar" href="#">
