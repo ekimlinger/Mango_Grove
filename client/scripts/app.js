@@ -71,7 +71,7 @@ function showAllGlobalFeed(response){//response is the data coming back from the
   }
 }
 
-  function showAllMangoMoments(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
+function showAllMangoMoments(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
     //empty out the div container on the DOM that stores the messages to refresh
     $('.comment-container').empty();
     //loop through the array and append INFO
@@ -87,6 +87,7 @@ function showAllGlobalFeed(response){//response is the data coming back from the
     }
   }
 }
+
 function showAllShoutOuts(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
   //empty out the div container on the DOM that stores the messages to refresh
   $('.comment-container').empty();
@@ -103,6 +104,7 @@ function showAllShoutOuts(){//response is the data coming back from the database
   }
 }
 }
+
 function showAllAffirmations(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
   //empty out the div container on the DOM that stores the messages to refresh
   $('.comment-container').empty();
