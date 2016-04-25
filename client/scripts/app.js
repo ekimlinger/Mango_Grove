@@ -1,6 +1,24 @@
 var newMessage = {};//New Message object to be sent down to the database
 var allMessages;
 $(document).ready(function(){
+//Next 16 Lines are used to set the Do Not Show Cookie not to show if checked
+  var my_cookie = $.cookie($('.dismiss').attr('name'));
+  if (my_cookie && my_cookie == "true") {
+      $(this).prop('checked', my_cookie);
+      console.log('checked checkbox');
+  }
+  else{
+      $('#welcomeModal').modal('show');
+      console.log('uncheck checkbox');
+  }
+
+  $(".dismiss").change(function() {
+      $.cookie($(this).attr("name"), $(this).prop('checked'), {
+          path: '/',
+          expires: 1
+      });
+  });
+  //END OF DO NOT SHOW COOKIE
     //when submit button is pressed in the guest_comment_modals
     $('#createGuestPost').on('click', createPost);
     //WILL NEED #createUserPost event handler
@@ -11,6 +29,7 @@ $(document).ready(function(){
     $('#all').on('click',getGlobalMessages);
     //Load
     getGlobalMessages();
+
 });
 
 //Create Post Function

@@ -21,7 +21,9 @@
     <script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/jquery.cookie.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
+    <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
     <!-- forgot to keep from Evan's index.html setup - delete note after merges done -->
     <!-- local css file added by Mango Grove for parts not included in template tlvh -->
     <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
@@ -31,6 +33,26 @@
 </head>
 
 <body>
+  <div id="welcomeModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Welcome to Mango Grove!</h4>
+              </div>
+              <div class="modal-body">
+                  <h6>Welcome to Mango Grove!</h6>
+                  <p>This is the place to connect with the community.
+  									Do you want to share a win? Send someone a shoutout?
+  									Share some inspiration? You're in the right place!</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" >Got it!</button>
+  								<label><input type="checkbox" class="dismiss" name="dismiss" />Do not show this again.</label>
+              </div>
+          </div>
+      </div>
+  </div>
 
 <div id="wrapper">
 
