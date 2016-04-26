@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>User Comment Modal</title>
+<title>User Comment</title>
 <link href="/vendors/Static_Seed_Project/css/bootstrap.min.css" rel="stylesheet">
 <link href="/vendors/Static_Seed_Project/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -18,7 +18,7 @@
 <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
 <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
 
-<script type="text/javascript" src="/assets/scripts/app.min.js"></script>
+<script type="text/javascript" src="/assets/scripts/app.js"></script>
 
 </head>
 <body>
@@ -37,10 +37,10 @@
       </div>
       <form id="postUserMessageForm">
       <div class="modal-body">
-        <p>What would you like to share?</p>
-        <label class="radio-inline"><input type="radio" name="type" value="mm" >Mango Moment</label>
-        <label class="radio-inline"><input type="radio" name="type" value="so" >Shout-Out</label>
-        <label class="radio-inline"><input type="radio" name="type" value="af" >Affirmation</label>
+        <h4>What would you like to share?</h4>
+        <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="mm" ><img src="/assets/views/images/mango.png" height="50" width="50" />Share Moment</label>
+        <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="af" ><img src="/assets/views/images/noun_75102_cc.png" height="50" width="50" />Encourage</label>
+        <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="so" ><img src="/assets/views/images/noun_24896_cc_mod.png" height="50" width="50" />Shoutout</label>
 
         <fieldset class="form-group">
           <label for="guestTextarea">Type here</label>
@@ -49,7 +49,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" id="createUserPost" class="btn btn-default" data-dismiss="modal">Post</button>
+        <button type="button" id="createUserPost" class="btn btn-primary" data-dismiss="modal">Post</button>
       </div>
     </form>
 
