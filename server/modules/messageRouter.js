@@ -61,7 +61,7 @@ router.get('/:location/:type/:ammount/:time', function(req,res){
 
 
 //  POST REQUESTS
-
+//post comment to the messages while updating the message comments array with comment ids
 router.post('/comment', function(req,res){
 
   var messageID = req.body.messageID;
@@ -91,8 +91,18 @@ router.post('/comment', function(req,res){
       });
     }
   });
+});
 
+router.get('/comment/:messageID/', function(req,res){
+  var messageID = req.params.messageID;
+  console.log(req.params);
+      Comment.find({messageID: messageID}, function(err, data){
 
+        if(err){
+          console.log(err);
+        }
+          res.send(data);
+      });
 });
 
 //Posts new message

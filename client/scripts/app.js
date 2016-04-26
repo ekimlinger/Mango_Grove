@@ -1,6 +1,5 @@
 var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
-var allMessages;
 $(document).ready(function(){
     //when submit button is pressed in the guest_comment_modals
     $('#createGuestPost').on('click', createPost);
@@ -16,6 +15,7 @@ $(document).ready(function(){
     $('#all').on('click',getGlobalMessages);
     //Load
     getGlobalMessages();
+    getComment();
 });
 
 //Create Post Function
@@ -69,7 +69,7 @@ function getGlobalMessages(){
 
 //Shows all messages
 function showAllGlobalFeed(response){
-  allMessages = response;//stores the response from the database into a global variable allMessages to be used in other functions
+//stores the response from the database into a global variable allMessages to be used in other functions
   //empty out the div container on the DOM that stores the messages to refresh
   $('.comment-container').empty();
 
@@ -87,40 +87,40 @@ function showAllGlobalFeed(response){
 
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+    $el.append('<h4>'+"comment : " + comment.comments+'</h4>');
+    //set message id for the comment button
     $el.append('<button class="messageComment" data-id="'+comment._id+'" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestMessageCommentModal"> Comment </button>');
   }
 }
 // get messageid by clicking the comment button
 function getMessageID (){
-  console.log("HERE: " , $(this));
+  console.log("HERE: " , $(this).data("id"));
   var messageID = $(this).data("id");
+  //set the message id for the post button
   $("#createGuestComment").data("id", messageID);
-  newComment.messageID = messageID;
   console.log("this message id will be", messageID);
-    console.log("meow");
+  console.log("meow");
 }
 //posting comment to database
 function createComment(event){
+  //set the messageID key for the comment object
   newComment.messageID = $("#createGuestComment").data("id");
     event.preventDefault();
 
     //grab the information from the compose message modal NEED THE ID FROM THE FORM --CHANGE
     var commentArray = $('#postCommentForm').serializeArray();
-    //grab information off the form and stores it into the newMessage variable
+    //grab information off the form and stores it into the newComment variable
     $.each(commentArray, function(index, element){
       newComment[element.name] = element.value;
       console.log( "New Comment: ", newComment);
     });
-
 
     //start of post new comment ajax call
     $.ajax({
       type: 'POST',
       url: '/message/comment',
       data: newComment, //Pass newComment to the Database
-      success: function(data){
-        console.log(data);
-      }
+      success: sendComment
     });
 
     //reset input field values
@@ -129,8 +129,54 @@ function createComment(event){
     $('#username').val('');
 
 }
-//function that justs shows Mango Moments when called
+function sendComment (){
+  var messageID = $("#createGuestComment").data("id");
+    $.ajax({
+      type: 'GET',
+      //MAKE SURE TO CHANGE THE URL ROUTE --change
+      url: '/message/comment/'+messageID,
 
+      success: getComment
+        //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
+        //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
+    });
+
+}
+//loop through the array and append INFO
+//append info to comment-container
+function getComment(response){
+//$('.comment-container').empty();
+for(var i = 0; i <response.length; i++){
+  var comment = response[i];//store response into comment for readability
+  console.log(comment);
+  console.log("Name: ", comment.name);
+  console.log("Content: ", comment.content);
+  console.log("id: ", comment._id);
+
+  $('.media').append('<div class="newComment"></div>');//creates each individual comment
+  var $el = $('.media').children().last();
+
+  $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
+  $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+
+}
+}
+
+// function appendDom(response){
+//   response.forEach(function(comment){
+//     $('.newComment-container').append('<div class="comments"></div>');
+//     var $el = $('.newComment-container').children().last();
+//
+//     $el.append('<h2>' + "Name: " + comment.name + '</h2>');
+//     $el.append('<p>' + "Content: " + comment.content + '</p>');
+//     $el.append('<p>' + "Time Posted: " + comment.date_created +'</p>');
+//
+//   });
+//
+// }
+
+
+//function that justs shows Mango Moments when called
 function showAllMangoMoments(){//response is the data coming back from the database. NOT SURE EXACTLY HOW IT IS GOING TO COME BACK
     //empty out the div container on the DOM that stores the messages to refresh
     $('.comment-container').empty();
