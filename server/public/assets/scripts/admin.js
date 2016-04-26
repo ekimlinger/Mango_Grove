@@ -69,24 +69,6 @@ function getFlaggedComments(){
     }
   });
 }
-function deleteMessage(messageID){
-  $.ajax({
-    type: 'DELETE',
-    url: '/message/'+ messageID,
-    success: function(data){
-      console.log("Got all Flagged messages: ", data);
-    }
-  });
-}
-function deleteComment(commentID){
-  $.ajax({
-    type: 'DELETE',
-    url: '/message/comment/'+ commentID,
-    success: function(data){
-      console.log("Deleted comment: ", data);
-    }
-  });
-}
 function viewFeedback(){
   $.ajax({
     type: 'GET',

@@ -11,10 +11,48 @@ $(document).ready(function(){
       messageType = $(this).data('type');
       showMessages(messageType);
     });
-
+    $('.comment-container').on('click','.delete-message', deleteMessage);
     $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modals
     //WILL NEED #createUserPost event handler
 });
+
+//
+// EVAN'S CODE
+//
+
+
+function deleteMessage(){
+  console.log($(this));
+  var messageID = $(this).data('messageid');
+  $.ajax({
+    type: 'DELETE',
+    url: '/message/'+ messageID,
+    success: function(data){
+      console.log("Deleted message: ", data);
+      showMessages(data.type);
+    }
+  });
+}
+function deleteComment(){
+  var commentID = $(this).data('commentid');
+  $.ajax({
+    type: 'DELETE',
+    url: '/message/comment/'+ commentID,
+    success: function(data){
+      console.log("Deleted comment: ", data);
+      showMessages();
+    }
+  });
+}
+
+
+
+
+
+
+//
+//  BRADY'S CODE
+//
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
   var composeType = $(this).data('type');
@@ -84,7 +122,9 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
 
   $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+response.date_created+'<br/></div></a>');
   $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+response.content+'<br/><br/>- '+response.name+'</div>');
+  $el.append('<div class="media-body react-options"><button class="react-button fa fa-thumbs-o-up" title="Like"></button><button class="react-button fa fa-comment-o" title="Comment"></button><button class="react-button delete-message" data-messageid="'+response._id+'">Delete Post</button></div>');
 }
+
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
@@ -98,6 +138,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+      $el.append('<div class="media-body react-options"><button class="react-button fa fa-thumbs-o-up" title="Like"></button><button class="react-button fa fa-comment-o" title="Comment"></button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
   }
 }
 
