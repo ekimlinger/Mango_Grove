@@ -16,7 +16,7 @@ $(document).ready(function(){
     //WILL NEED #createUserPost event handler
 });
 
-function composeMessage(){
+function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
   var composeType = $(this).data('type');
   if(composeType == "mm"){
     $('#mm').replaceWith('<input type="radio" checked name="type" value="mm" id="mm">');
@@ -30,7 +30,6 @@ function composeMessage(){
     $('#so').replaceWith('<input type="radio" checked name="type" value="so" id="so">');
     $('#guestCommentModal').modal('show');
   }
-
 }
 
 function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
@@ -48,7 +47,6 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
 
 function createPost(event){//Create Post Function
     event.preventDefault();
-  l
     var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
 
     $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
@@ -73,9 +71,7 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
 
   $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+response.date_created+'<br/></div></a>');
   $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+response.content+'<br/><br/>- '+response.name+'</div>');
-
 }
-
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
