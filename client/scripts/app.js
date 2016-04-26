@@ -4,15 +4,15 @@ $(document).ready(function(){
     var messageType = "all";
     dismissCheckbox();//checks if do not show again button is checked
     showMessages(messageType);//show all messages on page load
-    //When Compose Buttons are clicked for guests
-    $('.compose').on('click', composeMessage);
-    //Event Handler that will Filter global messages
-    $('.filter-messages').on('click',function(){
+
+    $('.compose').on('click', composeMessage);//When Compose Buttons are clicked for guests
+
+    $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       messageType = $(this).data('type');
       showMessages(messageType);
     });
-    //when submit button is pressed in the guest_comment_modals
-    $('#createGuestPost').on('click', createPost);
+
+    $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modals
     //WILL NEED #createUserPost event handler
 });
 
@@ -32,27 +32,26 @@ function composeMessage(){
   }
 
 }
-//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
-function showMessages(messageType){
+
+function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
   var type = messageType;
-  //start of get all messages ajax call
   var amount = 20;//Limits how many messages are displayed on the dom at any given time
   var time = new Date(Date.now());
+
   $.ajax({
     type: 'GET',
-    //MAKE SURE TO CHANGE THE URL ROUTE --change
     url: '/message/global/'+type+'/'+amount+'/'+time,
     success: loadGlobalFeed //loads messages on the success of the ajax call
   });
 }
 
-//Create Post Function
-function createPost(event){
+
+function createPost(event){//Create Post Function
     event.preventDefault();
-    //grab the information from the compose message modal NEED THE ID FROM THE FORM --CHANGE
-    var messageArray = $('#postMessageForm').serializeArray();
-    //grab information off the form and stores it into the newMessage variable
-    $.each(messageArray, function(index, element){
+  l
+    var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
+
+    $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
       newMessage[element.name] = element.value;
     });
     newMessage.global = true;
@@ -67,8 +66,8 @@ function createPost(event){
       success: addNewMessageToFeed //call addNewMessageToFeed function to display new post right away
     });
 }
-//Append New Message to the Top of the Feed
-function addNewMessageToFeed(response){
+
+function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
   $('.comment-container').prepend('<div class="media animated fadeInRight"></div>');
   var $el = $('.comment-container').children().first();
 
@@ -77,12 +76,13 @@ function addNewMessageToFeed(response){
 
 }
 
-//Loads Messages to GlobalFeed
-function loadGlobalFeed(response){
-  //empty out the div container on the DOM that stores the messages to refresh the page
-  $('.comment-container').empty();
-  //append info to comment-container by looping through the array
-  for(var i = 0; i <response.length; i++){
+
+function loadGlobalFeed(response){//Loads Messages to GlobalFeed
+
+  $('.comment-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+
+  for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
+
     var comment = response[i];//store response into comment for readability
     $('.comment-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
     var $el = $('.comment-container').children().last();
@@ -91,8 +91,8 @@ function loadGlobalFeed(response){
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
   }
 }
-//dismiss Checkbox fucntion for Welcome modal
-function dismissCheckbox(){
+
+function dismissCheckbox(){//dismiss Checkbox fucntion for Welcome modal
   var my_cookie = $.cookie($('.dismiss').attr('name'));
   if (my_cookie && my_cookie == "true") {
       $(this).prop('checked', my_cookie);
