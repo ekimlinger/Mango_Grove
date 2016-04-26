@@ -74,8 +74,9 @@ module.exports = function(grunt){
 
             "*/*",
             //adding back in - my html files aren't updating - tlvh
-            "index.html",
-            "minor.html"
+            //"index.html",
+            "minor.html",
+            "minor_test.html"
 
             //ADD HTML FILES HEREEEEEEEEEEEEEEEEEEEEEEEEE~~~~~!!!!!!!!!!
           ],
