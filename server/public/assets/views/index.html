@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -14,83 +13,142 @@
 
     <link href="/vendors/Static_Seed_Project/css/animate.css" rel="stylesheet">
     <link href="/vendors/Static_Seed_Project/css/style.css" rel="stylesheet">
-
+    <!--Vendor Scripts-->
+    <script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
     <!-- local css file added by Mango Grove for parts not included in template tlvh -->
     <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/assets/scripts/app.min.js"></script>
+    <script type="text/javascript" src="/assets/scripts/app.js"></script>
 
 </head>
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                              <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Susan Wollan Fan</strong>
-                               </span> <span class="text-muted text-xs block">Founder MANGO <b class="caret"></b></span> </span> </a>
+                                <img src="/assets/views/images/mango_logo_M.png" width="70" height="70" />
+                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Susan Wollan Fan</strong>
+                               </span> <span class="text-muted text-xs block">Founder MANGO <b class="caret"></b></span> </span>
+                            </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="#">Logout</a></li>
                             </ul>
-                    </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                </li>
-                <li class="active">
-                    <a href="/assets/views/index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
-                </li>
-                <li>
-                    <a href="/assets/views/minor.html"><i class="fa fa-th-large"></i> <span class="nav-label">Minor view</span> </a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-
-    <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="#">
-                        <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
                         </div>
-                    </form>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
+                        <div class="logo-element">
+                            <img src="/assets/views/images/mango_logo_M.png" width="30" height="30" />
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="/assets/views/index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
+                    </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
+                        <a href="/assets/views/minor.html"><i class="fa fa-th-large"></i> <span class="nav-label">Minor view</span> </a>
                     </li>
                 </ul>
 
-            </nav>
-        </div>
-        <!-- <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center m-t-lg">
-                        <h1>
-                            Welcome to Mango Grove!
-                        </h1>
-                        <small>
-                            It is an application skeleton for a typical web app. You can use it to quickly bootstrap your webapp projects and dev environment for these projects.
-                        </small>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <!-- <form role="search" class="navbar-form-custom" method="post" action="#">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form> -->
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <!-- this is the placeholder code for the 3 images, roughly styled! tlvh -->
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class=" text-center ">
+
+
+                            <div class="col-md-4">
+                                <img class="trio-pic" src="/assets/views/images/mangomoment_sq.jpg" />
+
+                                <h3>Mango Moment</h3>
+                                <p class="trio-pic-caption">Today I got the call back I was waiting for. All the hard work paid off!</p>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <img class="trio-pic" src="/assets/views/images/inspired-seed_sq.jpg" />
+                                <h3>Affirmation</h3>
+                                <p class="trio-pic-caption">Sometimes you win, sometimes you learn. </p>
+                            </div>
+
+                            <div class="col-md-4">
+                                <img class="trio-pic" src="/assets/views/images/handshake_sq.jpg" />
+                                <h3>Shout-Out</h3>
+                                <p class="trio-pic-caption">Thanks to Marlene for the thank-you note guidance! </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+            <!-- end of placeholder code for 3 images tlvh -->
 
-        <!-- inserting forum code here tlvh -->
-        <!-- <div class="row wrapper border-bottom white-bg page-heading">
+
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class=" text-center ">
+
+
+                            <div class="col-md-4">
+                                <img src="/assets/views/images/mango.png" height="100" width="100" />
+
+                                <h4><span class="small">Share a</span><br />
+                          Mango Moment</h4>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <img src="/assets/views/images/noun_75102_cc.png" height="100" width="100" />
+                                <h4><span class="small">Share an</span><br />
+                          Affirmation</h4>
+                            </div>
+
+                            <div class="col-md-4">
+                                <img src="/assets/views/images/noun_24896_cc_mod.png" height="100" width="100" />
+                                <h4><span class="small">Share a</span><br />
+                          Shoutout</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- inserting forum code here tlvh -->
+            <!-- <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
                 <h2>Forum - post view</h2>
                 <ol class="breadcrumb">
@@ -103,12 +161,21 @@
                 </ol>
             </div>
         </div> -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="ibox-content forum-post-container">
-                        <div class="forum-post-info">
-                            <h4><span class="text-navy"><i class="fa fa-sun-o"></i>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--TEST BUTTONS-->
+                    <!-- <div> -->
+                    <!--data-type IMPORTANT PLEASE DO NOT REMOVE. Used for filtering-->
+                    <!-- <button data-type="so" id="shoutOut">Shout Outs</button>
+                <button data-type="mm" id="mangoMoment">Mango Moments</button>
+                <button data-type="af" id="affirmation">Affirmations</button>
+                <button data-type="all" id="all">All</button>
+              </div> -->
+                    <!--END OF TEST BUTTONS-->
+                    <div class="wrapper wrapper-content animated fadeInRight">
+                        <div class="ibox-content forum-post-container">
+                            <div class="forum-post-info">
+                                <h4><span class="text-navy"><i class="fa fa-sun-o"></i>
                               <!-- General discussion - original section tlvh -->
                               Mango Moments
                             </span>
@@ -116,157 +183,191 @@
                             <!-- - Announcements - <span class="text-muted">Free talks</span> -->
                           </h4>
 
-                        </div>
-                        <div class="media">
-                            <a class="forum-avatar" href="#">
-                                <img src="/vendors/Static_Seed_Project/img/a1.jpg" class="img-circle" alt="image">
-                                <div class="author-info">
-                                    <strong>Posts:</strong> 542<br/>
-                                    <strong>Joined:</strong> April 11.2015<br/>
-                                </div>
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">The standard chunk of Lorem Ipsum</h4>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                                </p>
-                                <p>
-                                Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                                </p>
-                                <p>
-                                - Mike Smith
-                                CEO, Zender Inc.
-                                </p>
-
-                                <div class="media-body react-options">
-                                    <button class="react-button fa fa-thumbs-o-up" title="Like"></button>
-                                    <button class="react-button fa fa-comment-o" title="Comment"></button>
-                                    <button class="react-button flag-button fa fa-flag" title="Flag"> <span class="small-type">Flag as inappropriate</span></button>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="media">
-                            <a class="forum-avatar" href="#">
-                                <img src="/vendors/Static_Seed_Project/img/a2.jpg" class="img-circle" alt="image">
-                                <div class="author-info">
-                                    <strong>Posts:</strong> 32<br/>
-                                    <strong>Joined:</strong> Dec 11.2015<br/>
-                                </div>
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">There are many variations of passages of Lorem Ipsum available</h4>
-                                Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-                                <br/><br/>
-                                - Alex Kunter
-                                Designer, Kurtner Company
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="forum-avatar" href="#">
-                                <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
-                                <div class="author-info">
-                                    <strong>Posts:</strong> 543<br/>
-                                    <strong>Joined:</strong> June 21.2015<br/>
-                                </div>
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
-                                 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-                                <br/><br/>
-                                - Monica Jackson
-                                UX developer
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a class="forum-avatar" href="#">
-                                <img src="/vendors/Static_Seed_Project/img/a4.jpg" class="img-circle" alt="image">
-                                <div class="author-info">
-                                    <strong>Posts:</strong> 72<br/>
-                                    <strong>Joined:</strong> March 08.2015<br/>
-                                </div>
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Suffered alteration in some form,</h4>
-                                All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-                                <br/><br/>
-                                - John Ken
-                                UX/UI developer
+                                <!-- begin sample code placement for screenshots tlvh -->
 
                                 <div class="media">
                                     <a class="forum-avatar" href="#">
-                                        <img src="/vendors/Static_Seed_Project/img/a7.jpg" class="img-circle" alt="image">
+                                        <img src="/vendors/Static_Seed_Project/img/a1.jpg" class="img-circle" alt="image">
                                         <div class="author-info">
-                                            <strong>Posts:</strong> 253<br/>
-                                            <strong>Joined:</strong> Oct 08.2015<br/>
+                                            <strong>Posts:</strong> 542
+                                            <br/>
+                                            <strong>Joined:</strong> April 11.2015
+                                            <br/>
                                         </div>
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading"> Latin words, combined with a handful of mode</h4>
-                                        Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                                        <p>
+                                            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
+                                            source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very
+                                            popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                        </p>
+                                        <p>
+                                            - Mike Smith CEO, Zender Inc.
+                                        </p>
 
-                                        <!-- we won't be posting photos in comments tlvh -->
-                                        <!-- <div class="photos">
-                                            <a href="http://24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg" target="_blank"> <img src="img/p1.jpg" class="forum-photo" alt="image"></a>
-                                            <a href="http://37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg" target="_blank"> <img src="img/p3.jpg" class="forum-photo" alt="image"></a>
-                                        </div> -->
+                                        <div class="media-body react-options">
+                                            <button class="react-button fa fa-thumbs-o-up" title="Like"></button>
+                                            <button class="react-button fa fa-comment-o" title="Comment"></button>
+                                            <button class="react-button flag-button fa fa-flag" title="Flag"> <span class="small-type">Flag as inappropriate</span></button>
+                                        </div>
 
-                                        Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                        <br/><br/>
-                                        - Adam Smith
-                                        CEO
                                     </div>
+
                                 </div>
                                 <div class="media">
                                     <a class="forum-avatar" href="#">
-                                        <img src="/vendors/Static_Seed_Project/img/a8.jpg" class="img-circle" alt="image">
+                                        <img src="/vendors/Static_Seed_Project/img/a2.jpg" class="img-circle" alt="image">
                                         <div class="author-info">
-                                            <strong>Posts:</strong> 431<br/>
-                                            <strong>Joined:</strong> March 25.2015<br/>
+                                            <strong>Posts:</strong> 32
+                                            <br/>
+                                            <strong>Joined:</strong> Dec 11.2015
+                                            <br/>
                                         </div>
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">Virginia, looked up one of the more obscure Latin words</h4>
-                                        Distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-                                        <br/><br/>
-                                        Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words
-                                        <br/><br/>
-                                        - Sandra Jackson
-                                        UI developer
+
+                                        Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses
+                                        a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+                                        <br/>
+                                        <br/> - Alex Kunter Designer, Kurtner Company
                                     </div>
                                 </div>
+
+                                <!-- end sample code placement tlvh-->
+
                             </div>
 
+                            <!--Append New Comments here to the comment-container class-->
+                            <!-- <div class="comment-container">
+                        </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- end forum code  -->
+            <!-- end forum code  -->
 
-        <div class="footer">
-            <div class="pull-right">
-                MANGO Mentors
+            <div class="footer">
+                <div class="pull-right">
+                    MANGO Mentors
+                </div>
+                <div>
+                    <strong>Copyright</strong> MANGO Mentors &copy; 2016
+                </div>
             </div>
-            <div>
-                <strong>Copyright</strong> MANGO Mentors &copy; 2016
-            </div>
-        </div>
 
+        </div>
     </div>
-</div>
 
-<!-- Mainly scripts -->
-<script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
-<script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Mainly scripts -->
 
-<!-- Custom and plugin javascript -->
-<script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
 
 
 </body>
 
 </html>
+
+
+
+
+<!--SAMPLE FEED FROM TEMPLATE-->
+<!--<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a1.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 542<br/>
+            <strong>Joined:</strong> April 11.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">The standard chunk of Lorem Ipsum</h4>
+        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+        <br/><br/>
+        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        <br/><br/>
+        - Mike Smith
+        CEO, Zender Inc.
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a2.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 32<br/>
+            <strong>Joined:</strong> Dec 11.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">There are many variations of passages of Lorem Ipsum available</h4>
+        Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - Alex Kunter
+        Designer, Kurtner Company
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 543<br/>
+            <strong>Joined:</strong> June 21.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
+         All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - Monica Jackson
+        UX developer
+    </div>
+</div>
+<div class="media">
+    <a class="forum-avatar" href="#">
+        <img src="/vendors/Static_Seed_Project/img/a4.jpg" class="img-circle" alt="image">
+        <div class="author-info">
+            <strong>Posts:</strong> 72<br/>
+            <strong>Joined:</strong> March 08.2015<br/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">Suffered alteration in some form,</h4>
+        All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
+        <br/><br/>
+        - John Ken
+        UX/UI developer
+        <div class="media">
+            <a class="forum-avatar" href="#">
+                <img src="/vendors/Static_Seed_Project/img/a7.jpg" class="img-circle" alt="image">
+                <div class="author-info">
+                    <strong>Posts:</strong> 253<br/>
+                    <strong>Joined:</strong> Oct 08.2015<br/>
+                </div>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"> Latin words, combined with a handful of mode</h4>
+                Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                <br/><br/>
+                - Adam Smith
+                CEO
+            </div>
+        </div>
+        <div class="media">
+            <a class="forum-avatar" href="#">
+                <img src="/vendors/Static_Seed_Project/img/a8.jpg" class="img-circle" alt="image">
+                <div class="author-info">
+                    <strong>Posts:</strong> 431<br/>
+                    <strong>Joined:</strong> March 25.2015<br/>
+                </div>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Virginia, looked up one of the more obscure Latin words</h4>
+                Distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+                <br/><br/>
+                Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words
+                <br/><br/>
+                - Sandra Jackson
+                UI developer
+            </div>
+        </div>
+    </div>
+</div>-->

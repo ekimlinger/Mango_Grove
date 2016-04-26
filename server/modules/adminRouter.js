@@ -104,7 +104,7 @@ router.put('/unblockUser', function(req,res){
 
 // Send back admin home page if requested
 router.get("/", function(req,res){
-  var file = req.params[0] || "/assets/views/admin.html";
+  var file = req.params[0] || "/assets/views/admin/admin.html";
   res.sendFile(path.join(__dirname,"../public/", file));
 });
 
