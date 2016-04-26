@@ -14,6 +14,7 @@ router.get('/global/:type/:ammount/:time', function(req,res){
   var ammount = parseInt(req.params.ammount);
   var time = req.params.time;
   var type = req.params.type;
+  var id = req.params.id;
 
   if (type == 'all') {
       Message.find({global: true, date_created:{'$lt' : new Date(time)}}, function(err, data){
@@ -45,6 +46,7 @@ router.get('/:location/:type/:ammount/:time', function(req,res){
   var time = req.params.time;
   var type = req.params.type;
 
+
   Message.find({location: location, time: {$lt: time}}, function(err, data){
     if(err){
       console.log(err);
@@ -60,11 +62,12 @@ router.get('/:location/:type/:ammount/:time', function(req,res){
 
 //  POST REQUESTS
 
-router.post('/comment/:messageID', function(req,res){
+router.post('/comment', function(req,res){
 
-  var messageID = req.params.messageID;
+  var messageID = req.body.messageID;
   console.log("req.body: ", req.body, "messageID: ", messageID);
   var newComment = new Comment({
+    messageID : req.body.messageID,
     name: req.body.name,
     email: req.body.email,
     content: req.body.content,
@@ -89,7 +92,7 @@ router.post('/comment/:messageID', function(req,res){
     }
   });
 
-  res.send("Dummy Response from message comment request");
+
 });
 
 //Posts new message
@@ -131,7 +134,7 @@ router.put('/comment/:commentID', function(req,res){
                }
   });
 
-  res.send("Put/update route sends back");
+
 });
 
 // Edits Message by id
@@ -149,7 +152,7 @@ router.put('/:messageID', function(req,res){
                }
   });
 
-  res.send("Put/update route sends back");
+
 });
 
 
@@ -167,7 +170,7 @@ router.delete('/:messageID', function(req,res){
     }
   });
 
-  res.send("Delete route sends back");
+
 });
 
 
