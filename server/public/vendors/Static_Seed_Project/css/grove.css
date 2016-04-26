@@ -30,3 +30,11 @@
   font-style: italic;
   padding: 0 10px;
 }
+
+.jumbotron {
+    margin-bottom: 0;
+    height: 300px;
+    background-image: url(/assets/views/images/MangoGroveBanner.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
