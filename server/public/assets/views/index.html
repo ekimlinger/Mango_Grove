@@ -30,13 +30,36 @@
 
 <body>
 
+  <div id="loadWelcomeModal"></div>
+
     <div id="wrapper">
 
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element">
+
+                      <div class="logo-element">
+                          <img src="/assets/views/images/mango_logo_M.png" width="30" height="30" />
+                      </div>
+
+
+                      <!-- guest user display -->
+                      <div class="dropdown profile-element">
+                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <img src="/assets/views/images/mango_logo_M.png" width="70" height="70" />
+                              <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Guest User</strong></span>
+                             <!-- <span class="text-muted text-xs block">Founder MANGO <b class="caret"></b></span> --> </span>
+                          </a>
+                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                              <li><a href="#">Log in or register</a></li>
+                          </ul>
+                      </div>
+
+
+
+                      <!-- logged in user display -->
+                        <!-- <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <img src="/assets/views/images/mango_logo_M.png" width="70" height="70" />
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Susan Wollan Fan</strong>
@@ -45,10 +68,8 @@
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="#">Logout</a></li>
                             </ul>
-                        </div>
-                        <div class="logo-element">
-                            <img src="/assets/views/images/mango_logo_M.png" width="30" height="30" />
-                        </div>
+                        </div> -->
+
                     </li>
                     <li class="active">
                         <a href="/assets/views/index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Main view</span></a>
@@ -72,13 +93,15 @@
                         </div>
                     </form> -->
                     </div>
-                    <ul class="nav navbar-top-links navbar-right">
+
+                    <!-- hide log out for global page -->
+                    <!-- <ul class="nav navbar-top-links navbar-right">
                         <li>
                             <a href="#">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
 
                 </nav>
             </div>
@@ -96,24 +119,73 @@
 
 
                             <div class="col-md-4">
+                              <h1>Share a Moment</h1>
                                 <img src="/assets/views/images/mango.png" height="100" width="100" />
-
-                                <h1>Share a Moment</h1>
                             </div>
 
 
                             <div class="col-md-4">
+                              <h1>Encourage</h1>
                                 <img src="/assets/views/images/noun_75102_cc.png" height="100" width="100" />
-                                <h1>Encourage</h1>
                             </div>
 
                             <div class="col-md-4">
+                              <h1>Shout-Out</h1>
                                 <img src="/assets/views/images/noun_24896_cc_mod.png" height="100" width="100" />
-                                <h1>Shout-Out</h1>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="text-center">
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestCommentModal">
+                Post Now
+              </button>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="guestCommentModal" tabindex="-1" role="dialog" aria-labelledby="guestCommentLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="userCommentLabel">Guest Comments</h4>
+                  </div>
+                    <div class="modal-body">
+
+                      <h4>What would you like to share?</h4>
+                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="mm" >
+                        <img src="/assets/views/images/mango.png" height="50" width="50" />Share Moment</label>
+                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="af" >
+                        <img src="/assets/views/images/noun_75102_cc.png" height="50" width="50" />Encouragement</label>
+                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="so" >
+                        <img src="/assets/views/images/noun_24896_cc_mod.png" height="50" width="50" />Shoutout</label>
+
+                      <fieldset class="form-group">
+                        <label for="guestTextarea">Type here</label>
+                        <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
+                      </fieldset>
+
+                      <fieldset class="form-group">
+                        <label for="guestEmail">Email address</label>
+                        <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
+                        <small class="text-muted">We'll never share your email with anyone else.</small>
+                      </fieldset>
+
+                      <fieldset class="form-group">
+                        <label for="username">User Name</label>
+                        <input type="text" class="form-control" id="username" name="name" placeholder="User Name">
+                      </fieldset>
+                      <div class="modal-footer">
+                        <button type="button" id="createGuestPost" class="btn btn-default" data-dismiss="modal">Post</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- inserting social feed code here tlvh -->
