@@ -8,10 +8,10 @@ var Comment = require('../models/comment.js');
 
 // GET REQUESTS
 
-router.get('/global/:type/:ammount/:time', function(req,res){
+router.get('/global/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
-  var ammount = parseInt(req.params.ammount);
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
 
@@ -23,7 +23,7 @@ router.get('/global/:type/:ammount/:time', function(req,res){
         } else{
           res.send(data);
         }
-      }).sort({_id: -1}).limit(ammount);
+      }).sort({_id: -1}).limit(amount);
     }
     else{
       Message.find({global: true, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
@@ -33,15 +33,15 @@ router.get('/global/:type/:ammount/:time', function(req,res){
         } else{
           res.send(data);
         }
-      }).sort({_id: -1}).limit(ammount);
+      }).sort({_id: -1}).limit(amount);
     }
 });
 
-router.get('/:location/:type/:ammount/:time', function(req,res){
+router.get('/:location/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
   var location = req.params.location;
-  var ammount = req.params.ammount;
+  var amount = req.params.amount;
   var time = req.params.time;
   var type = req.params.type;
 
@@ -52,7 +52,7 @@ router.get('/:location/:type/:ammount/:time', function(req,res){
     } else{
       res.send(data);
     }
-  }).sort({_id: -1}).limit(ammount);
+  }).sort({_id: -1}).limit(amount);
   res.send("Dummy res");
 });
 
