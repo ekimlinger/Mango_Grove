@@ -14,7 +14,9 @@ function createPost(event){//Create Post Function
     $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
       newMessage[element.name] = element.value;
     });
+
     newMessage.global = true;
+    console.log("newMessage is: ", newMessage);
     //reset input field values
     $('#guestTextarea').val('');
     $('#guestEmail').val('');
@@ -28,9 +30,12 @@ function createPost(event){//Create Post Function
 }
 
 function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
-  $('.comment-container').prepend('<div class="media animated fadeInRight"></div>');
-  var $el = $('.comment-container').children().first();
+  var message = response;
+  $('.social-feed-box').prepend('<div class="media animated fadeInRight"></div>');//creates each individual comment
+  var $el = $('.social-feed-box').children().first();
 
-  $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+response.date_created+'<br/></div></a>');
-  $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+response.content+'<br/><br/>- '+response.name+'</div>');
+  $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+  $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div><div class="social-footer></div>');
+
+
 }

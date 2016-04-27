@@ -22,6 +22,7 @@
     <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
     <script src="/vendors/Static_Seed_Project/js/jquery.cookie.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
+    <script src="/vendors/Static_Seed_Project/js/jquery.cookie.js"></script>
     <!-- local css file added by Mango Grove for parts not included in template tlvh -->
     <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
 
@@ -88,6 +89,8 @@
                 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+                        <!-- placeholder for search if added in future -->
                         <!-- <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
                             <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
@@ -113,17 +116,14 @@
             </div>
 
 
-            <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="three-shares animated fadeInRight">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class=" text-center ">
-
-
+                        <div class="text-center">
                             <div class="col-md-4">
                               <h1>Share a Moment</h1>
                                 <img src="/assets/views/images/mango.png" height="100" width="100" />
                             </div>
-
 
                             <div class="col-md-4">
                               <h1>Encourage</h1>
@@ -141,160 +141,41 @@
 
             <!-- Button trigger modal -->
             <div class="text-center">
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestCommentModal">
+              <button type="button" class="btn btn-primary btn-lg compose" data-toggle="modal">
                 Post Now
               </button>
             </div>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="guestCommentModal" tabindex="-1" role="dialog" aria-labelledby="guestCommentLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userCommentLabel">Guest Comments</h4>
-                  </div>
-                    <div class="modal-body">
-
-                      <h4>What would you like to share?</h4>
-                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="mm" >
-                        <img src="/assets/views/images/mango.png" height="50" width="50" />Share Moment</label>
-                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="af" >
-                        <img src="/assets/views/images/noun_75102_cc.png" height="50" width="50" />Encouragement</label>
-                      <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="so" >
-                        <img src="/assets/views/images/noun_24896_cc_mod.png" height="50" width="50" />Shoutout</label>
-
-                      <fieldset class="form-group">
-                        <label for="guestTextarea">Type here</label>
-                        <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
-                      </fieldset>
-
-                      <fieldset class="form-group">
-                        <label for="guestEmail">Email address</label>
-                        <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
-                        <small class="text-muted">We'll never share your email with anyone else.</small>
-                      </fieldset>
-
-                      <fieldset class="form-group">
-                        <label for="username">User Name</label>
-                        <input type="text" class="form-control" id="username" name="name" placeholder="User Name">
-                      </fieldset>
-                      <div class="modal-footer">
-                        <button type="button" id="createGuestPost" class="btn btn-default" data-dismiss="modal">Post</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <!-- inserting social feed code here tlvh -->
 
             <div class="row">
                 <div class="col-lg-12">
                     <!--TEST BUTTONS-->
-                    <!-- <div> -->
                     <!--data-type IMPORTANT PLEASE DO NOT REMOVE. Used for filtering-->
-                    <!-- <button data-type="so" id="shoutOut">Shout Outs</button>
-                <button data-type="mm" id="mangoMoment">Mango Moments</button>
-                <button data-type="af" id="affirmation">Affirmations</button>
-                <button data-type="all" id="all">All</button>
-              </div> -->
-                    <!--END OF TEST BUTTONS-->
+
                     <div class="wrapper wrapper-content  animated fadeInRight">
                         <div class="row">
 
                             <div class="col-md-10 col-md-offset-1">
-                                <h3><span class="text-navy">
-                            Moments
-                            </span>
+                                <h3><span class="text-navy">Moments</span>
 
-                          </h3>
-
+                          <div class="filter-messages-box"><span class="small-type">
+                            <button data-type="mm" class="filter-messages react-button"><i class="fa fa-sun-o"></i> Moments</button>
+                            <button data-type="af" class="filter-messages react-button">Encouragements</button>
+                            <button data-type="so" class="filter-messages react-button">Shout-Outs</button>
+                            <button data-type="all" class="filter-messages react-button">All</button>
+                          </span>
+                          </div>
+                          <div class="clear-float"></div>
+                                <!--END OF TEST BUTTONS-->
+                                </h3>
 
                           <div class="social-feed-box">
-
-                              <!-- <div class="pull-right social-action dropdown">
-                                  <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                      <i class="fa fa-angle-down"></i>
-                                  </button>
-                                  <ul class="dropdown-menu m-t-xs">
-                                      <li><a href="#">Config</a></li>
-                                  </ul>
-                              </div> -->
-                              <div class="social-avatar">
-                                  <a href="" class="pull-left">
-                                      <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg">
-                                  </a>
-                                  <div class="media-body">
-                                      <a href="#">
-                                          Andrew Williams
-                                      </a>
-                                      <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
-                                  </div>
-                              </div>
-                              <div class="social-body">
-                                  <p>
-                                      Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                      default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                      in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                                      default model text.
-                                  </p>
-
-                                  <div class="btn-group">
-                                      <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
-                                      <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
-                                      <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
-                                  </div>
-                              </div>
-                              <div class="social-footer">
-                                  <div class="social-comment">
-                                      <a href="" class="pull-left">
-                                          <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg">
-                                      </a>
-                                      <div class="media-body">
-                                          <a href="#">
-                                              Andrew Williams
-                                          </a>
-                                          Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
-                                          <br/>
-                                          <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
-                                          <small class="text-muted">12.06.2014</small>
-                                      </div>
-                                  </div>
-
-                                  <div class="social-comment">
-                                      <a href="" class="pull-left">
-                                          <img alt="image" src="/vendors/Static_Seed_Project/img/a2.jpg">
-                                      </a>
-                                      <div class="media-body">
-                                          <a href="#">
-                                              Andrew Williams
-                                          </a>
-                                          Making this the first true generator on the Internet. It uses a dictionary of.
-                                          <br/>
-                                          <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
-                                          <small class="text-muted">10.07.2014</small>
-                                      </div>
-                                  </div>
-
-                                  <div class="social-comment">
-                                      <a href="" class="pull-left">
-                                          <img alt="image" src="/vendors/Static_Seed_Project/img/a3.jpg">
-                                      </a>
-                                      <div class="media-body">
-                                           <textarea class="form-control" placeholder="Write comment..."></textarea>
-                                      </div>
-                                  </div>
-
-                              </div>
-
+                            <!-- posts are appended here -->
                           </div>
-
-                                <!-- end sample code placement tlvh-->
-
-                            </div>
+                          </div>
 
                             <!--Append New Comments here to the comment-container class-->
                             <!-- <div class="comment-container">
@@ -319,7 +200,7 @@
 
 
 
-
+<div id="loadComposeModal"></div>
 
 </body>
 
