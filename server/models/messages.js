@@ -16,7 +16,6 @@ var Message = new Schema({
     like: {type: Number, required: false},
     flag: {type: Number, required: false},
     global : {type: Boolean, required: true}
-
 });
 
 module.exports = mongoose.model("Message", Message);
