@@ -1,8 +1,8 @@
 var newMessage = {};//New Message object to be sent down to the database
 
 $(document).ready(function(){
-    $("#loadComposeModal").load('../views/modals/guest_comment_modal.html');
-    $("#loadWelcomeModal").load('../views/modals/welcome.html');
+    $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
+    $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
     //$("#loadModal").load('../views/modals/guest_comment_modal.html script');
     var messageType = "all";
     showMessages(messageType);//show all messages on page load
