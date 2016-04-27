@@ -145,6 +145,7 @@ function sendComment (){
 //loop through the array and append INFO
 //append info to comment-container
 function getComment(response){
+  $('.newComment-container').empty();
 //$('.comment-container').empty();
 for(var i = 0; i <response.length; i++){
   var comment = response[i];//store response into comment for readability
@@ -153,8 +154,8 @@ for(var i = 0; i <response.length; i++){
   console.log("Content: ", comment.content);
   console.log("id: ", comment._id);
 
-  $('.media').append('<div class="newComment"></div>');//creates each individual comment
-  var $el = $('.media').children().last();
+  $('.newComment-container').append('<div class="newComment"></div>');//creates each individual comment
+  var $el = $('.newComment-container').children().last();
 
   $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
   $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
