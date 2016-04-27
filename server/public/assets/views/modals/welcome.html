@@ -1,39 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Welcome Modal</title>
-<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap-theme.min.css">
 
-<script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#welcomeModal").modal('show');
-	});
-</script>
-</head>
-<body>
+<script src="../scripts/welcome_modal_app.js"></script>
+
+
 <div id="welcomeModal" class="modal fade">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 75%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Welcome to Mango Grove!</h4>
+                <h2 class="modal-title">Welcome to Mango Grove!</h2>
             </div>
             <div class="modal-body">
-                <h6>Welcome to Mango Grove!</h6>
-                <p>This is the place to connect with the community.
+							<div class=" text-center ">
+                <h4>This is the place to connect with the community. <br />
 									Do you want to share a win? Send someone a shoutout?
-									Share some inspiration? You're in the right place!</p>
+									Share some inspiration? <br /> You're in the right place!</h4>
             </div>
+				<!--<div class="row">-->
+							 <div class="col-md-12 white-bg">
+									 <div class=" text-center ">
+											 <div class="col-md-4">
+											 <img src="/assets/views/images/mango.png" height="100" width="100" />
+
+											 <h4>Share
+												 Moment</h4>
+												 <p>
+													Tell everyone about a win, an ah-ha moment or a great connection.
+												 </p>
+												 <p>
+													<i>I aced my interview at The Nerdery!</i> - Brady P
+												</p>
+												 <p>
+													<i>I had lunch with the CEO of Mango today, and got lots of great feedback.</i> - tracey lvh
+												 </p>
+												 </div>
+
+
+										 <div class="col-md-4">
+											 <img src="/assets/views/images/noun_75102_cc.png" height="100" width="100" />
+											 <h4>
+												 Encourage</h4>
+												 <p>
+													Share a positive, inspirational quote.
+												 </p>
+												 <p>
+													<i>If opportunity doesn't knock, build a door.</i> - Milton Berle
+												</p>
+												 <p>
+													<i>If I have seen further than others, it is by standing upon the shoulders of giants.</i> - Isaac Newton
+												 </p>
+										 </div>
+
+										 <div class="col-md-4">
+											 <img src="/assets/views/images/noun_24896_cc_mod.png" height="100" width="100" />
+											 <h4>
+												 Shoutout</h4>
+												 <p>
+													Say thanks or give credit to a mentor or colleague for a job well done.
+												 </p>
+												 <p>
+													<i>Thanks to Sue for feedback on my resume!</i> - Michelle W
+												</p>
+												 <p>
+													<i>Laura, great presentation at the meet-up!</i> - Evan K
+												 </p>
+										 </div>
+							 </div>
+					 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>
-								<label><input type="checkbox" />Do not show this again.</label>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button> <br />
+								<label style="font-size:x-small; font-weight:normal"><input type="checkbox" />  Do not show this message again.</label>
+
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>
+</div>

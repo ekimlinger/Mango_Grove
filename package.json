@@ -5,7 +5,7 @@
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "grunt && node server/app.js"
+    "start": "node server/app.js"
   },
   "author": "Team Mango 2016 (Tracey Van Haften, Brady Peterson, Michelle Wang, Joette Poehler, Evan Kimlinger)",
   "license": "ISC",

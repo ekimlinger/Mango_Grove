@@ -161,13 +161,15 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background: url("patterns/header-profile.png") no-repeat;
+  /*take out background image to match mango site tlvh*/
+  /*background: url("patterns/header-profile.png") no-repeat;*/
 }
 .pace-done .nav-header {
   transition: all 0.4s;
 }
 .nav > li.active {
-  border-left: 4px solid #19aa8d;
+  /*this is the side highlight in the left nav, not used on Mango sight tlvh*/
+  /*border-left: 4px solid #19aa8d;*/
   background: #2F4050;
 }
 .nav.nav-second-level > li.active {
@@ -381,7 +383,7 @@ body.canvas-menu .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #EE6631;
+  background-color: #2f4050;
 }
 body.canvas-menu .nav-header {
   padding: 33px 25px;
@@ -632,8 +634,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #EE6631;
+  border-color: #EE6631;
   color: #FFFFFF;
 }
 .btn-primary:active,

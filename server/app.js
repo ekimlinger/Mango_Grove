@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 //ROUTES
 var router = require('./modules/index.js');
 var messageRouter = require('./modules/messageRouter.js');
-
+var adminRouter = require('./modules/adminRouter.js');
 
 var db = require('./modules/db');
 var router = require('./modules/index.js');
@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.use('/message', messageRouter);
+app.use('/admin', adminRouter);
 app.use('/', router);
 
 

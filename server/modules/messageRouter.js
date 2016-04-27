@@ -171,7 +171,7 @@ router.delete('/:messageID', function(req,res){
   var messageID = req.params.messageID;
   console.log("messageID: ", messageID);
 
-  Post.findOneAndRemove({_id: messageID}, function(err, data){
+  Message.findOneAndRemove({_id: messageID}, function(err, data){
     if (err){
       console.log(err);
       res.send("Couldn't delete your post, sorry");
@@ -180,6 +180,21 @@ router.delete('/:messageID', function(req,res){
     }
   });
 
+
+});
+
+router.delete('/comment/:commentID', function(req,res){
+  var commentID = req.params.commentID;
+  console.log("commentID: ", commentID);
+
+  Comment.findOneAndRemove({_id: commentID}, function(err, data){
+    if (err){
+      console.log(err);
+      res.send("Couldn't delete your comment, sorry");
+    } else{
+      res.send("Removed your comment! :", data);
+    }
+  });
 
 });
 
