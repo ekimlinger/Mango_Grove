@@ -1,61 +1,25 @@
 var newMessage = {};//New Message object to be sent down to the database
 
 $(document).ready(function(){
+    $("#loadComposeModal").load('../views/modals/guest_comment_modal.html');
+    $("#loadWelcomeModal").load('../views/modals/welcome.html');
+    //$("#loadModal").load('../views/modals/guest_comment_modal.html script');
     var messageType = "all";
-    dismissCheckbox();//checks if do not show again button is checked
     showMessages(messageType);//show all messages on page load
 
-    $('.compose').on('click', composeMessage);//When Compose Buttons are clicked for guests
+    $('.compose').on('click',composeMessage);//When Compose Buttons are clicked for guests
 
     $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       messageType = $(this).data('type');
       showMessages(messageType);
     });
-    $('.comment-container').on('click','.delete-message', deleteMessage);
-    $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modals
+
     //WILL NEED #createUserPost event handler
 });
 
-//
-// EVAN'S CODE
-//
-
-
-function deleteMessage(){
-  console.log($(this));
-  var messageID = $(this).data('messageid');
-  $.ajax({
-    type: 'DELETE',
-    url: '/message/'+ messageID,
-    success: function(data){
-      console.log("Deleted message: ", data);
-      showMessages(data.type);
-    }
-  });
-}
-function deleteComment(){
-  var commentID = $(this).data('commentid');
-  $.ajax({
-    type: 'DELETE',
-    url: '/message/comment/'+ commentID,
-    success: function(data){
-      console.log("Deleted comment: ", data);
-      showMessages();
-    }
-  });
-}
-
-
-
-
-
-
-//
-//  BRADY'S CODE
-//
-
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
   var composeType = $(this).data('type');
+  console.log("composeType: ", composeType);
   if(composeType == "mm"){
     $('#mm').replaceWith('<input type="radio" checked name="type" value="mm" id="mm">');
     $('#guestCommentModal').modal('show');
@@ -66,7 +30,7 @@ function composeMessage(){//function that is called to open up the Compose Modal
   }
   else if(composeType == "so"){
     $('#so').replaceWith('<input type="radio" checked name="type" value="so" id="so">');
-    $('#guestCommentModal').modal('show');
+    $('#guestCommentModal').modal('show');;
   }
 }
 
@@ -74,7 +38,6 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
   var type = messageType;
   var amount = 20;//Limits how many messages are displayed on the dom at any given time
   var time = new Date(Date.now());
-  console.log("Made It here to the conditional Statements: ", type);
 
   if(type == "all"){
     $('.text-navy').html('<i class="fa fa-sun-o"></i> All Messages');
@@ -95,37 +58,6 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
   });
 }
 
-
-function createPost(event){//Create Post Function
-    event.preventDefault();
-    var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
-
-    $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
-      newMessage[element.name] = element.value;
-    });
-    newMessage.global = true;
-    //reset input field values
-    $('#guestTextarea').val('');
-    $('#guestEmail').val('');
-    $('#username').val('');
-    $.ajax({
-      type: 'POST',
-      url: '/message',
-      data: newMessage, //Pass newMessage to the Database
-      success: addNewMessageToFeed //call addNewMessageToFeed function to display new post right away
-    });
-}
-
-function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
-  $('.comment-container').prepend('<div class="media animated fadeInRight"></div>');
-  var $el = $('.comment-container').children().first();
-
-  $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+response.date_created+'<br/></div></a>');
-  $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+response.content+'<br/><br/>- '+response.name+'</div>');
-  $el.append('<div class="media-body react-options"><button class="react-button fa fa-thumbs-o-up" title="Like"></button><button class="react-button fa fa-comment-o" title="Comment"></button><button class="react-button delete-message" data-messageid="'+response._id+'">Delete Post</button></div>');
-}
-
-
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
   $('.comment-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
@@ -138,28 +70,10 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
     $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
     $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
-      $el.append('<div class="media-body react-options"><button class="react-button fa fa-thumbs-o-up" title="Like"></button><button class="react-button fa fa-comment-o" title="Comment"></button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
   }
 }
 
-function dismissCheckbox(){//dismiss Checkbox fucntion for Welcome modal
-  var my_cookie = $.cookie($('.dismiss').attr('name'));
-  if (my_cookie && my_cookie == "true") {
-      $(this).prop('checked', my_cookie);
-      console.log('checked checkbox');
-  }
-  else{
-      $('#welcomeModal').modal('show');
-      console.log('uncheck checkbox');
-  }
 
-  $(".dismiss").change(function() {
-      $.cookie($(this).attr("name"), $(this).prop('checked'), {
-          path: '/',
-          expires: 1
-      });
-  });
-}
 
   //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
   // <div class="media">
