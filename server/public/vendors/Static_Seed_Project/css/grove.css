@@ -7,7 +7,15 @@
 
 .react-button {
   border: 0;
+  background-color: #f3f3f4;
+}
+
+.react-button:hover,
+.react-button:focus,
+.react-button:active {
   background-color: #fff;
+  color: #EE6631;
+  outline: none;
 }
 
 .flag-button {
@@ -18,6 +26,7 @@
 .small-type {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
+  font-weight: normal;
 }
 
 .jumbotron {
@@ -33,4 +42,12 @@
 
 .three-shares {
   margin-bottom: 20px;
+}
+
+.filter-messages-box {
+  float: right;
+}
+
+.clear-float {
+  clear: both;
 }
