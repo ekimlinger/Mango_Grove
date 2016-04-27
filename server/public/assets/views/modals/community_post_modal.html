@@ -1,0 +1,44 @@
+<script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
+<script src="/assets/scripts/community_app.js"></script>
+
+<div class="modal fade" id="composeCommunityModal" tabindex="-1" role="dialog" aria-labelledby="guestCommentLabel">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="userCommentLabel">Community Comments</h4>
+      </div>
+        <div class="modal-body">
+        <form id="communityPostMessageForm">
+          <h4>What would you like to share?</h4>
+          <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="mm" >
+            <img src="/assets/views/images/mango.png" height="50" width="50" />Share Moment</label>
+          <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="af" >
+            <img src="/assets/views/images/noun_75102_cc.png" height="50" width="50" />Encouragement</label>
+          <label class="radio-inline" style="font-weight:bold"><input type="radio" name="type" value="so" >
+            <img src="/assets/views/images/noun_24896_cc_mod.png" height="50" width="50" />Shoutout</label>
+          <fieldset class="form-group community-list">
+
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="guestTextarea">Type here</label>
+            <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
+
+            <label for="guestEmail">Email address</label>
+            <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
+            <small class="text-muted">We'll never share your email with anyone else.</small>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" class="form-control" id="username" name="name" placeholder="User Name">
+          </fieldset>
+          <div class="modal-footer">
+            <button type="button" id="createCommunityPost" class="btn btn-default" data-dismiss="modal">Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
