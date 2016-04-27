@@ -192,31 +192,6 @@ function composeMessage(){//function that is called to open up the Compose Modal
   }
 }
 
-function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
-  var type = messageType;
-  var amount = 20;//Limits how many messages are displayed on the dom at any given time
-  var time = new Date(Date.now());
-  console.log("Made It here to the conditional Statements: ", type);
-
-  if(type == "all"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> All Messages');
-  }
-  else if(type == "af"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Affirmations');
-  }
-  else if(type == "so"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Shout-Outs');
-  }
-  else if(type == "mm"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Mango Moments');
-  }
-  $.ajax({
-    type: 'GET',
-    url: '/message/global/'+type+'/'+amount+'/'+time,
-    success: loadGlobalFeed //loads messages on the success of the ajax call
-  });
-}
-
 
 function createPost(event){//Create Post Function
     event.preventDefault();
