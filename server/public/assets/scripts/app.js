@@ -16,8 +16,9 @@ $(document).ready(function(){
     });
     $('#createGuestComment').on('click', createComment);
     //try to grab message id
-    $('.comment-container').on('click', '.messageComment', getMessageID);
-      getComment();
+    $('.social-feed-box').on('click', '#messageComment', getMessageID);
+
+    receiveComment();
 
     //WILL NEED #createUserPost event handler
 });
@@ -65,18 +66,15 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
-  $('.comment-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+  //$('.comment-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
 
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
 
     var comment = response[i];//store response into comment for readability
-    $('.comment-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
-    var $el = $('.comment-container').children().last();
-
-    $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-    $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
-    $el.append('<button class="messageComment" data-id="'+comment._id+'" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#guestMessageCommentModal"> Comment </button>');
-
+    $('.social-feed-box').append('<div></div>');//creates each individual comment
+    var $el = $('.social-feed-box').children().last();
+    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+ comment.name +'</a><small class="text-muted">'+ comment.date_created+'</small></div></div>');
+    $el.append('<div class="social-body"><p>'+ comment.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button id="messageComment" data-id="'+comment._id+'" class= "btn btn-white btn-xs" data-toggle="modal" data-target="#guestMessageCommentModal"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div>');
   }
 
 }
@@ -96,12 +94,14 @@ function createComment(event){
   newComment.messageID = $("#createGuestComment").data("id");
     event.preventDefault();
 
-    //grab the information from the compose message modal NEED THE ID FROM THE FORM --CHANGE
+    //grab the information from the compose comment modal NEED THE ID FROM THE FORM --CHANGE
     var commentArray = $('#postCommentForm').serializeArray();
     //grab information off the form and stores it into the newComment variable
     $.each(commentArray, function(index, element){
       newComment[element.name] = element.value;
       console.log( "New Comment: ", newComment);
+
+
     });
 
     //start of post new comment ajax call
@@ -109,7 +109,7 @@ function createComment(event){
       type: 'POST',
       url: '/message/comment',
       data: newComment, //Pass newComment to the Database
-      success: sendComment
+      success: receiveComment
     });
 
     //reset input field values
@@ -118,14 +118,14 @@ function createComment(event){
     $('#username').val('');
 
 }
-function sendComment (){
+function receiveComment (){
   var messageID = $("#createGuestComment").data("id");
     $.ajax({
       type: 'GET',
       //MAKE SURE TO CHANGE THE URL ROUTE --change
       url: '/message/comment/'+messageID,
 
-      success: getComment
+      success: showComment
         //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
         //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
     });
@@ -133,8 +133,8 @@ function sendComment (){
 }
 //loop through the array and append INFO
 //append info to comment-container
-function getComment(response){
-  $('.newComment-container').empty();
+function showComment(response){
+  //$('.social-footer').empty();
 //$('.comment-container').empty();
 for(var i = 0; i <response.length; i++){
   var comment = response[i];//store response into comment for readability
@@ -143,31 +143,11 @@ for(var i = 0; i <response.length; i++){
   console.log("Content: ", comment.content);
   console.log("id: ", comment._id);
 
-  $('.newComment-container').append('<div class="newComment"></div>');//creates each individual comment
-  var $el = $('.newComment-container').children().last();
+  $('.social-footer').append('<div class="social-comment"></div>');//creates each individual comment
+  var $el = $('.social-footer').children().last();
 
-  $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-  $el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
+  $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
+  $el.append(' <div class="media-body"><a href="#">'+comment.name + '</a>' + comment.content+ '<br/><a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a><small class="text-muted"->' + comment.date_created + '</small></div>');
 
 }
 }
-
-
-
-  //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
-  // <div class="media">
-  //     <a class="forum-avatar" href="#">
-  //         <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
-  //         <div class="author-info">
-  //             <strong>Posts:</strong> 543<br/>
-  //             <strong>Joined:</strong> June 21.2015<br/>
-  //         </div>
-  //     </a>
-  //     <div class="media-body">
-  //         <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
-  //          All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-  //         <br/><br/>
-  //         - Monica Jackson
-  //         UX developer
-  //     </div>
-  // </div>
