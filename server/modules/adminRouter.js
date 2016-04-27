@@ -54,7 +54,7 @@ router.get('/flaggedComments', function(req, res){
       console.log(err);
       res.send();
     } else{
-      console.log("All flagged messages: ", data);
+      console.log("All flagged comments: ", data);
       res.send(data);
     }
   });
@@ -95,6 +95,44 @@ router.put('/unblockUser', function(req,res){
     }
   });
 });
+
+// unflags
+
+// Edits comment by id
+router.put('/unflag/comment/:commentID', function(req,res){
+  var commentID = req.params.commentID;
+
+  Comment.update({_id: commentID},
+              {flag: 0},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to unflag your comment");
+               } else{
+                 res.send("Updated Comment :", data);
+               }
+  });
+});
+
+// Edits Message by id
+router.put('/unflag/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+
+  Message.update({_id: messageID},
+              {flag: 0},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to unflag your message");
+               } else{
+                 res.send("Updated Message :", data);
+               }
+  });
+});
+
+
+
+
 
 
 //
