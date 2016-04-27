@@ -1,8 +1,8 @@
 var newMessage = {};//New Message object to be sent down to the database
 
 $(document).ready(function(){
-    $("#loadComposeModal").load('../views/modals/guest_comment_modal.html');
-    $("#loadWelcomeModal").load('../views/modals/welcome.html');
+    $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
+    $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
     //$("#loadModal").load('../views/modals/guest_comment_modal.html script');
     var messageType = "all";
     showMessages(messageType);//show all messages on page load
@@ -52,7 +52,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
 
     var message = response[i];//store response into comment for readability
-    $('.social-feed-box').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
+    $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
 
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
