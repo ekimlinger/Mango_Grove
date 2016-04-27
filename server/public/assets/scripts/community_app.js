@@ -1,5 +1,5 @@
 var appendCommunityList;
-var communityList = ["Carlson School","McCalister School", "Global"];
+var communityList = ["Carlson School","McCalister School"];
 
 var newMessage = {};
 
@@ -15,14 +15,26 @@ $(document).ready(function(){
 });
 
 function createCommunityPost(){
+        var checked = $("input[type=checkbox]:checked").length;
+
+        if(!checked) {
+          $('#errorMessage').text("You must check at least one checkbox.");
+          return false;
+        }
 
   event.preventDefault();
   var messageArray = $('#communityPostMessageForm').serializeArray();  //grab the information from the compose message moda
   console.log("Message Array is: ", messageArray);
+  newMessage.location = [];
+  newMessage.global = false;
   $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
-    newMessage[element.name] = element.value;
+    if(element.name == "location"){
+      newMessage.location.push(element.value);
+    }
+    else{
+      newMessage[element.name] = element.value;
+    }
   });
-  newMessage.global = true;
   console.log("newMessage is: ", newMessage);
   $.ajax({
     type: 'POST',
