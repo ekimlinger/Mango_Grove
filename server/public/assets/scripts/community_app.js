@@ -26,10 +26,10 @@ function createCommunityPost(){
   var messageArray = $('#communityPostMessageForm').serializeArray();  //grab the information from the compose message moda
   console.log("Message Array is: ", messageArray);
   newMessage.location = [];
-  newMessage.global = false;
+  newMessage.global = false;//Set global to false unless user checks
   $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
     if(element.name == "location"){
-      newMessage.location.push(element.value);
+      newMessage.location.push(element.value);//push multiple locations to location key
     }
     else{
       newMessage[element.name] = element.value;
