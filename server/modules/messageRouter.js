@@ -41,7 +41,7 @@ router.get('/:location/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
   var location = req.params.location;
-  var amount = req.params.amount;
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
   if (type == 'all') {

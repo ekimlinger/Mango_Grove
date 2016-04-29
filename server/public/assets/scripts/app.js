@@ -1,18 +1,18 @@
-var newMessage = {};//New Message object to be sent down to the database
 
 $(document).ready(function(){
+    //load all modals to the DOM
     $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
     $("#loadCommunityModal").load('/assets/views/modals/community_post_modal.html');
-    //$("#loadModal").load('../views/modals/guest_comment_modal.html script');
+
     var messageType = "all";
-    //showMessages(messageType);//show all messages on page load
+    showMessages(messageType);//show all messages on page load
 
     $('.compose').on('click',composeMessage);//When Compose Buttons are clicked for guests
 
     $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       messageType = $(this).data('type');
-      //showMessages(messageType);
+      showMessages(messageType);
     });
     //WILL NEED #createUserPost event handler
 });
@@ -57,35 +57,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div><div class="social-footer></div>"');
-
-
-
-    //$el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-    //$el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
   }
-}
-
-
-
-
-  //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
-  // <div class="media">
-  //     <a class="forum-avatar" href="#">
-  //         <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
-  //         <div class="author-info">
-  //             <strong>Posts:</strong> 543<br/>
-  //             <strong>Joined:</strong> June 21.2015<br/>
-  //         </div>
-  //     </a>
-  //     <div class="media-body">
-  //         <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
-  //          All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-  //         <br/><br/>
-  //         - Monica Jackson
-  //         UX developer
-  //     </div>
-  // </div>
-    $('#composeCommunityModal').modal('show');
 }
 
 function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
@@ -126,32 +98,5 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $el.append('<div class="social-body"><p>'+message.content+'</p>');
     $el.append('<div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div>');
 
-
-    //$el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-    //$el.append('<div class="media-body"><h4 class="media-heading">Hampden-Sydney College in Virginia</h4>'+comment.content+'<br/><br/>- '+comment.name+'</div>');
   }
 }
-
-
-
-
-
-
-
-  //EXAMPLE OF THE CONTENT CONTAINER FOR EACH INDIVIDUAL MESSAGES
-  // <div class="media">
-  //     <a class="forum-avatar" href="#">
-  //         <img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image">
-  //         <div class="author-info">
-  //             <strong>Posts:</strong> 543<br/>
-  //             <strong>Joined:</strong> June 21.2015<br/>
-  //         </div>
-  //     </a>
-  //     <div class="media-body">
-  //         <h4 class="media-heading">Hampden-Sydney College in Virginia</h4>
-  //          All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures
-  //         <br/><br/>
-  //         - Monica Jackson
-  //         UX developer
-  //     </div>
-  // </div>
