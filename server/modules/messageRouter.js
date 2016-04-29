@@ -7,6 +7,17 @@ var Comment = require('../models/comment.js');
 
 
 // GET REQUESTS
+router.get('/comment/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+  console.log(req.params);
+      Comment.find({messageID: messageID}, function(err, data){
+        if(err){
+          console.log(err);
+        }
+          res.send(data);
+      });
+});
+
 
 router.get('/global/:type/:amount/:time', function(req,res){
 
@@ -53,7 +64,6 @@ router.get('/:location/:type/:amount/:time', function(req,res){
       res.send(data);
     }
   }).sort({_id: -1}).limit(amount);
-  res.send("Dummy res");
 });
 
 
@@ -65,6 +75,7 @@ router.post('/comment/:messageID', function(req,res){
   var messageID = req.params.messageID;
   console.log("req.body: ", req.body, "messageID: ", messageID);
   var newComment = new Comment({
+    messageID: messageID,
     name: req.body.name,
     email: req.body.email,
     content: req.body.content,
@@ -88,8 +99,6 @@ router.post('/comment/:messageID', function(req,res){
       });
     }
   });
-
-  res.send("Dummy Response from message comment request");
 });
 
 //Posts new message
