@@ -1,10 +1,10 @@
-  var newMessage = {};//New Message object to be sent down to the database
-
+var newMessage = {};//New Message object to be sent down to the database
+  var newUser = {}; //Used to strip email address from blocking form
 $(document).ready(function(){
+  $("#loadComposeModal").load('/assets/views/modals/user_comment_modal.html');
 
   console.log("Jquery is working!");
   getBlockedUsers();
-  unblockUser("ekimlinger@gmail.com");
   getFlaggedMessages();
   getFlaggedComments();
   viewFeedback();
@@ -13,7 +13,8 @@ $(document).ready(function(){
   $('.flagged-messages-container').on('click','.unflag-message', unflagMessage);
   $('.flagged-comments-container').on('click','.unflag-comment', unflagComment);
 
-
+  $('#block-user-form').on('submit', submitBlockedUser)
+  $('.blocked-users-container').on('click', '.remove-blocked-user', unblockUser);
   //  BRADY'S CODE
   var messageType = "all";
   showMessages(messageType);//show all messages on page load
@@ -29,15 +30,32 @@ $(document).ready(function(){
   //WILL NEED #createUserPost event handler
 
 });
+
 //
 // EVAN'S CODE
 //
+function submitBlockedUser(event){
+  event.preventDefault();
+  var userArray = $('#block-user-form').serializeArray();  //grab the information from the compose message moda
+  $.each(userArray, function(index, element){//grab information off the form and stores it into the newMessage variable
+    newUser[element.name] = element.value;
+  });
+  $('#userName').val('');
 
+  $.ajax({
+    type: 'POST',
+    url: '/admin/blockUser',
+    data: newUser, //Pass newMessage to the Database
+    success: getBlockedUsers //call addNewMessageToFeed function to display new post right away
+  });
+}
 
 function appendBlockedUsers(data){
+  console.log("Appending Blocked Users: ", data);
+  $('.blocked-users-container').empty();
   for (var i = 0; i < data.length; i++) {
     var user = data[i];
-    $('.blockedUsersList').append("<li>"+user+"</li>");
+    $('.blocked-users-container').append('<h4><button type="button" class="close remove-blocked-user" data-userName="'+user+'" aria-label="Close"><span aria-hidden="true">×</span></button>'+user+'</h4>');
   }
 }
 
@@ -100,15 +118,14 @@ function blockUser(userName){
     }
   });
 }
-function unblockUser(userName){
+function unblockUser(){
+  var userName = $(this).data('userName');
   var body = {userName: userName};
   $.ajax({
     type: 'PUT',
     url: '/admin/unblockUser',
     data: body,
-    success: function(data){
-      console.log("Unblocked user: ", data);
-    }
+    success: getBlockedUsers
   });
 }
 function getFlaggedMessages(){
@@ -154,12 +171,14 @@ function unflagComment(){
 }
 
 function deleteMessage(){
-  console.log($(this));
   var messageID = $(this).data('messageid');
   $.ajax({
     type: 'DELETE',
     url: '/message/'+ messageID,
-    success: getFlaggedMessages
+    success: function(data){
+      getFlaggedMessages();
+      showMessages(data.type);
+    }
   });
 }
 function deleteComment(){
@@ -167,7 +186,10 @@ function deleteComment(){
   $.ajax({
     type: 'DELETE',
     url: '/message/comment/'+ commentID,
-    success: getFlaggedComments
+    success: function(data){
+      getFlaggedComments();
+      showMessages(data.type);
+    }
   });
 }
 
@@ -178,18 +200,7 @@ function deleteComment(){
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
   var composeType = $(this).data('type');
-  if(composeType == "mm"){
-    $('#mm').replaceWith('<input type="radio" checked name="type" value="mm" id="mm">');
-    $('#guestCommentModal').modal('show');
-  }
-  else if(composeType == "af"){
-    $('#af').replaceWith('<input type="radio" checked name="type" value="af" id="af">');
-    $('#guestCommentModal').modal('show');
-  }
-  else if(composeType == "so"){
-    $('#so').replaceWith('<input type="radio" checked name="type" value="so" id="so">');
-    $('#guestCommentModal').modal('show');
-  }
+  $('#userCommentModal').modal('show');
 }
 
 function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
@@ -199,16 +210,16 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
   console.log("Made It here to the conditional Statements: ", type);
 
   if(type == "all"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> All Messages');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> All Messages');
   }
   else if(type == "af"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Affirmations');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Affirmations');
   }
   else if(type == "so"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Shout-Outs');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Shout-Outs');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Mango Moments');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Mango Moments');
   }
   $.ajax({
     type: 'GET',

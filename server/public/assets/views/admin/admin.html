@@ -94,60 +94,73 @@
             </nav>
         </div>
 
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 white-bg">
-                <div class=" text-center ">
-                  <!--BRADY CHANGES -->
-                    <div class="col-md-4">
-                    <img src="/assets/views/images/mango.png" height="100" width="100" />
-
-                    <h4><span class="small">Share a</span><br />
-                      <button class="compose" data-type="mm" >Mango Moment</button></h4>
-                    </div>
-                    <!--BRADY CHANGES -->
-                  <div class="col-md-4">
-                    <img src="/assets/views/images/noun_75102_cc.png" height="100" width="100" />
-                    <h4><span class="small">Share an</span><br />
-                      <button class="compose" data-type="af">Affirmation</button></h4>
-                  </div>
-                  <!--BRADY CHANGES -->
-                  <div class="col-md-4">
-                    <img src="/assets/views/images/noun_24896_cc_mod.png" height="100" width="100" />
-                    <h4><span class="small">Share a</span><br />
-                      <button class="compose" data-type="so">Shoutout</button></h4>
-                  </div>
-                  </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-              <!--TEST BUTTONS-->
-              <div class="text-center">
-                <button data-type="so" class="filter-messages">Shout Outs</button>
-                <button data-type="mm" class="filter-messages">Mango Moments</button>
-                <button data-type="af" class="filter-messages">Affirmations</button>
-                <button data-type="all" class="filter-messages">All</button>
-              </div>
-              <!--END OF TEST BUTTONS-->
-                <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="ibox-content forum-post-container">
-                        <div class="forum-post-info">
-                            <h4><span class="text-navy"><i class="fa fa-sun-o"></i>
-                              <!-- General discussion - original section tlvh -->
-                              Mango Moments
-                            </span>
-                            <!-- prob not needed tlvh -->
-                            <!-- - Announcements - <span class="text-muted">Free talks</span> -->
-                          </h4>
+        <div class="three-shares animated fadeInRight">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <div class="col-md-4">
+                          <h1>Share a Moment</h1>
+                            <img src="/assets/views/images/mango.png" height="100" width="100" />
                         </div>
-                        <!--Append New Comments here to the comment-container class-->
-                        <div class="comment-container">
 
+                        <div class="col-md-4">
+                          <h1>Encourage</h1>
+                            <img src="/assets/views/images/noun_75102_cc.png" height="100" width="100" />
+                        </div>
+
+                        <div class="col-md-4">
+                          <h1>Shout-Out</h1>
+                            <img src="/assets/views/images/noun_24896_cc_mod.png" height="100" width="100" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Button trigger modal -->
+        <div class="text-center">
+          <button type="button" class="btn btn-primary btn-lg compose" data-toggle="modal">
+            Post Now
+          </button>
+        </div>
+
+        <!-- inserting social feed code here tlvh -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!--TEST BUTTONS-->
+                <!--data-type IMPORTANT PLEASE DO NOT REMOVE. Used for filtering-->
+
+                <div class="wrapper wrapper-content  animated fadeInRight">
+                    <div class="row">
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <h3><span class="text-navy">Moments</span>
+
+                      <div class="filter-messages-box"><span class="small-type">
+                        <button data-type="mm" class="filter-messages react-button"></i>Moments</button>
+                        <button data-type="af" class="filter-messages react-button">Encouragement</button>
+                        <button data-type="so" class="filter-messages react-button">Shout-Outs</button>
+                        <button data-type="all" class="filter-messages react-button">All</button>
+                      </span>
+                      </div>
+                      <div class="clear-float"></div>
+                            <!--END OF TEST BUTTONS-->
+                            </h3>
+
+                            <!-- inserting social feed code here tlvh -->
+
+                        <!-- posts are appended here -->
+                          </div>
+                          </div>
+
+                          <!--Append New Comments here to the comment-container class-->
+                          <!-- <div class="comment-container">
+                          </div> -->
+                          </div>
+                      </div>
+                  </div>
+             </div>
 
             <div class="footer">
                 <div class="pull-right">
@@ -162,7 +175,7 @@
     </div>
 </div>
 
-<!-- Start of Compose Modal-->
+<!-- Start of Compose Modal
 <div class="modal fade" id="guestCommentModal" tabindex="-1" role="dialog" aria-labelledby="guestCommentLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -173,7 +186,7 @@
         <div class="modal-body">
         <form id="postMessageForm">
           <p>What would you like to share?</p>
-          <!--BRADY CHANGES -->
+          <!-BRADY CHANGES
           <label class="radio-inline"><input type="radio" name="type" value="mm" id="mm">Mango Moment</label>
           <label class="radio-inline"><input type="radio" name="type" value="af" id="af">Affirmation</label>
           <label class="radio-inline"><input type="radio" name="type" value="so" id="so">Shout-Out</label>
@@ -200,9 +213,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!--END of Message Modal-->
-
+<div id="loadComposeModal"></div>
 
 </body>
 
