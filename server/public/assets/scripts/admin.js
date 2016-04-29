@@ -1,4 +1,4 @@
-var newMessage = {};//New Message object to be sent down to the database
+  var newMessage = {};//New Message object to be sent down to the database
   var newUser = {}; //Used to strip email address from blocking form
 $(document).ready(function(){
   $("#loadComposeModal").load('/assets/views/modals/user_comment_modal.html');
