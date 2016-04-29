@@ -93,10 +93,10 @@ router.post('/comment', function(req,res){
   });
 });
 
-router.get('/comment/:messageID/', function(req,res){
+router.get('/comment', function(req,res){
   var messageID = req.params.messageID;
   console.log(req.params);
-      Comment.find({messageID: messageID}, function(err, data){
+      Comment.find({}, function(err, data){
 
         if(err){
           console.log(err);

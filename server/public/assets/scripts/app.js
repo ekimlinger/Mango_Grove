@@ -127,7 +127,7 @@ function receiveComment () {
     $.ajax({
       type: 'GET',
       //MAKE SURE TO CHANGE THE URL ROUTE --change
-      url: '/message/comment/'+ messageID,
+      url: '/message/comment',
 
       success: showComment
         //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
@@ -138,7 +138,8 @@ function receiveComment () {
 //loop through the array and append INFO
 //append info to comment-container
 function showComment(response){
-  //$('.social-footer').empty();
+  $('.social-footer').empty();
+    var messageID = $("#createGuestComment").data("id");
   console.log("Made it here on page load");
 
 
@@ -148,15 +149,29 @@ for(var i = 0; i <response.length; i++){
   console.log("Name: ", comment.name);
   console.log("Content: ", comment.content);
   console.log("id: ", comment._id);
-  var messageID = $("#createGuestComment").data("id");
-  if (messageID == comment.messageID){
+
+  //if (messageID == comment.messageID){
     $('#'+ comment.messageID).append('<div class="social-comment"></div>');//creates each individual comment
-    var $el = $('.social-footer').children().last();
+    var $el = $('#'+comment.messageID).children().last();
 
     $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
     $el.append(' <div class="media-body"><a href="#">'+ comment.name + '</a>' + comment.content+ '<br/><a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
 
-  }
+  //}
 
 }
 }
+
+//
+// function loadComment (){
+//   $.ajax({
+//     type: 'GET',
+//     //MAKE SURE TO CHANGE THE URL ROUTE --change
+//     url: '/message/comment'
+//
+//     success: showComment
+//       //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
+//       //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
+//   });
+//
+// }
