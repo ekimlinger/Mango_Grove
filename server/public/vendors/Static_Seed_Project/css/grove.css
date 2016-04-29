@@ -20,7 +20,8 @@
 
 .flag-button {
   position: absolute;
-  right: 50px;
+  right: 30px;
+  color: #C0C0C0;
 }
 
 .small-type {
@@ -60,4 +61,11 @@
 
 .underline {
   border-bottom: 1px solid #f1f1f1;
+}
+
+.post-icon {
+  /*background-color: red;*/
+  float: right;
+  width: 50px;
+  height: 50px;
 }

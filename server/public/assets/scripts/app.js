@@ -55,6 +55,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
 
+    $el.append('<div class="post-icon"><img src="/assets/views/images/noun_24896_cc_mod.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div><div class="social-footer></div>"');
 
