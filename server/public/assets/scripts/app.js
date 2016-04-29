@@ -2,9 +2,11 @@ var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
 
 $(document).ready(function(){
-    $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
+    //load all modals to the DOM
+    $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
-    //$("#loadModal").load('../views/modals/guest_comment_modal.html script');
+
+
     var messageType = "all";
     showMessages(messageType);//show all messages on page load
 
@@ -51,13 +53,9 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
 }
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
-
   $('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
-
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
-
     var message = response[i];//store response into comment for readability
-
     var iconType;             // Sets icon type to be displayed on dom
     switch (message.type) {
       case "so":
@@ -66,14 +64,12 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
       case "mm":
         iconType = "mango"
         break;
-      case "af":
-        iconType = "noun_75102_cc"
+      case "so":
+        iconType = "noun_24896_cc"
         break;
     }
-
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
-
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
@@ -81,9 +77,6 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     getCommentsByMessage(message._id);
   }
 }
-
-
-
 // COMMENT FUNCTIONS
 
 
@@ -95,6 +88,7 @@ function getMessageID() {
     $("#createGuestComment").data("id", messageID);
     console.log("this message id will be", messageID);
 }
+
 //posting comment to database
 function createComment(event) {
     //set the messageID key for the comment object
