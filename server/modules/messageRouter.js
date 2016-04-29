@@ -7,14 +7,24 @@ var Comment = require('../models/comment.js');
 
 
 // GET REQUESTS
+router.get('/comment/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+  console.log(req.params);
+      Comment.find({messageID: messageID}, function(err, data){
+        if(err){
+          console.log(err);
+        }
+          res.send(data);
+      });
+});
 
-router.get('/global/:type/:ammount/:time', function(req,res){
+
+router.get('/global/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
-  var ammount = parseInt(req.params.ammount);
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
-  var id = req.params.id;
 
   if (type == 'all') {
       Message.find({global: true, date_created:{'$lt' : new Date(time)}}, function(err, data){
@@ -24,7 +34,7 @@ router.get('/global/:type/:ammount/:time', function(req,res){
         } else{
           res.send(data);
         }
-      }).sort({_id: -1}).limit(ammount);
+      }).sort({_id: -1}).limit(amount);
     }
     else{
       Message.find({global: true, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
@@ -34,18 +44,17 @@ router.get('/global/:type/:ammount/:time', function(req,res){
         } else{
           res.send(data);
         }
-      }).sort({_id: -1}).limit(ammount);
+      }).sort({_id: -1}).limit(amount);
     }
 });
 
-router.get('/:location/:type/:ammount/:time', function(req,res){
+router.get('/:location/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
   var location = req.params.location;
-  var ammount = req.params.ammount;
+  var amount = req.params.amount;
   var time = req.params.time;
   var type = req.params.type;
-
 
   Message.find({location: location, time: {$lt: time}}, function(err, data){
     if(err){
@@ -54,20 +63,19 @@ router.get('/:location/:type/:ammount/:time', function(req,res){
     } else{
       res.send(data);
     }
-  }).sort({_id: -1}).limit(ammount);
-  res.send("Dummy res");
+  }).sort({_id: -1}).limit(amount);
 });
 
 
 
 //  POST REQUESTS
-//post comment to the messages while updating the message comments array with comment ids
-router.post('/comment', function(req,res){
 
-  var messageID = req.body.messageID;
+router.post('/comment/:messageID', function(req,res){
+
+  var messageID = req.params.messageID;
   console.log("req.body: ", req.body, "messageID: ", messageID);
   var newComment = new Comment({
-    messageID : req.body.messageID,
+    messageID: messageID,
     name: req.body.name,
     email: req.body.email,
     content: req.body.content,
@@ -91,18 +99,6 @@ router.post('/comment', function(req,res){
       });
     }
   });
-});
-
-router.get('/comment', function(req,res){
-  var messageID = req.params.messageID;
-  console.log(req.params);
-      Comment.find({}, function(err, data){
-
-        if(err){
-          console.log(err);
-        }
-          res.send(data);
-      });
 });
 
 //Posts new message
@@ -144,7 +140,7 @@ router.put('/comment/:commentID', function(req,res){
                }
   });
 
-
+  res.send("Put/update route sends back");
 });
 
 // Edits Message by id
@@ -162,7 +158,7 @@ router.put('/:messageID', function(req,res){
                }
   });
 
-
+  res.send("Put/update route sends back");
 });
 
 
@@ -179,7 +175,6 @@ router.delete('/:messageID', function(req,res){
       res.send("Removed your message! :", data);
     }
   });
-
 
 });
 

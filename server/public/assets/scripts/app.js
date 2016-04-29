@@ -1,6 +1,6 @@
 var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
-var likePosts = 0;
+var likePost = {};
 
 $(document).ready(function(){
     $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
@@ -15,33 +15,16 @@ $(document).ready(function(){
       messageType = $(this).data('type');
       showMessages(messageType);
     });
+
+    // Comment Abilities
     $('#createGuestComment').on('click', createComment);
-    //try to grab message id
+    // Gets messageID for modal to post to
     $('.social-feed-box').on('click', '#messageComment', getMessageID);
 
-    $('.social-feed-box').on('click', '#likePosts', likePostsCounting);
-
-
-    //load previous comments when dom loads
-    receiveComment();
-    //WILL NEED #createUserPost event handler
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
-  var composeType = $(this).data('type');
-  console.log("composeType: ", composeType);
-  if(composeType == "mm"){
-    $('#mm').replaceWith('<input type="radio" checked name="type" value="mm" id="mm">');
     $('#guestCommentModal').modal('show');
-  }
-  else if(composeType == "af"){
-    $('#af').replaceWith('<input type="radio" checked name="type" value="af" id="af">');
-    $('#guestCommentModal').modal('show');
-  }
-  else if(composeType == "so"){
-    $('#so').replaceWith('<input type="radio" checked name="type" value="so" id="so">');
-    $('#guestCommentModal').modal('show');;
-  }
 }
 
 function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
@@ -50,23 +33,22 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
   var time = new Date(Date.now());
 
   if(type == "all"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> All Messages');
+    $('.text-navy').html(' All Messages');
   }
   else if(type == "af"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Affirmations');
+    $('.text-navy').html('<img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" /> Encouragements');
   }
   else if(type == "so"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Shout-Outs');
+    $('.text-navy').html('<img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" /> Shout-Outs');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Mango Moments');
+    $('.text-navy').html('<img src="/assets/views/images/mango.png" height="20" width="20" />Moments');
   }
   $.ajax({
     type: 'GET',
     url: '/message/global/'+type+'/'+amount+'/'+time,
     success: loadGlobalFeed //loads messages on the success of the ajax call
   });
-
 }
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
@@ -75,100 +57,111 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
 
-    var comment = response[i];//store response into comment for readability
-    $('.social-feed-box').append('<div></div>');//creates each individual comment
+    var message = response[i];//store response into comment for readability
+    $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
-    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+ comment.name +'</a><small class="text-muted">'+ comment.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+ comment.content+'</p><div class="btn-group"><button id="likePosts"+"'+comment._id+'" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button id="messageComment" data-id="'+comment._id+'" class= "btn btn-white btn-xs" data-toggle="modal" data-target="#guestMessageCommentModal"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div>');
-    $el.append('<div class="social-footer" id="'+comment._id+'"></div>');
 
+    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-footer" id="'+message._id+'"></div>');
+    getCommentsByMessage(message._id);
   }
-
-
-
 }
+
+
+
+// COMMENT FUNCTIONS
+
 
 // get messageid by clicking the comment button
-function getMessageID (){
-  console.log("HERE: " , $(this).data("id"));
-  var messageID = $(this).data("id");
-  //set the message id for the post button
-  $("#createGuestComment").data("id", messageID);
-  console.log("this message id will be", messageID);
-  console.log("meow");
+function getMessageID() {
+    console.log("HERE: ", $(this).data("id"));
+    var messageID = $(this).data("id");
+    //set the message id for the post button
+    $("#createGuestComment").data("id", messageID);
+    console.log("this message id will be", messageID);
 }
 //posting comment to database
-function createComment(event){
-  //set the messageID key for the comment object
-  newComment.messageID = $("#createGuestComment").data("id");
+function createComment(event) {
+    //set the messageID key for the comment object
+    newComment.messageID = $("#createGuestComment").data("id");
     event.preventDefault();
-
-    //grab the information from the compose comment modal NEED THE ID FROM THE FORM --CHANGE
+    //grab the information from the compose comment modal NEED THE ID FROM THE FORM
     var commentArray = $('#postCommentForm').serializeArray();
     //grab information off the form and stores it into the newComment variable
-    $.each(commentArray, function(index, element){
-      newComment[element.name] = element.value;
-      console.log( "New Comment: ", newComment);
-
-
+    $.each(commentArray, function(index, element) {
+        newComment[element.name] = element.value;
+        console.log("New Comment: ", newComment);
     });
-
-    //start of post new comment ajax call
+    // Send to server to be saved,
     $.ajax({
-      type: 'POST',
-      url: '/message/comment',
-      data: newComment, //Pass newComment to the Database
-      success: receiveComment
+        type: 'POST',
+        url: '/message/comment/'+ newComment.messageID,
+        data: newComment,
+        success: function(data){
+          getCommentsByMessage(newComment.messageID);
+        }
     });
-
     //reset input field values
     $('#guestTextarea').val('');
     $('#guestEmail').val('');
     $('#username').val('');
 
 }
-function receiveComment () {
-  var messageID = $("#createGuestComment").data("id");
-    $.ajax({
-      type: 'GET',
-      //MAKE SURE TO CHANGE THE URL ROUTE --change
-      url: '/message/comment',
 
-      success: showComment
-        //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
-        //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
+function getCommentsByMessage(messageID) {
+    var messageID = messageID;
+    $.ajax({
+        type: 'GET',
+        url: '/message/comment/'+ messageID,
+        success: showComments
     });
 
 }
+
 //loop through the array and append INFO
 //append info to comment-container
-function showComment(response){
-  $('.social-footer').empty();
-    var messageID = $("#createGuestComment").data("id");
-  console.log("Made it here on page load");
+function showComments(response) {
+  console.log(response);
+  // Shows comments if available
+  if(response.length){
+    var messageID = response[0].messageID;
+    $('#'+messageID).empty();
+    for (var i = 0; i < response.length; i++) {
+        var comment = response[i]; //store response into comment for readability
 
+        $('#' + comment.messageID).append('<div class="social-comment"></div>'); //creates each individual comment
+        var $el = $('#' + comment.messageID).children().last();
 
-for(var i = 0; i <response.length; i++){
-  var comment = response[i];//store response into comment for readability
-  console.log(comment);
-  console.log("Name: ", comment.name);
-  console.log("Content: ", comment.content);
-  console.log("id: ", comment._id);
-
-    $('#'+ comment.messageID).append('<div class="social-comment"></div>');//creates each individual comment
-    var $el = $('#'+comment.messageID).children().last();
-
-    $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-    $el.append(' <div class="media-body"><a href="#">'+ comment.name + '</a>' + comment.content+ '<br/><a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
-
-
-
-}
+        $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><a href="#" class="small">'+comment.like+'<i class="fa fa-thumbs-up"></i>Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
+    }
+  }
 }
 
-function likePostsCounting (){
-  likePosts++;
-  console.log(likePosts);
-  
-
-}
+// function likePostsCounting (){
+//   if
+//   newComment.messageID = $("#createGuestComment").data("id");
+//     event.preventDefault();
+//
+//     //grab the information from the compose comment modal NEED THE ID FROM THE FORM --CHANGE
+//     var commentArray = $('#postCommentForm').serializeArray();
+//     //grab information off the form and stores it into the newComment variable
+//     $.each(commentArray, function(index, element){
+//       newComment[element.name] = element.value;
+//       console.log( "New Comment: ", newComment);
+//
+//
+//     });
+//
+//     //start of post new comment ajax call
+//     $.ajax({
+//       type: 'POST',
+//       url: '/message/comment',
+//       data: newComment, //Pass newComment to the Database
+//       success: receiveComment
+//     });
+//
+//
+//
+// }
