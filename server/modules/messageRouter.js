@@ -44,16 +44,27 @@ router.get('/:location/:type/:amount/:time', function(req,res){
   var amount = req.params.amount;
   var time = req.params.time;
   var type = req.params.type;
+  if (type == 'all') {
+        Message.find({location: { $in: [location]} }, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            console.log("Data that is being sent back: ", data);
+            res.send(data);
 
-  Message.find({location: location, time: {$lt: time}}, function(err, data){
-    if(err){
-      console.log(err);
-      res.send();
-    } else{
-      res.send(data);
-    }
-  }).sort({_id: -1}).limit(amount);
-  res.send("Dummy res");
+          }
+        }).sort({_id: -1}).limit(amount);
+      }else{
+        Message.find({location: { $in: [location]}, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            res.send(data);
+          }
+        }).sort({_id: -1}).limit(amount);
+      }
 });
 
 
