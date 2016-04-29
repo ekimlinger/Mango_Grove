@@ -1,4 +1,3 @@
-
 var communityList = ["Carlson School","McCalister School"];
 var community = communityList[0];
 var messageType = "all";
@@ -17,6 +16,7 @@ $(document).ready(function(){
   });
 
   $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
+      console.log("This is what Community equals in the filter-messages: ", community);
       messageType = $(this).data('type');
       showMessages(community, messageType);
   });

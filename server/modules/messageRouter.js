@@ -38,13 +38,23 @@ router.get('/global/:type/:amount/:time', function(req,res){
 });
 
 router.get('/:location/:type/:amount/:time', function(req,res){
-  console.log("Start of get Call: ",req.params);
   var location = req.params.location;
-  console.log("Location: ", location);
   var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
-      Message.find({location: { $in: [location]}}, function(err, data){
+    if (type == 'all') {
+      Message.find({location: { $in: [location]} }, function(err, data){
+        if(err){
+          console.log(err);
+          res.send();
+        } else{
+          console.log("Data that is being sent back: ", data);
+          res.send(data);
+
+        }
+      }).sort({_id: -1}).limit(amount);
+    }else{
+      Message.find({location: { $in: [location]}, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
         if(err){
           console.log(err);
           res.send();
@@ -52,6 +62,7 @@ router.get('/:location/:type/:amount/:time', function(req,res){
           res.send(data);
         }
       }).sort({_id: -1}).limit(amount);
+    }
 });
 
 //  POST REQUESTS
@@ -59,7 +70,7 @@ router.get('/:location/:type/:amount/:time', function(req,res){
 router.post('/comment/:messageID', function(req,res){
 
   var messageID = req.params.messageID;
-  console.log("req.body: ", req.body, "messageID: ", messageID);
+
   var newComment = new Comment({
     name: req.body.name,
     email: req.body.email,
