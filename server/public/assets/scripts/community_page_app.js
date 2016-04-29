@@ -4,7 +4,7 @@ var messageType = "all";
 var newMessage = {};
 
 $(document).ready(function(){
-  $("#loadCommunityModal").load('/assets/views/modals/community_post_modal.html');
+  $("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
   showMessages(community, messageType);
 
   for(var i = 0; i < communityList.length; i++){
@@ -23,25 +23,20 @@ $(document).ready(function(){
   });
 
   $('.compose').on('click',function(){
+    console.log("Message Type when being clicked: ", messageType);
     composeMessage(messageType);
   });
-
+  console.log("Message Type on page load: ", messageType);
   //CODE FOR CHARACTER REMAINING IN TEXTAREA
-  var maxLength = 150;
-  $('#communityTextarea').keyup(function() {
-    var length = $(this).val().length;
-    var length = maxLength-length;
-    $('.chars').text(length);
-  });
+
 
 });
 
 
-function composeMessage(messageType){//function that is called to open up the Compose Modal Message which sets the type of the message
-    $('.modal-content').html('<div class="modal-content" data-messageType="'+messageType+'">');
-    console.log("Made It inside the compose Message function");
+function composeMessage(type){//function that is called to open up the Compose Modal Message which sets the type of the message
+    $('.modal-content').data('messageType',type);
+    console.log("Message Type inside the compose Message function: ",type);
     $('#userMessageModal').modal('show');
-
 }
 
 function showMessages(community, messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
@@ -69,7 +64,6 @@ function showMessages(community, messageType){//Shows specific Messages -- Mango
     url: '/message/'+location+'/'+type+'/'+amount+'/'+time,
     success: loadCommunityFeed //loads messages on the success of the ajax call
   });
-
 }
 
 function loadCommunityFeed(response){

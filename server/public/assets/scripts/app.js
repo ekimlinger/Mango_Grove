@@ -1,9 +1,9 @@
 
 $(document).ready(function(){
     //load all modals to the DOM
-    $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
+    $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
-  
+
 
     var messageType = "all";
     showMessages(messageType);//show all messages on page load
