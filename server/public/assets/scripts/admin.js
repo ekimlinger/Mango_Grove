@@ -70,7 +70,7 @@ function showFlaggedMessages(data){
 
       $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
       $el.append('<div class="media-body"><h4 class="media-heading">'+comment.name+'</h4>'+comment.content+'<br/><br/></div>');
-        $el.append('<div class="media-body react-options"><button class="react-button unflag-message" data-messageid="'+comment._id+'">Remove Flags</button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
+        $el.append('<div class="media-body react-options"><button class="react-button unflag-message" data-messageid="'+comment._id+'">Remove ' + comment.flag + ' Flags</button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
     }
   }else{
     //Appends Message saying "No flagged content"
@@ -89,7 +89,7 @@ function showFlaggedComments(data){
 
       $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
       $el.append('<div class="media-body"><h4 class="media-heading">'+comment.name+'</h4>'+comment.content+'<br/><br/></div>');
-        $el.append('<div class="media-body react-options"><button class="react-button unflag-message" data-messageid="'+comment._id+'">Remove Flags</button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
+        $el.append('<div class="media-body react-options"><button class="react-button unflag-message" data-messageid="'+comment._id+'">Remove '+comment.flag+' Flags</button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
     }
   }else{
     //Appends Message saying "No flagged content"
@@ -193,9 +193,16 @@ function deleteComment(){
   });
 }
 
+// End of Unique admin functionality
+
+
+
+
+
+
 
 //
-//  BRADY'S CODE
+//  START OF REGULAR USER FUNCTIONALITY
 //
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -213,7 +220,7 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
     $('.message-type').html('<i class="fa fa-sun-o"></i> All Messages');
   }
   else if(type == "af"){
-    $('.message-type').html('<i class="fa fa-sun-o"></i> Affirmations');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Encouragements');
   }
   else if(type == "so"){
     $('.message-type').html('<i class="fa fa-sun-o"></i> Shout-Outs');
