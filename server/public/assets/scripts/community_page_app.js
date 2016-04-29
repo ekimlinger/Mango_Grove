@@ -4,10 +4,11 @@ var messageType = "all";
 var newMessage = {};
 
 $(document).ready(function(){
+  $("#loadCommunityModal").load('/assets/views/modals/community_post_modal.html');
   showMessages(community, messageType);
+
   for(var i = 0; i < communityList.length; i++){
-    $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label> ');
-    $('.community-container').append('<button class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</button>')
+    $('.community-container').append('<button class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</button>');
   }
 
   $('.community-filter').on('click',function(){
@@ -21,7 +22,9 @@ $(document).ready(function(){
       showMessages(community, messageType);
   });
 
-
+  $('.compose').on('click',function(){
+    composeMessage(messageType);
+  });
 
   //CODE FOR CHARACTER REMAINING IN TEXTAREA
   var maxLength = 150;
@@ -30,7 +33,16 @@ $(document).ready(function(){
     var length = maxLength-length;
     $('.chars').text(length);
   });
-});//END OF DOCUMENT READY
+
+});
+
+
+function composeMessage(messageType){//function that is called to open up the Compose Modal Message which sets the type of the message
+    $('.modal-content').html('<div class="modal-content" data-messageType="'+messageType+'">');
+    console.log("Made It inside the compose Message function");
+    $('#userMessageModal').modal('show');
+
+}
 
 function showMessages(community, messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
   var location = community;

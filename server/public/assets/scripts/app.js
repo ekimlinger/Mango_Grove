@@ -3,7 +3,7 @@ $(document).ready(function(){
     //load all modals to the DOM
     $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
-    $("#loadCommunityModal").load('/assets/views/modals/community_post_modal.html');
+  
 
     var messageType = "all";
     showMessages(messageType);//show all messages on page load

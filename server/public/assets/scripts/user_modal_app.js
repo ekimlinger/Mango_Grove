@@ -1,7 +1,14 @@
 var newMessage = {};
+var communityList = ["Carlson School","McCalister School"];
+var community = communityList[0];
+var messageType = "";
 
 $(document).ready(function(){
+  console.log("im here");
     $('#createCommunityPost').on('click',createCommunityPost);
+    for(var i = 0; i < communityList.length; i++){
+      $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label> ');
+    }
 });
 
 function createCommunityPost(){
@@ -23,7 +30,7 @@ function createCommunityPost(){
       newMessage[element.name] = element.value;
     }
   });
-
+  messageType = newMessage.type;
   $.ajax({
     type: 'POST',
     url: '/message',
