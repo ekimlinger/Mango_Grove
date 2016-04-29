@@ -7,7 +7,15 @@
 
 .react-button {
   border: 0;
+  background-color: #f3f3f4;
+}
+
+.react-button:hover,
+.react-button:focus,
+.react-button:active {
   background-color: #fff;
+  color: #EE6631;
+  outline: none;
 }
 
 .flag-button {
@@ -18,33 +26,38 @@
 .small-type {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
+  font-weight: normal;
 }
-
-.trio-pic {
-  width: 250px;
-  height: 250px;
-  margin-bottom: 10px;
-}
-
-.trio-pic-caption {
-  font-style: italic;
-  padding: 0 10px;
-}
-
-/*.jumbotron {
-    margin-bottom: 0;
-    height: 260px;
-    background-color: red;
-    background-image: url(/assets/views/images/MangoGroveBanner.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-}*/
 
 .jumbotron {
+    margin: 0;
+    padding: 0;
     position: relative;
     background: #000 url(/assets/views/images/MangoGroveBanner.jpg) center center;
     width: 100%;
     height: 260px;
     background-size: cover;
     overflow: hidden;
+}
+
+.three-shares {
+  margin-bottom: 20px;
+}
+
+.filter-messages-box {
+  float: right;
+}
+
+.filter-messages-type {
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.clear-float {
+  clear: both;
+}
+
+.underline {
+  border-bottom: 1px solid #f1f1f1;
 }

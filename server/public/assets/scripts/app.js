@@ -2,6 +2,7 @@ var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
 var likePost = {};
 
+
 $(document).ready(function(){
     $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
