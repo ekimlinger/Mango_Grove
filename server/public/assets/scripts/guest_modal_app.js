@@ -1,7 +1,7 @@
 var newMessage = {};
 
 $(document).ready(function(){
-  $('#createGuestPost').on('click',createPost);//when submit button is pressed in the guest_comment_modals
+  $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modals
 console.log("Made it into the guest_modal_app.js");
 });
 
