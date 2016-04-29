@@ -1,5 +1,6 @@
 var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
+var likePosts = 0;
 
 $(document).ready(function(){
     $("#loadComposeModal").load('/assets/views/modals/guest_comment_modal.html');
@@ -17,7 +18,11 @@ $(document).ready(function(){
     $('#createGuestComment').on('click', createComment);
     //try to grab message id
     $('.social-feed-box').on('click', '#messageComment', getMessageID);
-//
+
+    $('.social-feed-box').on('click', '#likePosts', likePostsCounting);
+
+
+    //load previous comments when dom loads
     receiveComment();
     //WILL NEED #createUserPost event handler
 });
@@ -66,7 +71,7 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 
-  //$('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+  $('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
 
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
 
@@ -74,7 +79,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $('.social-feed-box').append('<div></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+ comment.name +'</a><small class="text-muted">'+ comment.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+ comment.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button id="messageComment" data-id="'+comment._id+'" class= "btn btn-white btn-xs" data-toggle="modal" data-target="#guestMessageCommentModal"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div>');
+    $el.append('<div class="social-body"><p>'+ comment.content+'</p><div class="btn-group"><button id="likePosts"+"'+comment._id+'" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button id="messageComment" data-id="'+comment._id+'" class= "btn btn-white btn-xs" data-toggle="modal" data-target="#guestMessageCommentModal"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div>');
     $el.append('<div class="social-footer" id="'+comment._id+'"></div>');
 
   }
@@ -150,28 +155,20 @@ for(var i = 0; i <response.length; i++){
   console.log("Content: ", comment.content);
   console.log("id: ", comment._id);
 
-  //if (messageID == comment.messageID){
     $('#'+ comment.messageID).append('<div class="social-comment"></div>');//creates each individual comment
     var $el = $('#'+comment.messageID).children().last();
 
     $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
     $el.append(' <div class="media-body"><a href="#">'+ comment.name + '</a>' + comment.content+ '<br/><a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
 
-  //}
+
 
 }
 }
 
-//
-// function loadComment (){
-//   $.ajax({
-//     type: 'GET',
-//     //MAKE SURE TO CHANGE THE URL ROUTE --change
-//     url: '/message/comment'
-//
-//     success: showComment
-//       //MOST LIKELY WILL NEED AN APPEND TO DOM FUNCTION HERE TO DISPLAY NEW FEED
-//       //WILL HAVE TO EMPTY THE DIV FIRST AND THEN REPOST ALL NEW INFO --change
-//   });
-//
-// }
+function likePostsCounting (){
+  likePosts++;
+  console.log(likePosts);
+  
+
+}
