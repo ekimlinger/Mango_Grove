@@ -38,25 +38,21 @@ router.get('/global/:type/:amount/:time', function(req,res){
 });
 
 router.get('/:location/:type/:amount/:time', function(req,res){
-
-  console.log(req.params);
+  console.log("Start of get Call: ",req.params);
   var location = req.params.location;
-  var amount = req.params.amount;
+  console.log("Location: ", location);
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
-
-  Message.find({location: location, time: {$lt: time}}, function(err, data){
-    if(err){
-      console.log(err);
-      res.send();
-    } else{
-      res.send(data);
-    }
-  }).sort({_id: -1}).limit(amount);
-  res.send("Dummy res");
+      Message.find({location: { $in: [location]}}, function(err, data){
+        if(err){
+          console.log(err);
+          res.send();
+        } else{
+          res.send(data);
+        }
+      }).sort({_id: -1}).limit(amount);
 });
-
-
 
 //  POST REQUESTS
 

@@ -1,4 +1,4 @@
-<script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
+
 <script src="/assets/scripts/community_app.js"></script>
 
 <div class="modal fade" id="composeCommunityModal" tabindex="-1" role="dialog" aria-labelledby="guestCommentLabel">
@@ -24,7 +24,8 @@
           <span id="errorMessage"></span>
           <fieldset class="form-group">
             <label for="guestTextarea">Type here</label>
-            <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
+            <textarea class="form-control" id="communityTextarea" name="content" rows="3"  maxlength="150"></textarea>
+              <small class="text-muted"><span class="chars">150</span> characters remaining</small></br>
 
             <label for="guestEmail">Email address</label>
             <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
