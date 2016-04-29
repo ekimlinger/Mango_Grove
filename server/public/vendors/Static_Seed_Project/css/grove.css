@@ -48,6 +48,12 @@
   float: right;
 }
 
+.filter-messages-type {
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+
 .clear-float {
   clear: both;
 }
