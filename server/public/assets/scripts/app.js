@@ -64,8 +64,8 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
       case "mm":
         iconType = "mango"
         break;
-      case "so":
-        iconType = "noun_24896_cc"
+      case "af":
+        iconType = "noun_75102_cc"
         break;
     }
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
