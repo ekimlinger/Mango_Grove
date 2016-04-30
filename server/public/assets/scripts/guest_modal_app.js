@@ -35,9 +35,25 @@ function createPost(event){//Create Post Function
 
 function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
   var message = response;
-    $('.social-feed-box').prepend('<div class="media animated fadeInRight"></div>');//creates each individual comment
-    var $el = $('.social-feed-box').children().first();
 
-    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div><div class="social-footer></div>');
+    var iconType;             // Sets icon type to be displayed on dom
+    switch (message.type) {
+      case "so":
+        iconType = "noun_24896_cc_mod"
+        break;
+      case "mm":
+        iconType = "mango"
+        break;
+      case "af":
+        iconType = "noun_75102_cc"
+        break;
     }
+
+    $('.social-feed-box').prepend('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
+    var $el = $('.social-feed-box').children().first();
+    $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
+    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-footer" id="'+message._id+'"></div>');
+    
+}
