@@ -22,6 +22,9 @@ $(document).ready(function(){
     // Gets messageID for modal to post to
     $('.social-feed-box').on('click', '#messageComment', getMessageID);
 
+    // Like Abilities
+    $('.social-feed-box').on('click', '.messageLike', likeMessage);
+    $('.social-feed-box').on('click', '.commentLike', likeComment);
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -68,11 +71,21 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
         iconType = "noun_75102_cc"
         break;
     }
+
+    // Displays ammount of likes if there are any
+    var likeAmmount;
+    if(message.like){
+      likeAmmount = message.like + " ";
+    }else{
+      likeAmmount = "";
+    }
+
+    // Appends to DOM
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div class="social-footer" id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
@@ -138,11 +151,50 @@ function showComments(response) {
     for (var i = 0; i < response.length; i++) {
         var comment = response[i]; //store response into comment for readability
 
+        // Displays ammount of likes if there are any
+        var likeAmmount;
+        if(comment.like){
+          likeAmmount = comment.like + " ";
+        }else{
+          likeAmmount = "";
+        }
+
         $('#' + comment.messageID).append('<div class="social-comment"></div>'); //creates each individual comment
         var $el = $('#' + comment.messageID).children().last();
-
         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><a href="#" class="small">'+comment.like+'<i class="fa fa-thumbs-up"></i>Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><small class="text-muted"> ' + comment.date_created + '</small></div>');
     }
   }
+}
+
+
+// Get message id and make ajax call to increment like amount in db and on DOM
+function likeMessage(){
+  var messageID = $(this).data('id');
+  // Toggle class here in order to only like once
+  console.log("About to like message: ", messageID);
+  $.ajax({
+    type: "PUT",
+    url: '/message/like/'+messageID,
+    success: function(data){
+      var oldValue = $('[data-id="' + messageID + '"]').children().first().text() || 0;
+      var newValue = parseInt(oldValue) + 1;
+      $('[data-id="' + messageID + '"]').children().first().text(newValue + " ");
+    }
+  })
+}
+// Get comment id and make ajax call to increment like amount in db and on DOM
+function likeComment(){
+  var commentID = $(this).data('id');
+  // Toggle class here in order to only like once
+  console.log("About to like comment: ", commentID);
+  $.ajax({
+    type: "PUT",
+    url: '/message/comment/like/'+commentID,
+    success: function(data){
+      var oldValue = $('[data-id="' + commentID + '"]').children().first().text() || 0;
+      var newValue = parseInt(oldValue) + 1;
+      $('[data-id="' + commentID + '"]').children().first().text(newValue + " ");
+    }
+  })
 }
