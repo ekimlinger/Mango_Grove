@@ -52,18 +52,31 @@ router.get('/:location/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
   var location = req.params.location;
-  var amount = req.params.amount;
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
 
-  Message.find({location: location, time: {$lt: time}}, function(err, data){
-    if(err){
-      console.log(err);
-      res.send();
-    } else{
-      res.send(data);
-    }
-  }).sort({_id: -1}).limit(amount);
+  if (type == 'all') {
+        Message.find({location: { $in: [location]} }, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            console.log("Data that is being sent back: ", data);
+            res.send(data);
+
+          }
+        }).sort({_id: -1}).limit(amount);
+      }else{
+        Message.find({location: { $in: [location]}, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            res.send(data);
+          }
+        }).sort({_id: -1}).limit(amount);
+      }
 });
 
 
@@ -147,8 +160,8 @@ router.put('/comment/:commentID', function(req,res){
 router.put('/:messageID', function(req,res){
   var messageID = req.params.messageID;
   console.log("req.body: ", req.body, "messageID: ", messageID);
-  Message.update({_id: reqId},
-              {/* Whatever you would like to change*/},
+  Message.update({_id: messageID},
+              {$inc : {like: 1}},
              function(err, data){
                if(err){
                  console.log(err);
@@ -158,7 +171,7 @@ router.put('/:messageID', function(req,res){
                }
   });
 
-  res.send("Put/update route sends back");
+  // res.send("Put/update route sends back");
 });
 
 

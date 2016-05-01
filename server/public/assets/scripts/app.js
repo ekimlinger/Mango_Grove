@@ -1,6 +1,6 @@
 var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
-var likePost = {};
+
 
 
 $(document).ready(function(){
@@ -21,6 +21,11 @@ $(document).ready(function(){
     $('#createGuestComment').on('click', createComment);
     // Gets messageID for modal to post to
     $('.social-feed-box').on('click', '#messageComment', getMessageID);
+
+    //message like counting
+    $('.social-feed-box').on('click', '#likePost', likePostsCounting);
+
+
 
 });
 
@@ -62,8 +67,9 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
 
+    $el.append('<div class="post-icon"><img src="/assets/views/images/noun_24896_cc_mod.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button id ="likePost" data-id="'+message._id+'"  class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i>'+message.like+' people like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div class="social-footer" id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
@@ -97,7 +103,7 @@ function createComment(event) {
     // Send to server to be saved,
     $.ajax({
         type: 'POST',
-        url: '/message/comment/'+ newComment.messageID,
+        url: '/message/comment/'+newComment.messageID,
         data: newComment,
         success: function(data){
           getCommentsByMessage(newComment.messageID);
@@ -135,34 +141,26 @@ function showComments(response) {
         var $el = $('#' + comment.messageID).children().last();
 
         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><a href="#" class="small">'+comment.like+'<i class="fa fa-thumbs-up"></i>Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><a href="#" class="small"><i class="fa fa-thumbs-up"></i>Like this!</a><small class="text-muted">' + comment.date_created + '</small></div>');
     }
   }
 }
 
-// function likePostsCounting (){
-//   if
-//   newComment.messageID = $("#createGuestComment").data("id");
-//     event.preventDefault();
-//
-//     //grab the information from the compose comment modal NEED THE ID FROM THE FORM --CHANGE
-//     var commentArray = $('#postCommentForm').serializeArray();
-//     //grab information off the form and stores it into the newComment variable
-//     $.each(commentArray, function(index, element){
-//       newComment[element.name] = element.value;
-//       console.log( "New Comment: ", newComment);
-//
-//
-//     });
-//
-//     //start of post new comment ajax call
-//     $.ajax({
-//       type: 'POST',
-//       url: '/message/comment',
-//       data: newComment, //Pass newComment to the Database
-//       success: receiveComment
-//     });
-//
-//
-//
-// }
+//like message counting function
+function likePostsCounting (){
+
+  var messageID = $(this).data("id");
+  console.log("this like id is ", messageID);
+    //update like message count ajax call
+    $.ajax({
+        type: 'PUT',
+        url: '/message/'+messageID,
+        data: newMessage,
+        success: function(data){
+         showMessages("all");
+        }
+
+
+    });
+
+  }
