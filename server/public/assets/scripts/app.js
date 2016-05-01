@@ -169,32 +169,41 @@ function showComments(response) {
 
 
 // Get message id and make ajax call to increment like amount in db and on DOM
-function likeMessage(){
-  var messageID = $(this).data('id');
-  // Toggle class here in order to only like once
-  console.log("About to like message: ", messageID);
-  $.ajax({
-    type: "PUT",
-    url: '/message/like/'+messageID,
-    success: function(data){
-      var oldValue = $('[data-id="' + messageID + '"]').children().first().text() || 0;
-      var newValue = parseInt(oldValue) + 1;
-      $('[data-id="' + messageID + '"]').children().first().text(newValue + " ");
+function likeMessage() {
+    var messageID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).removeClass('btn-white');
+        $(this).addClass('btn-success');
+        // Toggle class here in order to only like once
+        console.log("About to like message: ", messageID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/like/' + messageID,
+            success: function(data) {
+                var oldValue = $('[data-id="' + messageID + '"]').children().first().text() || 0;
+                var newValue = parseInt(oldValue) + 1;
+                $('[data-id="' + messageID + '"]').children().first().text(newValue + " ");
+            }
+        });
     }
-  })
 }
+
 // Get comment id and make ajax call to increment like amount in db and on DOM
-function likeComment(){
-  var commentID = $(this).data('id');
-  // Toggle class here in order to only like once
-  console.log("About to like comment: ", commentID);
-  $.ajax({
-    type: "PUT",
-    url: '/message/comment/like/'+commentID,
-    success: function(data){
-      var oldValue = $('[data-id="' + commentID + '"]').children().first().text() || 0;
-      var newValue = parseInt(oldValue) + 1;
-      $('[data-id="' + commentID + '"]').children().first().text(newValue + " ");
+function likeComment() {
+    var commentID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        // Toggle class here in order to only like once
+        console.log("About to like comment: ", commentID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/comment/like/' + commentID,
+            success: function(data) {
+                var oldValue = $('[data-id="' + commentID + '"]').children().first().text() || 0;
+                var newValue = parseInt(oldValue) + 1;
+                $('[data-id="' + commentID + '"]').children().first().text(newValue + " ");
+            }
+        });
     }
-  })
 }
