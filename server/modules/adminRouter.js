@@ -43,7 +43,6 @@ router.get('/flaggedMessages', function(req, res){
       console.log(err);
       res.send();
     } else{
-      console.log("All flagged messages: ", data);
       res.send(data);
     }
   });
@@ -54,7 +53,6 @@ router.get('/flaggedComments', function(req, res){
       console.log(err);
       res.send();
     } else{
-      console.log("All flagged comments: ", data);
       res.send(data);
     }
   });

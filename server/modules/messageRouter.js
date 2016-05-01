@@ -192,6 +192,21 @@ router.put('/like/:messageID', function(req,res){
   });
 });
 
+// Increments message flags by one when called
+router.put('/flag/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+  Message.update({_id: messageID},
+              {$inc: {flag: 1}},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to update your post");
+               } else{
+                 res.send(data);
+               }
+  });
+});
+
 // Edits Message by id **CURRENTLY NOT IN USE**
 router.put('/:messageID', function(req,res){
   var messageID = req.params.messageID;

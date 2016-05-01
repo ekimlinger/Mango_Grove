@@ -25,6 +25,9 @@ $(document).ready(function(){
     // Like Abilities
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
     $('.social-feed-box').on('click', '.commentLike', likeComment);
+
+    // Flag Message
+    $('.social-feed-box').on('click', '.messageFlag', flagMessage);
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -85,7 +88,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div class="social-footer" id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
@@ -168,6 +171,26 @@ function showComments(response) {
 }
 
 
+// Get message id and make ajax call to increment flag amount in db and on DOM
+function flagMessage() {
+    var messageID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).removeClass('btn-white');
+        $(this).addClass('btn-warning');
+        // Toggle class here in order to only like once
+        console.log("About to flag message: ", messageID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/flag/' + messageID,
+            success: function(data) {
+                console.log("Successfully flagged message: ", messageID);
+            }
+        });
+    }
+}
+
+
 // Get message id and make ajax call to increment like amount in db and on DOM
 function likeMessage() {
     var messageID = $(this).data('id');
@@ -175,8 +198,7 @@ function likeMessage() {
         $(this).data('alreadyPressed', true);
         $(this).removeClass('btn-white');
         $(this).addClass('btn-success');
-        // Toggle class here in order to only like once
-        console.log("About to like message: ", messageID);
+
         $.ajax({
             type: "PUT",
             url: '/message/like/' + messageID,
@@ -194,8 +216,7 @@ function likeComment() {
     var commentID = $(this).data('id');
     if ($(this).data('alreadyPressed') == undefined) {
         $(this).data('alreadyPressed', true);
-        // Toggle class here in order to only like once
-        console.log("About to like comment: ", commentID);
+
         $.ajax({
             type: "PUT",
             url: '/message/comment/like/' + commentID,
