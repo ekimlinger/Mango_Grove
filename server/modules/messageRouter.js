@@ -4,7 +4,7 @@ var path = require('path');
 
 var Message = require('../models/messages.js');
 var Comment = require('../models/comment.js');
-
+var BlockedUsers = require('../models/blockedUsers.js');
 //
 // GET REQUESTS
 //
@@ -82,62 +82,89 @@ router.get('/:location/:type/:amount/:time', function(req,res){
 });
 
 
+
 //
 //  POST REQUESTS
 //
 
 // Posts new comment pushes new _id into message array
 router.post('/comment/:messageID', function(req,res){
-
-  var messageID = req.params.messageID;
-  var newComment = new Comment({
-    messageID: messageID,
-    name: req.body.name,
-    email: req.body.email,
-    content: req.body.content,
-    flag: 0,
-    like: 0
-  });
-  newComment.save(function(err,comment){
+  console.log(req.body);
+  //checks to see if user is blocked before posting
+  BlockedUsers.find({ list: { $in: [req.body.email]} },function(err,data){
     if(err){
       console.log(err);
-      res.send("Error creating comment");
+      res.sendStatus(500);
+    } else if (!data.length){
+
+      var messageID = req.params.messageID;
+      var newComment = new Comment({
+        messageID: messageID,
+        name: req.body.name,
+        email: req.body.email,
+        content: req.body.content,
+        flag: 0,
+        like: 0
+      });
+      newComment.save(function(err,comment){
+        if(err){
+          console.log(err);
+          res.send("Error creating comment");
+        } else{
+          Message.update({_id: messageID},
+                      {$push: {comments: comment._id}},
+            function(err, comment){
+            if(err){
+              console.log(err);
+              res.send("Save request failed");
+            } else{
+              res.send("Saved new message: ", comment);
+            }
+          });
+        }
+      });
+
     } else{
-      Message.update({_id: messageID},
-                  {$push: {comments: comment._id}},
-        function(err, comment){
+      // User's email address is blocked (code: 403 Forbidden)
+      res.sendStatus(403);
+    }
+
+  });
+});
+
+//Posts new message if user is not blocked
+router.post('/', function(req,res){
+  //checks to see if user is blocked before posting
+  BlockedUsers.find({ list: { $in: [req.body.email]} },function(err,data){
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    } else if (!data.length){
+
+      var newMessage = new Message({
+        type: req.body.type,
+        content: req.body.content,
+        name : req.body.name,
+        email : req.body.email,
+        location: req.body.location,
+        like: 0,
+        flag: 0,
+        global : req.body.global
+      });
+
+      newMessage.save(function(err, entry){
         if(err){
           console.log(err);
           res.send("Save request failed");
         } else{
-          res.send("Saved new message: ", comment);
+          res.send("Saved new message: ", entry);
         }
       });
-    }
-  });
 
-});
-
-//Posts new message
-router.post('/', function(req,res){
-
-  var newMessage = new Message({
-    type: req.body.type,
-    content: req.body.content,
-    name : req.body.name,
-    email : req.body.email,
-    location: req.body.location,
-    like: 0,
-    flag: 0,
-    global : req.body.global
-  });
-
-  newMessage.save(function(err, entry){
-    if(err){
-      console.log(err);
-      res.send("Save request failed");
+        //save post here
     } else{
-      res.send("Saved new message: ", entry);
+      // User's email address is blocked (code: 403 Forbidden)
+      res.sendStatus(403);
     }
   });
 });
