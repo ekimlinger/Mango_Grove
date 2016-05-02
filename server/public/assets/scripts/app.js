@@ -53,7 +53,7 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
     $('.text-navy').html('<img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" /> Shout-Outs');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<img src="/assets/views/images/mango.png" height="20" width="20" />Moments');
+    $('.text-navy').html('<img src="/assets/views/images/mango_small.png" height="20"  />Moments');
   }
   $.ajax({
     type: 'GET',
