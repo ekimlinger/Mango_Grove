@@ -18,7 +18,8 @@
     <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- Custom and plugin javascript -->
+    <!-- <script src="/vendors/Static_Seed_Project/js/plugins/iCheck/iCheck.min.js"></script>
+     Custom and plugin javascript -->
     <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
     <script src="/vendors/Static_Seed_Project/js/jquery.cookie.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
@@ -32,15 +33,13 @@
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen   animated fadeInDown">
-        <div>
-            <div>
+  <div class="log-reg-logo">
+  <a href="/assets/views/index.html"><img src="/assets/views/images/MANGO_logo_500x158.png" width="400"/></a>
+  </div>
 
-              <img src="/assets/views/images/mango_logo_M.png" width="300" height="300" />
-
-            </div>
-            <h3>Become a member of Mango Grove</h3>
-            <p>Create account and start your network today.</p>
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+  <div>
+              <h2>Sign up</h2>
             <form class="m-t" role="form" action="login.html">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" required="">
@@ -52,6 +51,18 @@
                     <input type="password" class="form-control" placeholder="Password" required="">
                 </div>
                 <div class="form-group">
+          <div class="dropdown">
+            <label for="sell">Choose your school</label>
+            <select class="form-control" id="sell">
+            <option>
+              Carlson School of Management
+            </option>
+            <option>
+              Macalester
+            </option>
+          </select>
+        </div>
+                <div class="form-group">
                         <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree to the terms of use and privacy policy </label></div>
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
@@ -62,12 +73,12 @@
             <p class="m-t"> <small>Inspinia web app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>
     </div>
+<!--
 
-    <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    <script src="js/plugins/iCheck/icheck.min.js"></script> -->
     <script>
         $(document).ready(function(){
             $('.i-checks').iCheck({
