@@ -29,7 +29,14 @@ function createPost(event){//Create Post Function
       type: 'POST',
       url: '/message',
       data: newMessage, //Pass newMessage to the Database
-      success: addNewMessageToFeed //call addNewMessageToFeed function to display new post right away
+      success: addNewMessageToFeed, //call addNewMessageToFeed function to display new post right away
+      error: function (xhr, ajaxOptions, thrownError){
+        switch (xhr.status) {
+          case 403:
+           console.log("This email address is blocked");
+           break;
+         }
+      }
     });
 }
 
