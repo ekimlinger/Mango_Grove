@@ -132,6 +132,13 @@ function createComment(event) {
         data: newComment,
         success: function(data){
           getCommentsByMessage(newComment.messageID);
+        },
+        error: function (xhr, ajaxOptions, thrownError){
+          switch (xhr.status) {
+            case 403:
+             console.log("This email address is blocked");
+             break;
+           }
         }
     });
     //reset input field values

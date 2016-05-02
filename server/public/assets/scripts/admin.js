@@ -119,7 +119,7 @@ function blockUser(userName){
   });
 }
 function unblockUser(){
-  var userName = $(this).data('userName');
+  var userName = $(this).data('username');
   var body = {userName: userName};
   $.ajax({
     type: 'PUT',
