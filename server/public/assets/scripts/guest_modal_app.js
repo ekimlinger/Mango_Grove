@@ -1,5 +1,9 @@
 var newMessage = {};
 var messageType = "";
+var dateOptions = {     // Date formatting options
+    year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
 
 $(document).ready(function(){
   $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modal
@@ -74,6 +78,6 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
-    $el.append('<div class="social-footer" id="'+message._id+'"></div>');
+    $el.append('<div id="'+message._id+'"></div>');
 
 }

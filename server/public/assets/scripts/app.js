@@ -166,6 +166,7 @@ function showComments(response) {
     var messageID = response[0].messageID;
     $('#'+messageID).empty();
     $('#'+messageID).addClass('social-footer');
+
     for (var i = 0; i < response.length; i++) {
         var comment = response[i]; //store response into comment for readability
 
