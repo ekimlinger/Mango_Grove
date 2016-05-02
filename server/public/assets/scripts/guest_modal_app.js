@@ -48,7 +48,7 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
         iconType = "noun_75102_cc"
         break;
     }
-    
+
     // Displays ammount of likes if there are any
     var likeAmmount;
     if(message.like){
@@ -56,6 +56,10 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
     }else{
       likeAmmount = "";
     }
+
+    // Formats date/time
+    var newDate = new Date(message.date_created);
+    message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
     $('.social-feed-box').prepend('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().first();
