@@ -8,6 +8,7 @@ var dateOptions = {     // Date formatting options
 $(document).ready(function(){
     //load all modals to the DOM
     $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
+    $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
 
 
@@ -21,14 +22,11 @@ $(document).ready(function(){
       showMessages(messageType);
     });
 
-    // Comment Abilities
-    $('#createGuestComment').on('click', createComment);
-    // Gets messageID for modal to post to
-    $('.social-feed-box').on('click', '#messageComment', getMessageID);
+
 
     // Like Abilities
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
-    $('.social-feed-box').on('click', '.commentLike', likeComment);
+
 
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
@@ -168,6 +166,7 @@ function showComments(response) {
     var messageID = response[0].messageID;
     $('#'+messageID).empty();
     $('#'+messageID).addClass('social-footer');
+
     for (var i = 0; i < response.length; i++) {
         var comment = response[i]; //store response into comment for readability
 
@@ -208,6 +207,7 @@ function flagComment() {
         });
     }
 }
+
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagMessage() {
@@ -250,19 +250,3 @@ function likeMessage() {
 }
 
 // Get comment id and make ajax call to increment like amount in db and on DOM
-function likeComment() {
-    var commentID = $(this).data('id');
-    if ($(this).data('alreadyPressed') == undefined) {
-        $(this).data('alreadyPressed', true);
-
-        $.ajax({
-            type: "PUT",
-            url: '/message/comment/like/' + commentID,
-            success: function(data) {
-                var oldValue = $('[data-id="' + commentID + '"]').children().first().text() || 0;
-                var newValue = parseInt(oldValue) + 1;
-                $('[data-id="' + commentID + '"]').children().first().text(newValue + " ");
-            }
-        });
-    }
-}
