@@ -14,6 +14,7 @@
     "bootstrap": "^3.3.6",
     "bootstrap-multiselect": "^0.9.13-1",
     "express": "^4.13.4",
+    "fastselect": "^0.3.0",
     "grunt": "^1.0.1",
     "grunt-contrib": "^0.11.0",
     "grunt-contrib-copy": "^1.0.0",

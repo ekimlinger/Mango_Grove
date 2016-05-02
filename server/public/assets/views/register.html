@@ -18,7 +18,6 @@
     <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/vendors/Static_Seed_Project/js/plugins/iCheck/iCheck.min.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
     <script src="/vendors/Static_Seed_Project/js/jquery.cookie.js"></script>
@@ -27,23 +26,21 @@
     <!-- local css file added by Mango Grove for parts not included in template tlvh -->
     <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
 
-    <!-- files added for dropdown/selector menu -->
-    <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap-multiselect.js"></script>
-    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap-multiselect.css" type="text/css"/>
-
     <script type="text/javascript" src="/assets/scripts/app.js"></script>
 
 </head>
 
 <body class="gray-bg">
 
-  <div class="log-reg-logo">
-      <a href="/assets/views/index.html"><img src="/assets/views/images/MANGO_logo_500x158.png" width="400"/></a>
-  </div>
-
     <div class="middle-box text-center loginscreen   animated fadeInDown">
         <div>
-            <h2>Sign up</h2>
+            <div>
+
+              <img src="/assets/views/images/mango_logo_M.png" width="300" height="300" />
+
+            </div>
+            <h3>Become a member of Mango Grove</h3>
+            <p>Create account and start your network today.</p>
             <form class="m-t" role="form" action="login.html">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Name" required="">
@@ -51,19 +48,12 @@
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email" required="">
                 </div>
-
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required="">
                 </div>
-
                 <div class="form-group">
-                  <input type="text" class="form-control" multiple class="multipleInputDynamic" placeholder="Choose your communities" data-url="/assets/data/communities.json" name="community" />
+                        <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree to the terms of use and privacy policy </label></div>
                 </div>
-
-                <div class="form-group">
-                        <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
-                </div>
-
                 <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
 
                 <p class="text-muted text-center"><small>Already have an account?</small></p>
@@ -74,15 +64,12 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
-    <script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- iCheck -->
-    <script src="/vendors/Static_Seed_Project/js/plugins/iCheck/icheck.min.js"></script>
-
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('.multipleInputDynamic').fastselect();
-
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
