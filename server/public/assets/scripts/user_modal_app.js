@@ -1,5 +1,5 @@
 var newMessage = {};
-var communityList = ["Carlson School","McCalister School"];
+var communityList = ["Carlson School","Macalester School"];
 var community = communityList[0];
 var messageType = "all";
 var dateOptions = {     // Date formatting options

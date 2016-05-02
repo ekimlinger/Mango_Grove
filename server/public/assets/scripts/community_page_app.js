@@ -20,6 +20,7 @@ $(document).ready(function(){
 
   $('.community-filter').on('click',function(){
       community = $(this).data('location');
+      console.log("Community defined here is: ", community);
       $('.current-community').html(' ' + community);
       showMessages(community, messageType);
   });
