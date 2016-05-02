@@ -13,7 +13,7 @@ $(document).ready(function(){
   showMessages(community, messageType);
 
   for(var i = 0; i < communityList.length; i++){
-    $('.community-container').append('<button class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</button>');
+    $('.nav-second-level').append('<li><a href="#messageTop" class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</a></li>');
   }
 
   $('.community-filter').on('click',function(){
@@ -76,6 +76,7 @@ function showMessages(community, messageType){//Shows specific Messages -- Mango
 }
 
 function loadCommunityFeed(response){//Loads Messages to GlobalFeed
+  console.log("made it here");
   $('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
     var message = response[i];//store response into comment for readability
