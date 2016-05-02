@@ -1,5 +1,9 @@
 var newMessage = {};//New Message object to be sent down to the database
 var newComment = {};
+var dateOptions = {     // Date formatting options
+    year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
 
 $(document).ready(function(){
     //load all modals to the DOM
@@ -83,6 +87,10 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
       likeAmmount = "";
     }
 
+    // Formats date/time
+    var newDate = new Date(message.date_created);
+    message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+
     // Appends to DOM
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
@@ -161,6 +169,10 @@ function showComments(response) {
         }else{
           likeAmmount = "";
         }
+
+        // Formats date/time
+        var newDate = new Date(comment.date_created);
+        comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
         $('#' + comment.messageID).append('<div class="social-comment"></div>'); //creates each individual comment
         var $el = $('#' + comment.messageID).children().last();
