@@ -2,6 +2,10 @@ var communityList = ["Carlson School","McCalister School"];
 var community = communityList[0];
 var messageType = "all";
 var newMessage = {};
+var dateOptions = {     // Date formatting options
+    year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
 
 $(document).ready(function(){
   $("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
@@ -95,6 +99,9 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     }else{
       likeAmmount = "";
     }
+    // Formats date/time
+    var newDate = new Date(message.date_created);
+    message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
     // Appends to DOM
     $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
@@ -102,7 +109,7 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="communityMessageComment" data-toggle="modal" data-target="#userMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
-    $el.append('<div class="social-footer" id="'+message._id+'"></div>');
+    $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
 }
