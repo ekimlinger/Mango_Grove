@@ -1,4 +1,4 @@
-var communityList = ["Carlson School","McCalister School"];
+var communityList = ["Carlson School","Macalester School"];
 var community = communityList[0];
 var messageType = "all";
 var newMessage = {};
@@ -11,6 +11,8 @@ $(document).ready(function(){
   $("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
   $("#loadCommunityCommentModal").load('/assets/views/modals/user_comment_modal.html');
   showMessages(community, messageType);
+  $('.current-community').html(' ' + community);
+  $('.message-type').html(' All Messages');
 
   for(var i = 0; i < communityList.length; i++){
     $('.nav-second-level').append('<li><a href="#messageTop" class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</a></li>');
@@ -18,6 +20,7 @@ $(document).ready(function(){
 
   $('.community-filter').on('click',function(){
       community = $(this).data('location');
+      $('.current-community').html(' ' + community);
       showMessages(community, messageType);
   });
 
@@ -30,6 +33,7 @@ $(document).ready(function(){
   $('.compose').on('click',function(){
     console.log("Message Type when being clicked: ", messageType);
     composeMessage(messageType);
+
   });
   console.log("Message Type on page load: ", messageType);
   //CODE FOR CHARACTER REMAINING IN TEXTAREA
@@ -53,18 +57,18 @@ function showMessages(community, messageType){//Shows specific Messages -- Mango
   var type = messageType;
   var amount = 20;//Limits how many messages are displayed on the dom at any given time
   var time = new Date(Date.now());
-
+  //TRACEY
   if(type == "all"){
-    $('.text-navy').html(' All Messages');
+    $('.message-type').html(' All Messages');
   }
   else if(type == "af"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Encouragements');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Encouragements');
   }
   else if(type == "so"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Shout-Outs');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Shout-Outs');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Moments');
+    $('.message-type').html('<i class="fa fa-sun-o"></i> Moments');
   }
   console.log("Location: ", location);
   console.log("Type: ", type);
@@ -105,11 +109,11 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
     // Appends to DOM
-    $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
+    $('.social-feed-box').append('<div class="animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="communityMessageComment" data-toggle="modal" data-target="#userMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
