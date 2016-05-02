@@ -1,47 +1,39 @@
-<script src="/assets/scripts/user_modal_app.js"></script>
 
-<!-- Modal -->
-<div class="modal fade" id="userCommentModal" tabindex="-1" role="dialog" aria-labelledby="userCommentLabel">
+<script type="text/javascript" src="/assets/scripts/user_comment_app.js" ></script>
+<!-- COMMENT MODAL -->
+<div class="modal fade" id="userMessageCommentModal" tabindex="-1" role="dialog" aria-labelledby="userMessageCommentLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="userCommentLabel">Share with us!</h4>
+        <h4 class="modal-title" id="userMessageCommentLabel">Guest Comment</h4>
       </div>
-      <form id="postUserMessageForm">
-      <div class="modal-body">
+        <div class="modal-body">
+        <form id="userPostCommentForm">
+          <p>What would you like to comment?</p>
 
-        <h4>What would you like to share?</h4>
-      <label class="radio-inline" style="font-weight:bold">
-        <img src="/assets/views/images/mango.png" height="50" width="50" />Moment</label>
-        <input type="radio" name="type" value="mm" checked="checked" />
-      <label class="radio-inline" style="font-weight:bold">
-        <img src="/assets/views/images/noun_75102_cc.png" height="50" width="50" />Encourage</label>
-        <input type="radio" name="type" value="af" />
-      <label class="radio-inline" style="font-weight:bold">
-        <img src="/assets/views/images/noun_24896_cc_mod.png" height="50" width="50" />Shout-Out</label>
-        <input type="radio" name="type" value="so" />
+          <fieldset class="form-group">
+            <label for="userCommentTextarea">Type here</label>
+            <textarea class="form-control" id="userCommentTextarea" name="content" rows="3" maxlength="150"></textarea>
+            <small class="text-muted"><span class="chars">150</span> characters remaining</small></br>
+          </fieldset>
 
-        <fieldset class="form-group">
-          <label for="userTextarea">Type here</label>
-          <textarea class="form-control" id="userTextarea" name="content" rows="3"></textarea>
-        </fieldset>
+          <fieldset class="form-group">
+            <label for="userCommentEmail">Email address</label>
+            <input type="email" class="form-control" id="userCommentEmail" name="email" placeholder="Enter email">
+            <small class="text-muted">We'll never share your email with anyone else.</small>
+          </fieldset>
 
-        <fieldset class="form-group">
-          <input type="checkbox" name="global" value="global" id="userCommunity" checked="checked" /> Share globally<br />
-          <input type="checkbox" name="macalester" value="macalester" id="userCommunity" /> Share with Macalester<br />
-          <input type="checkbox" name="carlson" value="carlson" id="userCommunity" /> Share with Carlson School of Managment<br />
-        </fieldset>
-
+          <fieldset class="form-group">
+            <label for="userComment">User Name</label>
+            <input type="text" class="form-control" id="userComment" name="name" placeholder="User Name">
+          </fieldset>
+          <div class="modal-footer">
+            <button type="button" id="createUserComment" class="btn btn-primary" data-dismiss="modal">Post</button>
+          </div>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" id="createUserPost" class="btn btn-primary" data-dismiss="modal">Post</button>
-      </div>
-    </form>
 
     </div>
   </div>
 </div>
-
-</body>
-</html>

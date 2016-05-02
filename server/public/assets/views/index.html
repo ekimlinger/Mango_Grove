@@ -190,43 +190,6 @@
             </div>
             <!-- end forum code  -->
 
-            <!-- COMMENT MODAL -->
-            <div class="modal fade" id="guestMessageCommentModal" tabindex="-1" role="dialog" aria-labelledby="guestMessageCommentLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userCommentLabel">Guest Comment</h4>
-                  </div>
-                    <div class="modal-body">
-                    <form id="postCommentForm">
-                      <p>What would you like to comment?</p>
-
-                      <fieldset class="form-group">
-                        <label for="guestTextarea">Type here</label>
-                        <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
-                      </fieldset>
-
-                      <fieldset class="form-group">
-                        <label for="guestEmail">Email address</label>
-                        <input type="email" class="form-control" id="guestEmail" name="email" placeholder="Enter email">
-                        <small class="text-muted">We'll never share your email with anyone else.</small>
-                      </fieldset>
-
-                      <fieldset class="form-group">
-                        <label for="username">User Name</label>
-                        <input type="text" class="form-control" id="username" name="name" placeholder="User Name">
-                      </fieldset>
-                      <div class="modal-footer">
-                        <button type="button" id="createGuestComment" class="btn btn-primary" data-dismiss="modal">Post</button>
-                      </div>
-                    </form>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
 
             <!-- FOOTER -->
             <div class="footer">
@@ -244,6 +207,7 @@
 
 
 <div id="loadComposeModal"></div>
+<div id="loadCommentModal"></div>
 
 </body>
 

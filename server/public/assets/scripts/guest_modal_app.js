@@ -25,6 +25,7 @@ function createPost(event){//Create Post Function
     $('#guestTextarea').val('');
     $('#guestEmail').val('');
     $('#username').val('');
+    $('.chars').text("150");
     $.ajax({
       type: 'POST',
       url: '/message',
@@ -48,7 +49,7 @@ function addNewMessageToFeed(response){//Append New Message to the Top of the Fe
         iconType = "noun_75102_cc"
         break;
     }
-    
+
     // Displays ammount of likes if there are any
     var likeAmmount;
     if(message.like){
