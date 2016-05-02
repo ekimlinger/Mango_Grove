@@ -30,8 +30,9 @@ $(document).ready(function(){
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
     $('.social-feed-box').on('click', '.commentLike', likeComment);
 
-    // Flag Message
+    // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
+    $('.social-feed-box').on('click', '.commentFlag', flagComment);
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -184,11 +185,28 @@ function showComments(response) {
         $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
         var $el = $('#' + comment.messageID).children().last();
         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentLike" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
     }
   }
 }
 
+// Get message id and make ajax call to increment flag amount in db and on DOM
+function flagComment() {
+    var commentID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).addClass('btn-warning');
+        // Toggle class here in order to only like once
+        console.log("About to flag comment: ", commentID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/comment/flag/' + commentID,
+            success: function(data) {
+                console.log("Successfully flagged comment: ", commentID);
+            }
+        });
+    }
+}
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagMessage() {
