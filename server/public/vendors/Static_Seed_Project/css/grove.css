@@ -24,6 +24,12 @@
   color: #C0C0C0;
 }
 
+.flag-link a {
+  position: absolute;
+  right: 30px;
+  color: #C0C0C0;
+}
+
 .small-type {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px;
@@ -68,4 +74,13 @@
   float: right;
   width: 50px;
   height: 50px;
+}
+
+.log-reg-logo {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.indent {
+  margin-left: 15px;
 }
