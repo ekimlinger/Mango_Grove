@@ -188,6 +188,22 @@ router.put('/comment/like/:commentID', function(req,res){
   });
 });
 
+// Increments message likes by one when called
+router.put('/comment/flag/:commentID', function(req,res){
+  var commentID = req.params.commentID;
+  Comment.update({_id: commentID},
+              {$inc: {flag: 1}},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to update your post");
+               } else{
+                 res.send(data);
+               }
+  });
+});
+
+
 // Edits comment by id **CURRENTLY NOT IN USE**
 router.put('/comment/:commentID', function(req,res){
   var messageID = req.params.messageID;

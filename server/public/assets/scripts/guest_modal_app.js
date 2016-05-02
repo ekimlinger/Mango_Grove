@@ -25,6 +25,7 @@ function createPost(event){//Create Post Function
     $('#guestTextarea').val('');
     $('#guestEmail').val('');
     $('#username').val('');
+    $('.chars').text("150");
     $.ajax({
       type: 'POST',
       url: '/message',
