@@ -12,11 +12,10 @@ var Message = new Schema({
     comments : {type: Array, default: []},
     name : {type: String, required: true},
     email : {type: String, required: true},
-    location: {type: String, required: false},
+    location: {type: Array, required: false},
     like: {type: Number, required: false},
     flag: {type: Number, required: false},
     global : {type: Boolean, required: true}
-
 });
 
 module.exports = mongoose.model("Message", Message);

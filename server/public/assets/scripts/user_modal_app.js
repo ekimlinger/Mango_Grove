@@ -1,39 +1,64 @@
 var newMessage = {};
+var communityList = ["Carlson School","McCalister School"];
+var community = communityList[0];
+var messageType = "all";
 
 $(document).ready(function(){
-  $('#createUserPost').on('click',createPost);//when submit button is pressed in the guest_comment_modals
-console.log("Made it into the user_modal_app.js");
+    $('#createCommunityPost').on('click',createCommunityPost);
+
+    for(var i = 0; i < communityList.length; i++){
+      $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label> ');
+    }
+    //CHARACTER COUNT
+    var maxLength = 150;
+    $('#communityTextarea').keyup(function() {
+      var length = $(this).val().length;
+      var length = maxLength-length;
+      $('.chars').text(length);
+    });
 });
 
+function createCommunityPost(){
+  messageType = $('.modal-content').data('messageType');
+  console.log("Message Type from the data method: ", messageType);
+  var checked = $("input[type=checkbox]:checked").length;
+  if(!checked) {
+    $('#errorMessage').text("You must check at least one checkbox.");
+    return false;
+  }
 
-function createPost(event){//Create Post Function
-  console.log("I made it here inside Create post");
-
-    event.preventDefault();
-    var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
-    $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
+  event.preventDefault();
+  var messageArray = $('#communityPostMessageForm').serializeArray();  //grab the information from the compose message moda
+  newMessage.location = [];
+  newMessage.global = false;//Set global to false unless user checks
+  $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
+    if(element.name == "location"){
+      newMessage.location.push(element.value);//push multiple locations to location key
+    }
+    else{
       newMessage[element.name] = element.value;
-    });
-
-    newMessage.global = true;
-    console.log("newMessage is: ", newMessage);
-    //reset input field values
-    $('#userTextarea').val('');
-    $('#userCommunity').val('');
-    $.ajax({
-      type: 'POST',
-      url: '/message',
-      data: newMessage, //Pass newMessage to the Database
-      success: addNewMessageToFeed //call addNewMessageToFeed function to display new post right away
-    });
+    }
+  });
+  $('#communityTextarea').val('');
+  $('#communityEmail').val('');
+  $('#username').val('');
+  $.ajax({
+    type: 'POST',
+    url: '/message',
+    data: newMessage, //Pass newMessage to the Database
+    success:  addNewMessageToFeed
+  });
 }
 
 function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
   var message = response;
-  $('.social-feed-box').prepend('<div class="media animated fadeInRight"></div>');//creates each individual comment
-  var $el = $('.social-feed-box').children().first();
+  if(message.global == false && message.location && (messageType == newMessage.type)){
+        $('.social-feed-box').prepend('<div class="media animated fadeInRight"></div>');//creates each individual comment
+        var $el = $('.social-feed-box').children().first();
 
-  $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
-  $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div><div class="social-footer></div>');
+        $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+        $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button><button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button></div></div><div class="social-footer></div>');
+  }else{
 
+  }
 }

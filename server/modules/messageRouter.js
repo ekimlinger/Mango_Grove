@@ -5,11 +5,13 @@ var path = require('path');
 var Message = require('../models/messages.js');
 var Comment = require('../models/comment.js');
 
-
+//
 // GET REQUESTS
+//
+
+// Get comments for a specified message
 router.get('/comment/:messageID', function(req,res){
   var messageID = req.params.messageID;
-  console.log(req.params);
       Comment.find({messageID: messageID}, function(err, data){
         if(err){
           console.log(err);
@@ -18,10 +20,9 @@ router.get('/comment/:messageID', function(req,res){
       });
 });
 
-
+// Gets all global messages that match vv these parameters
 router.get('/global/:type/:amount/:time', function(req,res){
 
-  console.log(req.params);
   var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
@@ -48,32 +49,47 @@ router.get('/global/:type/:amount/:time', function(req,res){
     }
 });
 
+// Gets all messages by location that match these parameters
 router.get('/:location/:type/:amount/:time', function(req,res){
 
   console.log(req.params);
   var location = req.params.location;
-  var amount = req.params.amount;
+  var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
 
-  Message.find({location: location, time: {$lt: time}}, function(err, data){
-    if(err){
-      console.log(err);
-      res.send();
-    } else{
-      res.send(data);
-    }
-  }).sort({_id: -1}).limit(amount);
+  if (type == 'all') {
+        Message.find({location: { $in: [location]} }, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            console.log("Data that is being sent back: ", data);
+            res.send(data);
+
+          }
+        }).sort({_id: -1}).limit(amount);
+      }else{
+        Message.find({location: { $in: [location]}, type: type, date_created:{'$lt' : new Date(time)}}, function(err, data){
+          if(err){
+            console.log(err);
+            res.send();
+          } else{
+            res.send(data);
+          }
+        }).sort({_id: -1}).limit(amount);
+      }
 });
 
 
-
+//
 //  POST REQUESTS
+//
 
+// Posts new comment pushes new _id into message array
 router.post('/comment/:messageID', function(req,res){
 
   var messageID = req.params.messageID;
-  console.log("req.body: ", req.body, "messageID: ", messageID);
   var newComment = new Comment({
     messageID: messageID,
     name: req.body.name,
@@ -99,11 +115,12 @@ router.post('/comment/:messageID', function(req,res){
       });
     }
   });
+
 });
 
 //Posts new message
 router.post('/', function(req,res){
-  console.log("Message Being Posted Server Side: ", req.body);
+
   var newMessage = new Message({
     type: req.body.type,
     content: req.body.content,
@@ -125,10 +142,28 @@ router.post('/', function(req,res){
   });
 });
 
-// Edits comment by id
+//
+// PUT REQUESTS
+//
+
+// Increments message likes by one when called
+router.put('/comment/like/:commentID', function(req,res){
+  var commentID = req.params.commentID;
+  Comment.update({_id: commentID},
+              {$inc: {like: 1}},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to update your post");
+               } else{
+                 res.send(data);
+               }
+  });
+});
+
+// Edits comment by id **CURRENTLY NOT IN USE**
 router.put('/comment/:commentID', function(req,res){
   var messageID = req.params.messageID;
-  console.log("req.body: ", req.body, "messageID: ", messageID, "commentID: ", commentID);
   Message.update({_id: reqId},
               {/* Whatever you would like to change*/},
              function(err, data){
@@ -139,14 +174,42 @@ router.put('/comment/:commentID', function(req,res){
                  res.send("Updated Post :", data);
                }
   });
-
-  res.send("Put/update route sends back");
 });
 
-// Edits Message by id
+
+// Increments message likes by one when called
+router.put('/like/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+  Message.update({_id: messageID},
+              {$inc: {like: 1}},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to update your post");
+               } else{
+                 res.send(data);
+               }
+  });
+});
+
+// Increments message flags by one when called
+router.put('/flag/:messageID', function(req,res){
+  var messageID = req.params.messageID;
+  Message.update({_id: messageID},
+              {$inc: {flag: 1}},
+             function(err, data){
+               if(err){
+                 console.log(err);
+                 res.send("Failed to update your post");
+               } else{
+                 res.send(data);
+               }
+  });
+});
+
+// Edits Message by id **CURRENTLY NOT IN USE**
 router.put('/:messageID', function(req,res){
   var messageID = req.params.messageID;
-  console.log("req.body: ", req.body, "messageID: ", messageID);
   Message.update({_id: reqId},
               {/* Whatever you would like to change*/},
              function(err, data){
@@ -157,16 +220,16 @@ router.put('/:messageID', function(req,res){
                  res.send("Updated Post :", data);
                }
   });
-
-  res.send("Put/update route sends back");
 });
 
 
+//
+// DELETE REQUESTS
+//
 
+// Deletes message by ID
 router.delete('/:messageID', function(req,res){
   var messageID = req.params.messageID;
-  console.log("messageID: ", messageID);
-
   Message.findOneAndRemove({_id: messageID}, function(err, data){
     if (err){
       console.log(err);
@@ -178,10 +241,9 @@ router.delete('/:messageID', function(req,res){
 
 });
 
+// Deletes comment by ID
 router.delete('/comment/:commentID', function(req,res){
   var commentID = req.params.commentID;
-  console.log("commentID: ", commentID);
-
   Comment.findOneAndRemove({_id: commentID}, function(err, data){
     if (err){
       console.log(err);
