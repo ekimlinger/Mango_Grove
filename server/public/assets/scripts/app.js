@@ -92,12 +92,12 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
     // Appends to DOM
-    $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
+    $('.social-feed-box').append('<div class="animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
-    $el.append('<div class="social-footer" id="'+message._id+'"></div>');
+    $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
 }
@@ -159,6 +159,7 @@ function showComments(response) {
   if(response.length){
     var messageID = response[0].messageID;
     $('#'+messageID).empty();
+    $('#'+messageID).addClass('social-footer');
     for (var i = 0; i < response.length; i++) {
         var comment = response[i]; //store response into comment for readability
 
