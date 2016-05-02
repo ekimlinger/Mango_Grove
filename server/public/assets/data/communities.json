@@ -1,0 +1,13 @@
+{
+  "community":
+  [
+    {
+    "name" : "Macalester",
+    "location" : "St. Paul, MN"
+    },
+    {
+    "name" : "Carlson School of Management",
+    "location" : "Minneapolis, MN"
+    }
+  ]
+}
