@@ -33,6 +33,7 @@ function getMessageID() {
 //posting comment to database
 function createComment(event) {
     //set the messageID key for the comment object
+    console.log("Comment being created");
     newComment.messageID = $("#createUserComment").data("id");
     event.preventDefault();
     //grab the information from the compose comment modal NEED THE ID FROM THE FORM
@@ -56,8 +57,6 @@ function createComment(event) {
           getCommentsByMessage(newComment.messageID);
         }
     });
-
-
 }
 
 function getCommentsByMessage(messageID) {

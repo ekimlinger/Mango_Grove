@@ -33,6 +33,7 @@ function getMessageID() {
 //posting comment to database
 function createComment(event) {
     //set the messageID key for the comment object
+    console.log("Global Feed Comment");
     newComment.messageID = $("#createGuestComment").data("id");
     event.preventDefault();
     //grab the information from the compose comment modal NEED THE ID FROM THE FORM
