@@ -49,6 +49,7 @@ router.get('/global/:type/:amount/:time', function(req,res){
     }
 });
 
+
 // Gets all messages by location that match these parameters
 router.get('/:location/:type/:amount/:time', function(req,res){
 

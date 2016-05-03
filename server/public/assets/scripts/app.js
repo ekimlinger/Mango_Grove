@@ -4,6 +4,8 @@ var dateOptions = {     // Date formatting options
     year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
 };
+var messageType = "all";
+var amount = 10;
 
 $(document).ready(function(){
     //load all modals to the DOM
@@ -12,13 +14,17 @@ $(document).ready(function(){
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
 
 
-    var messageType = "all";
+
     showMessages(messageType);//show all messages on page load
 
     $('.compose').on('click',composeMessage);//When Compose Buttons are clicked for guests
 
     $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       messageType = $(this).data('type');
+      //pass the data type to load more button
+      $('.seeMore').data("newType", messageType);
+      console.log(messageType);
+    
       showMessages(messageType);
     });
 
@@ -26,11 +32,12 @@ $(document).ready(function(){
 
     // Like Abilities
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
-
-
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
     $('.social-feed-box').on('click', '.commentFlag', flagComment);
+
+    //load more feed
+    $(".seeMore").on('click', loadMoreFeed);
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -39,7 +46,7 @@ function composeMessage(){//function that is called to open up the Compose Modal
 
 function showMessages(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
   var type = messageType;
-  var amount = 20;//Limits how many messages are displayed on the dom at any given time
+  //Limits how many messages are displayed on the dom at any given time
   var time = new Date(Date.now());
 
   if(type == "all"){
@@ -59,6 +66,14 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
     url: '/message/global/'+type+'/'+amount+'/'+time,
     success: loadGlobalFeed //loads messages on the success of the ajax call
   });
+}
+
+function loadMoreFeed(type){
+  var type = $(this).data("newType");
+  amount++;
+  console.log(amount);
+  //Limits how many messages are displayed on the dom at any given time
+  showMessages(type);
 }
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
@@ -248,5 +263,6 @@ function likeMessage() {
         });
     }
 }
+
 
 // Get comment id and make ajax call to increment like amount in db and on DOM
