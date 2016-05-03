@@ -47,7 +47,7 @@ function createPost(event){//Create Post Function
 
 function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
   var message = response;
-  console.log("Made it Here to the addnew MEssage Feed");
+  // console.log("Made it Here to the addnew MEssage Feed");
     var iconType;             // Sets icon type to be displayed on dom
     switch (message.type) {
       case "so":
