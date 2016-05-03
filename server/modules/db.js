@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var mongoURI =
   // process.env.MONGOLAB_URI ||
   // process.env.MONGOHQ_URL ||
-  'mongodb://admin:MangoGrove@ds013212.mlab.com:13212/heroku_btq31zn7';
+  'mongodb://heroku_rzgkr91k:hpjccd3oc0afdpo94lgjt3ettv@ds013232.mlab.com:13232/heroku_rzgkr91k';
 
 var MongoDB = mongoose.connect(mongoURI).connection;
 
