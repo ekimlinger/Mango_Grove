@@ -22,7 +22,8 @@ router.get('/comment/:messageID', function(req,res){
 
 // Gets all global messages that match vv these parameters
 router.get('/global/:type/:amount/:time', function(req,res){
-
+  console.log("Made it Here to the global get route");
+=
   var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
