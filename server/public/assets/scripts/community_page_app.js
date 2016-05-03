@@ -137,38 +137,6 @@ function getCommentsByMessage(messageID) {
     });
 }
 
-//loop through the array and append INFO
-//append info to comment-container
-// function showComments(response) {
-//   console.log(response);
-//   // Shows comments if available
-//   if(response.length){
-//     var messageID = response[0].messageID;
-//     $('#'+messageID).empty();
-//     $('#'+messageID).addClass('social-footer');
-//
-//     for (var i = 0; i < response.length; i++) {
-//         var comment = response[i]; //store response into comment for readability
-//
-//         // Displays ammount of likes if there are any
-//         var likeAmmount;
-//         if(comment.like){
-//           likeAmmount = comment.like + " ";
-//         }else{
-//           likeAmmount = "";
-//         }
-//
-//         // Formats date/time
-//         var newDate = new Date(comment.date_created);
-//         comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
-//
-//         $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
-//         var $el = $('#' + comment.messageID).children().last();
-//         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-//         $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
-//     }
-//   }
-// }
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagComment() {
@@ -187,7 +155,6 @@ function flagComment() {
         });
     }
 }
-
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagMessage() {

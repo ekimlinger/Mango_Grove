@@ -10,7 +10,7 @@ $(document).ready(function(){
     $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
-
+    $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
 
     var messageType = "all";
     showMessages(messageType);//show all messages on page load
@@ -31,7 +31,14 @@ $(document).ready(function(){
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
     $('.social-feed-box').on('click', '.commentFlag', flagComment);
+
+    $('.compose-feedback').on('click', composeFeedback);
+
 });
+
+function composeFeedback(){
+  $('#feedbackModal').modal('show');
+}
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
     $('#guestCommentModal').modal('show');
