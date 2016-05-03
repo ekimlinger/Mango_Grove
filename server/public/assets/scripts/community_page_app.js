@@ -78,13 +78,13 @@ function showMessages(community, messageType){//Shows specific Messages -- Mango
     $('.message-type').html(' All Messages');
   }
   else if(type == "af"){
-    $('.message-type').html('<i class="fa fa-sun-o"></i> Encouragements');
+    $('.message-type').html(' Encouragements <img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" />');
   }
   else if(type == "so"){
-    $('.message-type').html('<i class="fa fa-sun-o"></i> Shout-Outs');
+    $('.message-type').html(' Shout-Outs <img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" />');
   }
   else if(type == "mm"){
-    $('.message-type').html('<i class="fa fa-sun-o"></i> Moments');
+    $('.message-type').html(' Moments <img src="/assets/views/images/mango_small.png" height="20"  />');
   }
   console.log("Location: ", location);
   console.log("Type: ", type);
