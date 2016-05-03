@@ -1,3 +1,10 @@
+var communityList = ["Carlson School","Macalester School"];
+var community = communityList[0];
+var dateOptions = {     // Date formatting options
+    year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
+
   var newMessage = {};//New Message object to be sent down to the database
   var newUser = {}; //Used to strip email address from blocking form
 $(document).ready(function(){
@@ -61,16 +68,35 @@ function appendBlockedUsers(data){
 
 function showFlaggedMessages(data){
   $('.flagged-messages-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+  // $('.flagged-messages-container').addClass('social-feed-box');
   if(data.length > 0){
     for(var i = 0; i <data.length; i++){  //append info to comment-container by looping through the array
+      var message = data[i];//store response into comment for readability
 
-      var comment = data[i];//store response into comment for readability
-      $('.flagged-messages-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
+      var iconType;             // Sets icon type to be displayed on dom
+      switch (message.type) {
+        case "so":
+          iconType = "noun_24896_cc_mod"
+          break;
+        case "mm":
+          iconType = "mango"
+          break;
+        case "af":
+          iconType = "noun_75102_cc"
+          break;
+      }
+
+      // Formats date/time
+      var newDate = new Date(message.date_created);
+      message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+
+      $('.flagged-messages-container').append('<div class="animated fadeInRight"></div>');//creates each individual comment
       var $el = $('.flagged-messages-container').children().last();
 
-      $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-      $el.append('<div class="media-body"><h4 class="media-heading">'+comment.name+'</h4>'+comment.content+'<br/><br/></div>');
-        $el.append('<div class="media-body react-options"><button class="react-button unflag-message" data-messageid="'+comment._id+'">Remove ' + comment.flag + ' Flags</button><button class="react-button delete-message" data-messageid="'+comment._id+'">Delete Post</button></div>');
+      $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
+      $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+      $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs unflag-message" data-messageid="'+message._id+'">Remove '+message.flag+' Flag(s)</button><button class="btn btn-white btn-xs delete-message" data-messageid="'+message._id+'">Delete Post</button></div></div>');
+
     }
   }else{
     //Appends Message saying "No flagged content"
@@ -79,17 +105,23 @@ function showFlaggedMessages(data){
 }
 function showFlaggedComments(data){
   $('.flagged-comments-container').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+  $('.flagged-comments-container').addClass('social-feed-box');
+
   if(data.length >0){
     for(var i = 0; i <data.length; i++){  //append info to comment-container by looping through the array
 
       var comment = data[i];//store response into comment for readability
-      $('.flagged-comments-container').append('<div class="media animated fadeInRight"></div>');//creates each individual comment
 
+
+      // Formats date/time
+      var newDate = new Date(comment.date_created);
+      comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+
+      $('.flagged-comments-container').append('<div class="animated fadeInRight"></div>');//creates each individual comment
       var $el = $('.flagged-comments-container').children().last();
 
-      $el.append('<a class="forum-avatar" href="#"><img src="/vendors/Static_Seed_Project/img/a3.jpg" class="img-circle" alt="image"><div class="author-info"><strong>Posts:</strong> 543<br/><strong>Date of Post:</strong>'+comment.date_created+'<br/></div></a>');
-      $el.append('<div class="media-body"><h4 class="media-heading">'+comment.name+'</h4>'+comment.content+'<br/><br/></div>');
-        $el.append('<div class="media-body react-options"><button class="react-button unflag-comment" data-commentid="'+comment._id+'">Remove '+comment.flag+' Flags</button><button class="react-button delete-comment" data-commentid="'+comment._id+'">Delete Post</button></div>');
+      $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+comment.name+'</a><small class="text-muted">'+comment.date_created+'</small></div></div>');
+      $el.append('<div class="social-body"><p>'+comment.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs unflag-comment" data-commentid="'+comment._id+'">Remove '+comment.flag+' Flag(s)</button><button class="btn btn-white btn-xs delete-comment" data-commentid="'+comment._id+'">Delete Post</button></div></div>');
     }
   }else{
     //Appends Message saying "No flagged content"
