@@ -1,4 +1,4 @@
-var communityList = ["Carlson School","Macalester School"];
+var communityList = ["Carlson School of Management","Macalester"];
 var community = communityList[0];
 var messageType = "all";
 var newMessage = {};
@@ -25,6 +25,10 @@ $(document).ready(function(){
       console.log("Community defined here is: ", community);
       $('.current-community').html(' ' + community);
       showMessages(community, messageType);
+  });
+
+  $('.community-global').on('click', function(){
+    showGlobal(messageType);
   });
 
   $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
@@ -68,6 +72,20 @@ function composeMessage(type){//function that is called to open up the Compose M
     console.log("Message Type inside the compose Message function: ",type);
     $('#userMessageModal').modal('show');
 }
+
+function showGlobal(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
+  var type = messageType;
+  var amount = 20;//Limits how many messages are displayed on the dom at any given time
+  var time = new Date(Date.now());
+  $('.current-community').html(' Global');
+
+  $.ajax({
+    type: 'GET',
+    url: '/message/global/'+type+'/'+amount+'/'+time,
+    success: loadCommunityFeed //loads messages on the success of the ajax call
+  });
+}
+
 
 function showMessages(community, messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
   var location = community;
