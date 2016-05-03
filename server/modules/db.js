@@ -1,11 +1,13 @@
 //MONGO
 var mongoose = require("mongoose");
 var mongoURI =
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
+  // process.env.MONGOLAB_URI ||
+  // process.env.MONGOHQ_URL ||
   'mongodb://admin:MangoGrove@ds013212.mlab.com:13212/heroku_btq31zn7';
 
-var MongoDB = mongoose.connect(mongoURI).connection;
+mongoose.connect(mongoURI);
+
+var MongoDB = mongoose.connection;
 
 MongoDB.on("error", function(err){
     console.log("Mongo Connection Error: ", err);
