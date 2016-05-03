@@ -10,6 +10,8 @@ var dateOptions = {     // Date formatting options
 $(document).ready(function(){
   $("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
   $("#loadCommunityCommentModal").load('/assets/views/modals/user_comment_modal.html');
+  $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
+
   showMessages(community, messageType);
   $('.current-community').html(' ' + community);
   $('.message-type').html(' All Messages');
@@ -44,7 +46,13 @@ $(document).ready(function(){
 
   // Flag Message
   $('.social-feed-box').on('click', '.messageFlag', flagMessage);
+  //Feedback filter
+  $('.compose-feedback').on('click', composeFeedback);
 });
+
+function composeFeedback(){
+  $('#feedbackModal').modal('show');
+}
 
 function getMessageID() {
     console.log("HERE: ", $(this).data("id"));

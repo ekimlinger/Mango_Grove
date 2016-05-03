@@ -1,17 +1,30 @@
 $(document).ready(function () {
   console.log("Working here ");
-    $("input#submit").click(function(){
-        $.ajax({
-            type: "POST",
-            url: "process.php", //process to mail
-            data: $('form.contact').serialize(),
-            success: function(msg){
-                $("#thanks").html(msg) //hide button and show thank you
-                $("#form-content").modal('hide'); //hide popup
-            },
-            error: function(){
-                alert("failure");
-            }
-        });
-    });
+  $("#contactForm").on('submit', function(event){
+      // cancels the form submission
+      event.preventDefault();
+      submitForm();
+  });
 });
+
+
+function submitForm(){
+    // Initiate Variables With Form Content
+    var name = $("#name").val();
+    var email = $("#email").val();
+    var message = $("#message").val();
+
+    $.ajax({
+        type: "POST",
+        url: "process.php",
+        data: "name=" + name + "&email=" + email + "&message=" + message,
+        success : function(text){
+            if (text == "success"){
+                formSuccess();
+            }
+        }
+    });
+}
+function formSuccess(){
+    //$( "#msgSubmit" ).removeClass( "hidden" );
+}

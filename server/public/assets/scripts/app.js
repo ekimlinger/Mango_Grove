@@ -31,7 +31,7 @@ $(document).ready(function(){
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
     $('.social-feed-box').on('click', '.commentFlag', flagComment);
-
+    //Feedback modal listener
     $('.compose-feedback').on('click', composeFeedback);
 
 });
