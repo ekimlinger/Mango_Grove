@@ -46,6 +46,7 @@ $(document).ready(function(){
 
   // Flag Message
   $('.social-feed-box').on('click', '.messageFlag', flagMessage);
+  $('.social-feed-box').on('click', '.commentFlag', flagComment);
   //Feedback filter
   $('.compose-feedback').on('click', composeFeedback);
 });
