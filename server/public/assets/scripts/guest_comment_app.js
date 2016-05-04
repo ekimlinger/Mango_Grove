@@ -18,6 +18,7 @@ $(document).ready(function(){
   });
 
   $('.social-feed-box').on('click', '.commentLike', likeComment);
+      $('.social-feed-box').on('click', '.commentFlag', flagComment);
 
 });
 
@@ -116,6 +117,24 @@ function likeComment() {
                 var oldValue = $('[data-id="' + commentID + '"]').children().first().text() || 0;
                 var newValue = parseInt(oldValue) + 1;
                 $('[data-id="' + commentID + '"]').children().first().text(newValue + " ");
+            }
+        });
+    }
+}
+
+// Get message id and make ajax call to increment flag amount in db and on DOM
+function flagComment() {
+    var commentID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).addClass('btn-warning');
+        // Toggle class here in order to only like once
+        console.log("About to flag comment: ", commentID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/comment/flag/' + commentID,
+            success: function(data) {
+                console.log("Successfully flagged comment: ", commentID);
             }
         });
     }
