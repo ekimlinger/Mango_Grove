@@ -8,15 +8,15 @@ var dateOptions = {     // Date formatting options
 
 
 $(document).ready(function(){
-  var messageType = "all";
-    $('.seeMore').data("newType", messageType);
+
     //load all modals to the DOM
     $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
     $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
 
-
+    var messageType = "all";
+    $('.seeMore').data("newType", messageType);
     showMessages(messageType);//show all messages on page load
 
     $('.compose').on('click',composeMessage);//When Compose Buttons are clicked for guests
@@ -190,7 +190,7 @@ function loadMoreGlobalFeed(response){//Loads Messages to GlobalFeed
     //var messageTime = message.date_created;
     $('.seeMore').data('time',newDate);
   }
-    $('.social-feed-box').append('<button class="seeMore filter-messages react-button " autofocus="true" >See More</button>');
+    $('.social-feed-box').append('<button class="seeMore autofocus="true" >See More</button>');
 }
 
 function getCommentsByMessage(messageID) {
