@@ -148,8 +148,12 @@
               <button type="button" class="btn btn-primary btn-lg compose" data-toggle="modal">
                 Post Now
               </button>
-              <button class="filter-messages react-button seeMore" autofocus="false">See More</button>
 
+
+             <!-- this div is super important to receive the initial loading feed information and transfer it to the See More Button. never remove. otherwise, the load more functiona wouldn't work -->
+             <div class="seeMore">
+
+             </div>
             </div>
 
 
@@ -179,8 +183,11 @@
                                 </h3>
 
                           <div class="social-feed-box">
+
                             <!-- posts are appended here -->
+
                           </div>
+
                           </div>
 
                             <!--Append New Comments here to the comment-container class-->
