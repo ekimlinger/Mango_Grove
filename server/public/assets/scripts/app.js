@@ -29,6 +29,7 @@ $(document).ready(function(){
     //Feedback modal listener
     $('.compose-feedback').on('click', composeFeedback);
 
+    $('.load-welcome').on('click', loadWelcomeModal);
 
     $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modal
 
@@ -39,6 +40,10 @@ $(document).ready(function(){
       $('.chars').text(length);
     });
 });
+
+function loadWelcomeModal(){
+  $('#welcomeModal').modal('show');
+}
 
 function composeFeedback(){
   $('#feedbackModal').modal('show');
