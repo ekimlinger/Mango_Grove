@@ -36,15 +36,11 @@
   font-weight: normal;
 }
 
-.jumbotron {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background: #000 url(/assets/views/images/MangoGroveBanner.jpg) center center;
-    width: 100%;
-    height: 260px;
-    background-size: cover;
-    overflow: hidden;
+.side-images {
+  float:left;
+  background-color: yellow;
+  width: 300px;
+  height: 1000px;
 }
 
 .three-shares {
@@ -92,4 +88,13 @@
 
 .plain  {
   color: #fff;
+}
+
+.vertical-space {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.top-space {
+  margin-top: 25px;
 }
