@@ -4,10 +4,12 @@ var dateOptions = {     // Date formatting options
     year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
 };
-var messageType = "all";
-var amount = 10;
+
+var amount = 1;
 
 $(document).ready(function(){
+  var messageType = "all";
+    $('.seeMore').data("newType", messageType);
     //load all modals to the DOM
     $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
@@ -24,7 +26,7 @@ $(document).ready(function(){
       //pass the data type to load more button
       $('.seeMore').data("newType", messageType);
       console.log(messageType);
-    
+
       showMessages(messageType);
     });
 
@@ -34,10 +36,10 @@ $(document).ready(function(){
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
-    $('.social-feed-box').on('click', '.commentFlag', flagComment);
+
 
     //load more feed
-    $(".seeMore").on('click', loadMoreFeed);
+    $(".social-feed-box").on('click', '.seeMore', loadMoreFeed);
 });
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
@@ -68,12 +70,12 @@ function showMessages(messageType){//Shows specific Messages -- Mango Momment, A
   });
 }
 
-function loadMoreFeed(type){
-  var type = $(this).data("newType");
+function loadMoreFeed(){
   amount++;
-  console.log(amount);
-  //Limits how many messages are displayed on the dom at any given time
+  var type = $('.seeMore').data("newType");
+
   showMessages(type);
+
 }
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
@@ -114,114 +116,13 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
   }
+    $('.social-feed-box').append('<button class="seeMore filter-messages react-button " autofocus="true">See More</button>');
 }
 // COMMENT FUNCTIONS
 
 
-// get messageid by clicking the comment button
-function getMessageID() {
-    console.log("HERE: ", $(this).data("id"));
-    var messageID = $(this).data("id");
-    //set the message id for the post button
-    $("#createGuestComment").data("id", messageID);
-    console.log("this message id will be", messageID);
-}
 
-//posting comment to database
-function createComment(event) {
-    //set the messageID key for the comment object
-    newComment.messageID = $("#createGuestComment").data("id");
-    event.preventDefault();
-    //grab the information from the compose comment modal NEED THE ID FROM THE FORM
-    var commentArray = $('#postCommentForm').serializeArray();
-    //grab information off the form and stores it into the newComment variable
-    $.each(commentArray, function(index, element) {
-        newComment[element.name] = element.value;
-        console.log("New Comment: ", newComment);
-    });
-    // Send to server to be saved,
-    $.ajax({
-        type: 'POST',
-        url: '/message/comment/'+ newComment.messageID,
-        data: newComment,
-        success: function(data){
-          getCommentsByMessage(newComment.messageID);
-        },
-        error: function (xhr, ajaxOptions, thrownError){
-          switch (xhr.status) {
-            case 403:
-             console.log("This email address is blocked");
-             break;
-           }
-        }
-    });
-    //reset input field values
-    $('#guestTextarea').val('');
-    $('#guestEmail').val('');
-    $('#username').val('');
 
-}
-
-function getCommentsByMessage(messageID) {
-    var messageID = messageID;
-    $.ajax({
-        type: 'GET',
-        url: '/message/comment/'+ messageID,
-        success: showComments
-    });
-
-}
-
-//loop through the array and append INFO
-//append info to comment-container
-function showComments(response) {
-  console.log(response);
-  // Shows comments if available
-  if(response.length){
-    var messageID = response[0].messageID;
-    $('#'+messageID).empty();
-    $('#'+messageID).addClass('social-footer');
-
-    for (var i = 0; i < response.length; i++) {
-        var comment = response[i]; //store response into comment for readability
-
-        // Displays ammount of likes if there are any
-        var likeAmmount;
-        if(comment.like){
-          likeAmmount = comment.like + " ";
-        }else{
-          likeAmmount = "";
-        }
-
-        // Formats date/time
-        var newDate = new Date(comment.date_created);
-        comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
-
-        $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
-        var $el = $('#' + comment.messageID).children().last();
-        $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
-    }
-  }
-}
-
-// Get message id and make ajax call to increment flag amount in db and on DOM
-function flagComment() {
-    var commentID = $(this).data('id');
-    if ($(this).data('alreadyPressed') == undefined) {
-        $(this).data('alreadyPressed', true);
-        $(this).addClass('btn-warning');
-        // Toggle class here in order to only like once
-        console.log("About to flag comment: ", commentID);
-        $.ajax({
-            type: "PUT",
-            url: '/message/comment/flag/' + commentID,
-            success: function(data) {
-                console.log("Successfully flagged comment: ", commentID);
-            }
-        });
-    }
-}
 
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
