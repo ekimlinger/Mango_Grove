@@ -1,5 +1,5 @@
-var newMessage = {};//New Message object to be sent down to the database
-var newComment = {};
+var newMessage = {};
+var messageType = "all";
 var dateOptions = {     // Date formatting options
     year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
@@ -7,33 +7,37 @@ var dateOptions = {     // Date formatting options
 
 $(document).ready(function(){
     //load all modals to the DOM
-    $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
+    //$("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
     $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
+    console.log("message type: ", messageType);
 
-    var messageType = "all";
     showMessages(messageType);//show all messages on page load
-
+    console.log("message type: ", messageType);
     $('.compose').on('click',composeMessage);//When Compose Buttons are clicked for guests
 
     $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       messageType = $(this).data('type');
       showMessages(messageType);
     });
-
-
-
     // Like Abilities
     $('.social-feed-box').on('click', '.messageLike', likeMessage);
-
-
     // Flag Abilities
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
     $('.social-feed-box').on('click', '.commentFlag', flagComment);
     //Feedback modal listener
-    $('.compose-feedback').on('click', composeFeedback):
+    $('.compose-feedback').on('click', composeFeedback);
 
+
+    $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modal
+
+    var maxLength = 150;
+    $('#guestTextarea').keyup(function() {
+      var length = $(this).val().length;
+      var length = maxLength-length;
+      $('.chars').text(length);
+    });
 });
 
 function composeFeedback(){
@@ -84,7 +88,6 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
         iconType = "noun_75102_cc"
         break;
     }
-
     // Displays ammount of likes if there are any
     var likeAmmount;
     if(message.like){
@@ -107,6 +110,72 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     getCommentsByMessage(message._id);
   }
 }
+
+function createPost(event){//Create Post Function
+    console.log("Global Feed Comment");
+    event.preventDefault();
+    var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
+    $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
+      newMessage[element.name] = element.value;
+    });
+
+    newMessage.global = true;
+    //reset input field values
+    $('#guestTextarea').val('');
+    $('#guestEmail').val('');
+    $('#username').val('');
+    $('.chars').text("150");
+    $.ajax({
+      type: 'POST',
+      url: '/message',
+      data: newMessage, //Pass newMessage to the Database
+      success: addNewMessageToFeed, //call addNewMessageToFeed function to display new post right away
+      error: function (xhr, ajaxOptions, thrownError){
+        switch (xhr.status) {
+          case 403:
+           console.log("This email address is blocked");
+           break;
+         }
+      }
+    });
+}
+
+function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
+  var message = response;
+  // console.log("Made it Here to the addnew MEssage Feed");
+    var iconType;             // Sets icon type to be displayed on dom
+    switch (message.type) {
+      case "so":
+        iconType = "noun_24896_cc_mod"
+        break;
+      case "mm":
+        iconType = "mango"
+        break;
+      case "af":
+        iconType = "noun_75102_cc"
+        break;
+    }
+
+    // Displays ammount of likes if there are any
+    var likeAmmount;
+    if(message.like){
+      likeAmmount = message.like + " ";
+    }else{
+      likeAmmount = "";
+    }
+    // Formats date/time
+    var newDate = new Date(message.date_created);
+    message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+    if(messageType == 'all' || messageType == newMessage.type){
+      $('.social-feed-box').prepend('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
+      var $el = $('.social-feed-box').children().first();
+      $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
+      $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+      $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+      $el.append('<div id="'+message._id+'"></div>');
+    }
+}
+
 // COMMENT FUNCTIONS
 
 
@@ -155,48 +224,47 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
 //
 // }
 //
-// function getCommentsByMessage(messageID) {
-//     var messageID = messageID;
-//     $.ajax({
-//         type: 'GET',
-//         url: '/message/comment/'+ messageID,
-//         success: showComments
-//     });
-//
-// }
+function getCommentsByMessage(messageID) {
+    var messageID = messageID;
+    $.ajax({
+        type: 'GET',
+        url: '/message/comment/'+ messageID,
+        success: showComments
+    });
+
+}
 //
 // //loop through the array and append INFO
 // //append info to comment-container
-// function showComments(response) {
-//   console.log("IM NEEDED");
-//   // Shows comments if available
-//   if(response.length){
-//     var messageID = response[0].messageID;
-//     $('#'+messageID).empty();
-//     $('#'+messageID).addClass('social-footer');
-//
-//     for (var i = 0; i < response.length; i++) {
-//         var comment = response[i]; //store response into comment for readability
-//
-//         // Displays ammount of likes if there are any
-//         var likeAmmount;
-//         if(comment.like){
-//           likeAmmount = comment.like + " ";
-//         }else{
-//           likeAmmount = "";
-//         }
-//
-//         // Formats date/time
-//         var newDate = new Date(comment.date_created);
-//         comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
-//
-//         $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
-//         var $el = $('#' + comment.messageID).children().last();
-//         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-//         $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
-//     }
-//   }
-// }
+function showComments(response) {
+  // Shows comments if available
+  if(response.length){
+    var messageID = response[0].messageID;
+    $('#'+messageID).empty();
+    $('#'+messageID).addClass('social-footer');
+
+    for (var i = 0; i < response.length; i++) {
+        var comment = response[i]; //store response into comment for readability
+
+        // Displays ammount of likes if there are any
+        var likeAmmount;
+        if(comment.like){
+          likeAmmount = comment.like + " ";
+        }else{
+          likeAmmount = "";
+        }
+
+        // Formats date/time
+        var newDate = new Date(comment.date_created);
+        comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+
+        $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
+        var $el = $('#' + comment.messageID).children().last();
+        $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
+    }
+  }
+}
 //
 // // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagComment() {
@@ -256,5 +324,3 @@ function likeMessage() {
         });
     }
 }
-
-// Get comment id and make ajax call to increment like amount in db and on DOM
