@@ -133,6 +133,7 @@ function showFlaggedComments(data){
 
 //AJAX CALLS
 function getBlockedUsers(){
+  console.log("Calling to getBlockedUsers");
   $.ajax({
     type: 'GET',
     url: '/admin/blockedUsers',

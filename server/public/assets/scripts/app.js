@@ -32,7 +32,7 @@ $(document).ready(function(){
     $('.social-feed-box').on('click', '.messageFlag', flagMessage);
     $('.social-feed-box').on('click', '.commentFlag', flagComment);
     //Feedback modal listener
-    $('.compose-feedback').on('click', composeFeedback);
+    $('.compose-feedback').on('click', composeFeedback):
 
 });
 

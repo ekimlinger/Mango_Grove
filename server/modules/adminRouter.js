@@ -89,7 +89,7 @@ router.put('/unblockUser', function(req,res){
       res.status(500);
     } else{
       console.log("Successfully removed user from blocked list!");
-      res.status(200);
+      res.status(200).send();
     }
   });
 });
