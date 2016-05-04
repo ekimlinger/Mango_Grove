@@ -99,6 +99,9 @@
   margin-top: 25px;
 }
 
+.right-space {
+  margin-right: 20px;
+}
 .modal-header {
   border: 0;
 }
