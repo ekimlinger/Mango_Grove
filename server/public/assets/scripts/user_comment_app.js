@@ -33,6 +33,7 @@ function getMessageID() {
 //posting comment to database
 function createComment(event) {
     //set the messageID key for the comment object
+    console.log("Comment being created");
     newComment.messageID = $("#createUserComment").data("id");
     event.preventDefault();
     //grab the information from the compose comment modal NEED THE ID FROM THE FORM
@@ -56,8 +57,6 @@ function createComment(event) {
           getCommentsByMessage(newComment.messageID);
         }
     });
-
-
 }
 
 function getCommentsByMessage(messageID) {
@@ -95,10 +94,10 @@ function showComments(response) {
         var newDate = new Date(comment.date_created);
         comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
-        $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
+        $('#' + comment.messageID).append('<div class="social-comment indent underline-comment"></div>'); //creates each individual comment
         var $el = $('#' + comment.messageID).children().last();
         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
-        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
+        $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted">' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
     }
   }
 }

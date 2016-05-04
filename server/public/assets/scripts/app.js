@@ -14,7 +14,7 @@ $(document).ready(function(){
     $("#loadComposeModal").load('/assets/views/modals/guest_post_modal.html');
     $("#loadCommentModal").load('/assets/views/modals/guest_comment_modal.html');
     $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
-
+    $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
 
 
     showMessages(messageType);//show all messages on page load
@@ -40,7 +40,16 @@ $(document).ready(function(){
 
     //load more feed
     $(".social-feed-box").on('click', '.seeMore', showMoreFeed);
+
+    $('.social-feed-box').on('click', '.commentFlag', flagComment);
+    //Feedback modal listener
+    $('.compose-feedback').on('click', composeFeedback);
+
 });
+
+function composeFeedback(){
+  $('#feedbackModal').modal('show');
+}
 
 function composeMessage(){//function that is called to open up the Compose Modal Message which sets the type of the message
     $('#guestCommentModal').modal('show');
@@ -187,9 +196,115 @@ function loadMoreGlobalFeed(response){//Loads Messages to GlobalFeed
 
 
 
+// get messageid by clicking the comment button
+// function getMessageID() {
+//     console.log("IM NEEDED");
+//     var messageID = $(this).data("id");
+//     //set the message id for the post button
+//     $("#createGuestComment").data("id", messageID);
+//
+// }
+
+//posting comment to database
+// function createComment(event) {
+//     //set the messageID key for the comment object
+//     console.log("Global create comment being fired");
+//     newComment.messageID = $("#createGuestComment").data("id");
+//     event.preventDefault();
+//     //grab the information from the compose comment modal NEED THE ID FROM THE FORM
+//     var commentArray = $('#postCommentForm').serializeArray();
+//     //grab information off the form and stores it into the newComment variable
+//     $.each(commentArray, function(index, element) {
+//         newComment[element.name] = element.value;
+//         console.log("New Comment: ", newComment);
+//     });
+//     // Send to server to be saved,
+//     $.ajax({
+//         type: 'POST',
+//         url: '/message/comment/'+ newComment.messageID,
+//         data: newComment,
+//         success: function(data){
+//           getCommentsByMessage(newComment.messageID);
+//         },
+//         error: function (xhr, ajaxOptions, thrownError){
+//           switch (xhr.status) {
+//             case 403:
+//              console.log("This email address is blocked");
+//              break;
+//            }
+//         }
+//     });
+//     //reset input field values
+//     $('#guestTextarea').val('');
+//     $('#guestEmail').val('');
+//     $('#username').val('');
+//
+// }
+//
+// function getCommentsByMessage(messageID) {
+//     var messageID = messageID;
+//     $.ajax({
+//         type: 'GET',
+//         url: '/message/comment/'+ messageID,
+//         success: showComments
+//     });
+//
+// }
+//
+// //loop through the array and append INFO
+// //append info to comment-container
+// function showComments(response) {
+//   console.log("IM NEEDED");
+//   // Shows comments if available
+//   if(response.length){
+//     var messageID = response[0].messageID;
+//     $('#'+messageID).empty();
+//     $('#'+messageID).addClass('social-footer');
+//
+//     for (var i = 0; i < response.length; i++) {
+//         var comment = response[i]; //store response into comment for readability
+//
+//         // Displays ammount of likes if there are any
+//         var likeAmmount;
+//         if(comment.like){
+//           likeAmmount = comment.like + " ";
+//         }else{
+//           likeAmmount = "";
+//         }
+//
+//         // Formats date/time
+//         var newDate = new Date(comment.date_created);
+//         comment.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+//
+//         $('#' + comment.messageID).append('<div class="social-comment indent"></div>'); //creates each individual comment
+//         var $el = $('#' + comment.messageID).children().last();
+//         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
+//         $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
+//     }
+//   }
+// }
+//
+// // Get message id and make ajax call to increment flag amount in db and on DOM
+function flagComment() {
+    var commentID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).addClass('btn-warning');
+        // Toggle class here in order to only like once
+        console.log("About to flag comment: ", commentID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/comment/flag/' + commentID,
+            success: function(data) {
+                console.log("Successfully flagged comment: ", commentID);
+            }
+        });
+    }
+}
 
 
-// Get message id and make ajax call to increment flag amount in db and on DOM
+
+// // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagMessage() {
     var messageID = $(this).data('id');
     if ($(this).data('alreadyPressed') == undefined) {
@@ -207,9 +322,9 @@ function flagMessage() {
         });
     }
 }
-
-
-// Get message id and make ajax call to increment like amount in db and on DOM
+//
+//
+// // Get message id and make ajax call to increment like amount in db and on DOM
 function likeMessage() {
     var messageID = $(this).data('id');
     if ($(this).data('alreadyPressed') == undefined) {

@@ -17,7 +17,7 @@ $(document).ready(function(){
 });
 
 function createPost(event){//Create Post Function
-
+    console.log("Global Feed Comment");
     event.preventDefault();
     var messageArray = $('#postMessageForm').serializeArray();  //grab the information from the compose message moda
     $.each(messageArray, function(index, element){//grab information off the form and stores it into the newMessage variable
@@ -47,7 +47,7 @@ function createPost(event){//Create Post Function
 
 function addNewMessageToFeed(response){//Append New Message to the Top of the Feed
   var message = response;
-
+  // console.log("Made it Here to the addnew MEssage Feed");
     var iconType;             // Sets icon type to be displayed on dom
     switch (message.type) {
       case "so":

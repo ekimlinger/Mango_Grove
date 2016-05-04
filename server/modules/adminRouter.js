@@ -86,10 +86,10 @@ router.put('/unblockUser', function(req,res){
   BlockedUsers.update({}, {$pull: {list: userName}}, function(err, data){
     if(err){
       console.log(err);
-      res.send();
+      res.status(500);
     } else{
       console.log("Successfully removed user from blocked list!");
-      res.send("Successfully removed user from blocked list!");
+      res.status(200).send();
     }
   });
 });
@@ -107,7 +107,7 @@ router.put('/unflag/comment/:commentID', function(req,res){
                  console.log(err);
                  res.send("Failed to unflag your comment");
                } else{
-                 res.send("Updated Comment :", data);
+                 res.send(data);
                }
   });
 });
@@ -123,7 +123,7 @@ router.put('/unflag/:messageID', function(req,res){
                  console.log(err);
                  res.send("Failed to unflag your message");
                } else{
-                 res.send("Updated Message :", data);
+                 res.send(data);
                }
   });
 });

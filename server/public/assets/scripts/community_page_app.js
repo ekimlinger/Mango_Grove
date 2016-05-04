@@ -1,4 +1,4 @@
-var communityList = ["Carlson School","McCalister School"];
+var communityList = ["Carlson School of Management","Macalester"];
 var community = communityList[0];
 var messageType = "all";
 var newMessage = {};
@@ -10,15 +10,25 @@ var dateOptions = {     // Date formatting options
 $(document).ready(function(){
   $("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
   $("#loadCommunityCommentModal").load('/assets/views/modals/user_comment_modal.html');
+  $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
+
   showMessages(community, messageType);
+  $('.current-community').html(' ' + community);
+  $('.message-type').html(' All Messages');
 
   for(var i = 0; i < communityList.length; i++){
-    $('.community-container').append('<button class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</button>');
+    $('.nav-second-level').append('<li><a href="#messageTop" class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</a></li>');
   }
 
   $('.community-filter').on('click',function(){
       community = $(this).data('location');
+      console.log("Community defined here is: ", community);
+      $('.current-community').html(' ' + community);
       showMessages(community, messageType);
+  });
+
+  $('.community-global').on('click', function(){
+    showGlobal(messageType);
   });
 
   $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
@@ -31,6 +41,7 @@ $(document).ready(function(){
     console.log("Message Type when being clicked: ", messageType);
     composeMessage(messageType);
   });
+
   console.log("Message Type on page load: ", messageType);
   //CODE FOR CHARACTER REMAINING IN TEXTAREA
 
@@ -39,8 +50,22 @@ $(document).ready(function(){
 
   // Flag Message
   $('.social-feed-box').on('click', '.messageFlag', flagMessage);
+  $('.social-feed-box').on('click', '.commentFlag', flagComment);
+  //Feedback filter
+  $('.compose-feedback').on('click', composeFeedback);
 });
 
+function composeFeedback(){
+  $('#feedbackModal').modal('show');
+}
+
+function getMessageID() {
+    console.log("HERE: ", $(this).data("id"));
+    var messageID = $(this).data("id");
+    //set the message id for the post button
+    $("#createUserComment").data("id", messageID);
+    console.log("this message id will be", messageID);
+}
 
 function composeMessage(type){//function that is called to open up the Compose Modal Message which sets the type of the message
     $('.modal-content').data('messageType',type);
@@ -48,23 +73,37 @@ function composeMessage(type){//function that is called to open up the Compose M
     $('#userMessageModal').modal('show');
 }
 
+function showGlobal(messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
+  var type = messageType;
+  var amount = 20;//Limits how many messages are displayed on the dom at any given time
+  var time = new Date(Date.now());
+  $('.current-community').html(' Global');
+
+  $.ajax({
+    type: 'GET',
+    url: '/message/global/'+type+'/'+amount+'/'+time,
+    success: loadCommunityFeed //loads messages on the success of the ajax call
+  });
+}
+
+
 function showMessages(community, messageType){//Shows specific Messages -- Mango Momment, Affirmations, Shout Outs or All of them
   var location = community;
   var type = messageType;
   var amount = 20;//Limits how many messages are displayed on the dom at any given time
   var time = new Date(Date.now());
-
+  //TRACEY
   if(type == "all"){
-    $('.text-navy').html(' All Messages');
+    $('.message-type').html(' All Messages');
   }
   else if(type == "af"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Encouragements');
+    $('.message-type').html(' Encouragements <img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" />');
   }
   else if(type == "so"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Shout-Outs');
+    $('.message-type').html(' Shout-Outs <img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" />');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<i class="fa fa-sun-o"></i> Moments');
+    $('.message-type').html(' Moments <img src="/assets/views/images/mango_small.png" height="20"  />');
   }
   console.log("Location: ", location);
   console.log("Type: ", type);
@@ -76,6 +115,7 @@ function showMessages(community, messageType){//Shows specific Messages -- Mango
 }
 
 function loadCommunityFeed(response){//Loads Messages to GlobalFeed
+  console.log("made it here");
   $('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
     var message = response[i];//store response into comment for readability
@@ -104,7 +144,7 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
 
     // Appends to DOM
-    $('.social-feed-box').append('<div class="media animated fadeInRight underline"></div>');//creates each individual comment
+    $('.social-feed-box').append('<div class="animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
     $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
@@ -113,7 +153,35 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     getCommentsByMessage(message._id);
   }
 }
+// }
+//
+function getCommentsByMessage(messageID) {
+    var messageID = messageID;
+    $.ajax({
+        type: 'GET',
+        url: '/message/comment/'+ messageID,
+        success: showComments
+    });
+}
 
+
+// Get message id and make ajax call to increment flag amount in db and on DOM
+function flagComment() {
+    var commentID = $(this).data('id');
+    if ($(this).data('alreadyPressed') == undefined) {
+        $(this).data('alreadyPressed', true);
+        $(this).addClass('btn-warning');
+        // Toggle class here in order to only like once
+        console.log("About to flag comment: ", commentID);
+        $.ajax({
+            type: "PUT",
+            url: '/message/comment/flag/' + commentID,
+            success: function(data) {
+                console.log("Successfully flagged comment: ", commentID);
+            }
+        });
+    }
+}
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
 function flagMessage() {
@@ -154,5 +222,3 @@ function likeMessage() {
         });
     }
 }
-
-// Get comment id and make ajax call to increment like amount in db and on DOM

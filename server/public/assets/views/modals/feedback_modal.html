@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Feedback</title>
-<link href="/vendors/Static_Seed_Project/css/bootstrap.min.css" rel="stylesheet">
-<link href="/vendors/Static_Seed_Project/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<link href="/vendors/Static_Seed_Project/css/animate.css" rel="stylesheet">
-<link href="/vendors/Static_Seed_Project/css/style.css" rel="stylesheet">
-
-<script src="/vendors/Static_Seed_Project/js/jquery-2.1.1.js"></script>
-<script src="/vendors/Static_Seed_Project/js/bootstrap.min.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="/vendors/Static_Seed_Project/js/inspinia.js"></script>
-<script src="/vendors/Static_Seed_Project/js/plugins/pace/pace.min.js"></script>
-
-<script type="text/javascript" src="/assets/scripts/app.js"></script>
-
-</head>
-<body>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#feedbackModal">
-  Feedback
-</button>
+<script src="/assets/scripts/feedback_app.js"></script>
 
 <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackLabel">
 
@@ -37,11 +11,11 @@
       </div>
         <div class="modal-body">
 
-          <form id="postMessageForm">
+          <form id="postFeedbackForm">
 
           <fieldset class="form-group">
-            <label for="guestTextarea">Type here</label>
-            <textarea class="form-control" id="guestTextarea" name="content" rows="3"></textarea>
+            <label for="feedbackTextarea">Type here</label>
+            <textarea class="form-control" id="feedbackTextarea" name="content" rows="3"></textarea>
           </fieldset>
 
           <fieldset class="form-group">
@@ -61,5 +35,4 @@
       </div>
     </div>
   </div>
-</div>
-</body>
+</div><!--END OF MODAL-->

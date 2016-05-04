@@ -22,7 +22,7 @@ router.get('/comment/:messageID', function(req,res){
 
 // Gets all global messages that match vv these parameters
 router.get('/global/:type/:amount/:time', function(req,res){
-
+  console.log("Made it Here to the global get route");
   var amount = parseInt(req.params.amount);
   var time = req.params.time;
   var type = req.params.type;
@@ -65,7 +65,7 @@ router.get('/:location/:type/:amount/:time', function(req,res){
             console.log(err);
             res.send();
           } else{
-            console.log("Data that is being sent back: ", data);
+            console.log(data);
             res.send(data);
 
           }
@@ -119,7 +119,7 @@ router.post('/comment/:messageID', function(req,res){
               console.log(err);
               res.send("Save request failed");
             } else{
-              res.send("Saved new message: ", comment);
+              res.send(comment);
             }
           });
         }
@@ -158,7 +158,7 @@ router.post('/', function(req,res){
           console.log(err);
           res.send("Save request failed");
         } else{
-          res.send("Saved new message: ", entry);
+          res.send(entry);
         }
       });
 
@@ -279,7 +279,7 @@ router.delete('/:messageID', function(req,res){
       console.log(err);
       res.send("Couldn't delete your post, sorry");
     } else{
-      res.send("Removed your message! :", data);
+      res.send(data);
     }
   });
 
@@ -293,7 +293,7 @@ router.delete('/comment/:commentID', function(req,res){
       console.log(err);
       res.send("Couldn't delete your comment, sorry");
     } else{
-      res.send("Removed your comment! :", data);
+      res.send(data);
     }
   });
 
