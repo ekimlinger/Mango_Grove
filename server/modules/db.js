@@ -15,7 +15,7 @@ MongoDB.on("error", function(err){
 });
 
 MongoDB.once("open", function(err){
-    console.log("Mongo Connection Open");
+    console.log("Mongo Connection Open on: ", mongoURI);
 });
 
 module.exports = MongoDB;
