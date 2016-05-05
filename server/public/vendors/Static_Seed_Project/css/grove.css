@@ -126,3 +126,13 @@
     position: relative;
     margin-bottom: 20px;
 }
+
+.form-group-shorten {
+  width: 80%;
+}
+
+.bottom {
+  position: absolute;
+  right: 20px;
+  bottom: 40px;
+}
