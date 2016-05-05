@@ -23,7 +23,7 @@ $(document).ready(function(){
     $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label><span class="right-space">&nbsp;</span> ');
   }
 
-  //var messageType = "all";
+
   $('.see-more-community').data("newType", messageType);
   $('.see-more-community').data('community', community);
 
