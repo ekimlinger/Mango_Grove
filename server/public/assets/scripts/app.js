@@ -46,6 +46,7 @@ $(document).ready(function(){
 
     $('.load-welcome').on('click', loadWelcomeModal);
 
+
     $('#createGuestPost').on('click', createPost);//when submit button is pressed in the guest_comment_modal
 
 
@@ -246,7 +247,6 @@ function showComments(response) {
     }
   }
 }
-
 
 function createPost(event){//Create Post Function
     console.log("Global Feed Comment");

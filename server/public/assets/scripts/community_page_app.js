@@ -23,8 +23,13 @@ $(document).ready(function(){
     $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label><span class="right-space">&nbsp;</span> ');
   }
 
+
+  $('.see-more-community').data("newType", messageType);
+  $('.see-more-community').data('community', community);
+
   $('.community-filter').on('click',function(){
       community = $(this).data('location');
+      $('.see-more-community').data('community', community);
       console.log("Community defined here is: ", community);
       $('.current-community').html(' ' + community);
       showMessages(community, messageType);
@@ -37,12 +42,15 @@ $(document).ready(function(){
   $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
       console.log("This is what Community equals in the filter-messages: ", community);
       messageType = $(this).data('type');
+      $('.see-more-community').data("newType", messageType);
       if(community == "global"){
         showGlobal(messageType);
       }
       else{
         showMessages(community, messageType);
       }
+
+
   });
 
   $('#createCommunityPost').on('click',function(){
@@ -74,6 +82,9 @@ $(document).ready(function(){
     var length = maxLength-length;
     $('.chars').text(length);
   });
+
+
+  $(".social-feed-box").on('click', '.see-more-community', showMoreCommunityFeed);
 });
 
 function loadWelcomeModal(){
@@ -104,16 +115,16 @@ function showGlobal(messageType){//Shows specific Messages -- Mango Momment, Aff
   var time = new Date(Date.now());
 
   if(type == "all"){
-    $('.text-navy').html(' All Messages');
+    $('.message-type').html(' All Messages');
   }
   else if(type == "af"){
-    $('.text-navy').html('<img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" /> Encouragements');
+    $('.message-type').html('<img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" /> Encouragements');
   }
   else if(type == "so"){
-    $('.text-navy').html('<img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" /> Shout-Outs');
+    $('.message-type').html('<img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" /> Shout-Outs');
   }
   else if(type == "mm"){
-    $('.text-navy').html('<img src="/assets/views/images/mango_small.png" height="20"  />Moments');
+    $('.message-type').html('<img src="/assets/views/images/mango_small.png" height="20"  />Moments');
   }
   $.ajax({
     type: 'GET',
@@ -187,7 +198,9 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="communityMessageComment" data-toggle="modal" data-target="#userMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
+    $('.see-more-community').data("time", newDate);
   }
+  $('.social-feed-box').append('<button class="see-more-community filter-messages react-button " autofocus="true" >See More</button>');
 }
 
 function createCommunityPost(type){
@@ -371,4 +384,76 @@ function likeMessage() {
             }
         });
     }
+}
+
+function showMoreCommunityFeed(type){
+  var location = $('.see-more-community').data('community');
+  var amount = 20;
+  var type = $('.see-more-community').data("newType");
+  var time = $('.see-more-community').data('time');
+  console.log(time);
+  $(this).remove();
+
+    if(type == "all"){
+      $('.message-type').html(' All Messages');
+    }
+    else if(type == "af"){
+      $('.message-type').html(' Encouragements <img src="/assets/views/images/noun_75102_cc.png" height="20" width="20" /> ');
+    }
+    else if(type == "so"){
+      $('.message-type').html(' Shout-Outs <img src="/assets/views/images/noun_24896_cc_mod.png" height="20" width="20" /> ');
+    }
+    else if(type == "mm"){
+      $('.message-type').html(' Moments <img src="/assets/views/images/mango_small.png" height="20"  />');
+    }
+    $.ajax({
+      type: 'GET',
+      url: '/message/'+location+'/'+type+'/'+amount+'/'+time,
+      success: loadMoreCommunityFeed //loads messages on the success of the ajax call
+    });
+
+}
+
+
+function loadMoreCommunityFeed(response){//Loads Messages to GlobalFeed
+  for(var i = 0; i < response.length; i++){  //append info to comment-container by looping through the array
+    var message = response[i];//store response into comment for readability
+    var iconType;             // Sets icon type to be displayed on dom
+    switch (message.type) {
+      case "so":
+        iconType = "noun_24896_cc_mod"
+        break;
+      case "mm":
+        iconType = "mango"
+        break;
+      case "af":
+        iconType = "noun_75102_cc"
+        break;
+    }
+
+
+    // Displays ammount of likes if there are any
+    var likeAmmount;
+    if(message.like){
+      likeAmmount = message.like + " ";
+    }else{
+      likeAmmount = "";
+    }
+
+    // Formats date/time
+    var newDate = new Date(message.date_created);
+    message.date_created = newDate.toLocaleTimeString("en-us", dateOptions);
+
+    // Appends to DOM
+    $('.social-feed-box').append('<div class="animated fadeInRight underline"></div>');//creates each individual comment
+    var $el = $('.social-feed-box').children().last();
+    $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
+    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+    $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
+    $el.append('<div id="'+message._id+'"></div>');
+    getCommentsByMessage(message._id);
+    //var messageTime = message.date_created;
+    $('.see-more-community').data('time',newDate);
+  }
+    $('.social-feed-box').append('<button class="see-more-community autofocus="true" >See More</button>');
 }
