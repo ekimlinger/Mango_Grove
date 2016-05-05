@@ -80,6 +80,11 @@ function showComments(response) {
     $('#'+messageID).addClass('social-footer');
 
     for (var i = 0; i < response.length; i++) {
+        //CHANGED FOR PRESENTATION
+        function randNumber(min, max){
+          return Math.floor(Math.random() * (1 + max - min) + min);
+        }
+
         var comment = response[i]; //store response into comment for readability
 
         // Displays ammount of likes if there are any
@@ -96,7 +101,8 @@ function showComments(response) {
 
         $('#' + comment.messageID).append('<div class="social-comment indent underline-comment"></div>'); //creates each individual comment
         var $el = $('#' + comment.messageID).children().last();
-        $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
+        //CHANGED FOR PRESENTATION
+        $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a'+randNumber(1,8)+'.jpg"></a>');
         $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted">' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
     }
   }
