@@ -200,7 +200,7 @@ function loadCommunityFeed(response){//Loads Messages to GlobalFeed
     getCommentsByMessage(message._id);
     $('.see-more-community').data("time", newDate);
   }
-  $('.social-feed-box').append('<button class="see-more-community filter-messages react-button " autofocus="true" >See More</button>');
+  $('.social-feed-box').append('<button class="animated fadeInRight col-md-12 see-more-community filter-messages btn-white" autofocus="true" >See More</button>');
 }
 
 function createCommunityPost(type){
@@ -455,5 +455,5 @@ function loadMoreCommunityFeed(response){//Loads Messages to GlobalFeed
     //var messageTime = message.date_created;
     $('.see-more-community').data('time',newDate);
   }
-    $('.social-feed-box').append('<button class="see-more-community autofocus="true" >See More</button>');
+    $('.social-feed-box').append('<button class="animated fadeInRight col-md-12 see-more-community btn-white" autofocus="true" >See More</button>');
 }

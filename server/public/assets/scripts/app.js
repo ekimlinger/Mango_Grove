@@ -161,7 +161,7 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     //var messageTime = message.date_created;
     $('.seeMore').data("time", newDate);
   }
-    $('.social-feed-box').append('<button class="seeMore filter-messages react-button " autofocus="true" >See More</button>');
+    $('.social-feed-box').append('<button class="animated fadeInRight col-md-12 seeMore filter-messages btn-white" autofocus="true" >See More</button>');
 }
 
 function loadMoreGlobalFeed(response){//Loads Messages to GlobalFeed
@@ -204,7 +204,7 @@ function loadMoreGlobalFeed(response){//Loads Messages to GlobalFeed
     //var messageTime = message.date_created;
     $('.seeMore').data('time',newDate);
   }
-    $('.social-feed-box').append('<button class="seeMore autofocus="true" >See More</button>');
+    $('.social-feed-box').append('<button class="animated fadeInRight col-md-12 seeMore filter-messages btn-white" autofocus="true" >See More</button>');
 }
 
 function getCommentsByMessage(messageID) {
