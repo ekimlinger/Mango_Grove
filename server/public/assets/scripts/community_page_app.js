@@ -11,6 +11,7 @@ $(document).ready(function(){
   //$("#loadCommunityModal").load('/assets/views/modals/user_post_modal.html');
   $("#loadCommunityCommentModal").load('/assets/views/modals/user_comment_modal.html');
   $("#loadFeedbackModal").load('/assets/views/modals/feedback_modal.html');
+  $("#loadWelcomeModal").load('/assets/views/modals/welcome.html');
 
   showGlobal(messageType);
 
@@ -59,7 +60,8 @@ $(document).ready(function(){
   $('.social-feed-box').on('click', '.messageFlag', flagMessage);
   //Feedback filter
   $('.compose-feedback').on('click', composeFeedback);
-
+  //Load Get Started
+  $('.load-welcome').on('click', loadWelcomeModal);
 
   // $('#createCommunityPost').on('click',createCommunityPost);
   // for(var i = 0; i < communityList.length; i++){
@@ -73,6 +75,10 @@ $(document).ready(function(){
     $('.chars').text(length);
   });
 });
+
+function loadWelcomeModal(){
+  $('#welcomeModal').modal('show');
+}
 
 function composeFeedback(){
   $('#feedbackModal').modal('show');
