@@ -19,7 +19,7 @@ $(document).ready(function(){
 
   for(var i = 0; i < communityList.length; i++){
     $('.nav-second-level').append('<li><a href="#messageTop" class="community-filter" data-location="'+communityList[i]+'">'+communityList[i]+'</a></li>');
-    $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label> ');
+    $('.community-list').append('<label><input type="checkbox" name="location" value="'+communityList[i]+'"> '+communityList[i]+'</label><span class="right-space">&nbsp;</span> ');
   }
 
   $('.community-filter').on('click',function(){
@@ -306,7 +306,7 @@ function showComments(response) {
         $el.append(' <a href="" class="pull-left"> <img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a>');
         $el.append(' <div class="media-body"><a href="#">' + comment.name + '</a> ' + comment.content + '<br/><small class="text-muted"> -' + comment.date_created + '</small><br/><a class="small commentLike" data-id="'+comment._id+'"><span>'+likeAmmount+'</span><i class="fa fa-thumbs-up"></i> Like this!</a><span class="flag-link"><a class="small commentFlag" data-id="'+comment._id+'"><i class="fa fa-flag"></i> Report this</a></span></div>');
     }
-  } 
+  }
 }
 
 // Get message id and make ajax call to increment flag amount in db and on DOM
