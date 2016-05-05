@@ -60,7 +60,7 @@ router.get('/:location/:type/:amount/:time', function(req,res){
   var type = req.params.type;
 
   if (type == 'all') {
-        Message.find({location: { $in: [location]} }, function(err, data){
+        Message.find({location: { $in: [location]}, date_created:{'$lt' : new Date(time)}}, function(err, data){
           if(err){
             console.log(err);
             res.send();
