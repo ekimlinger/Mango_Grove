@@ -27,7 +27,7 @@
     <link href="/vendors/Static_Seed_Project/css/grove.css" rel="stylesheet">
 
     <script type="text/javascript" src="/assets/scripts/app.js"></script>
-    <script src="/assets/scripts/guest_modal_app.js"></script>
+    <!--<script src="/assets/scripts/guest_modal_app.js"></script>-->
 
 </head>
 
@@ -66,6 +66,9 @@
                     <li class="active">
                         <a href="/assets/views/index.html"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                     </li>
+                    <li>
+                        <a href="#" class="load-welcome"><i class="fa fa-play"></i> <span class="nav-label">Get Started</span></a>
+                    </li>
                     <li><a href="/assets/views/login.html"><i class="fa fa-th-large"></i> <span class="nav-label">My Communities</span> </a></li>
                     <li>
                         <!--BRADY CHANGE-->
@@ -85,7 +88,7 @@
                         <!-- placeholder for search if added in future -->
                         <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="Search..." class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                     </div>
@@ -127,9 +130,9 @@
 
             <!-- Button trigger modal -->
             <div class="text-center">
-              <button type="button" class="btn btn-primary btn-lg compose" data-toggle="modal">
+              <!-- <button type="button" class="btn btn-primary btn-lg compose" data-toggle="modal">
                 Post Now
-              </button>
+              </button> -->
 
 
              <!-- this div is super important to receive the initial loading feed information and transfer it to the See More Button. never remove. otherwise, the load more functiona wouldn't work -->
@@ -151,11 +154,9 @@
                           <div class="modal-content-embed">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                              <!-- <h4 class="modal-title" id="guestCommentLabel">Share with us!</h4> -->
                             </div>
                               <div class="modal-body">
                               <form id="postMessageForm">
-                                <!-- <h4>What would you like to share?</h4> -->
                                 <div class="post-icon-group">
                                 <label class="radio-inline" style="font-weight:bold">
                                   <img src="/assets/views/images/mango.png" height="50" width="50" />Moment</label>
@@ -169,9 +170,8 @@
                                   </div>
 
                                 <fieldset class="form-group">
-                                  <!-- <label for="guestTextarea">Type here</label> -->
                                   <textarea class="form-control" id="guestTextarea" name="content" rows="3" maxlength="150" placeholder="Talk to us!"></textarea>
-                                  <small class="text-muted"><span class="chars">150</span> characters remaining</small></br>
+                                  <small class="text-muted"><span class="chars">150</span> characters remaining</small><br />
                                 </fieldset>
 
                                 <fieldset class="form-group">
@@ -233,7 +233,7 @@
             <!-- FOOTER -->
             <div class="footer">
                 <div class="pull-right">
-                    MANGO Mentors
+                    <a href="/assets/views/admin/admin.html">MANGO Mentors</a>
                 </div>
                 <div>
                     <strong>Copyright</strong> MANGO Mentors &copy; 2016
@@ -245,7 +245,7 @@
 
 
 <!--BRADY CHANGE-->
-<div id="loadComposeModal"></div>
+<!--<div id="loadComposeModal"></div>-->
 <div id="loadCommentModal"></div>
 <div id="loadFeedbackModal"></div>
 
