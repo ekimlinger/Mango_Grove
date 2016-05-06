@@ -37,6 +37,7 @@ $(document).ready(function(){
 
   $('.community-global').on('click', function(){
       showGlobal(messageType);
+      $('.current-community').html(' Global');
   });
 
   $('.filter-messages').on('click',function(){//Event Handler that will Filter global messages
