@@ -124,6 +124,11 @@ function showMoreFeed(){
 
 function loadGlobalFeed(response){//Loads Messages to GlobalFeed
   $('.social-feed-box').empty();  //empty out the div container on the DOM that stores the messages to refresh the page
+
+  //CHANGED FOR PRESENTATION
+  function randNumber(min, max){
+    return Math.floor(Math.random() * (1 + max - min) + min);
+  }
   for(var i = 0; i <response.length; i++){  //append info to comment-container by looping through the array
     var message = response[i];//store response into comment for readability
     var iconType;             // Sets icon type to be displayed on dom
@@ -154,7 +159,8 @@ function loadGlobalFeed(response){//Loads Messages to GlobalFeed
     $('.social-feed-box').append('<div class="animated fadeInRight underline"></div>');//creates each individual comment
     var $el = $('.social-feed-box').children().last();
     $el.append('<div class="post-icon"><img src="/assets/views/images/'+ iconType +'.png" height="30" width="30" /></div>');
-    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a1.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
+    //CHANGED FOR PRESENTATION
+    $el.append('<div class="social-avatar"><a href="" class="pull-left"><img alt="image" src="/vendors/Static_Seed_Project/img/a'+randNumber(1,8)+'.jpg"></a><div class="media-body"><a href="#">'+message.name+'</a><small class="text-muted">'+message.date_created+'</small></div></div>');
     $el.append('<div class="social-body"><p>'+message.content+'</p><div class="btn-group"><button class="btn btn-white btn-xs messageLike" data-id="' + message._id + '"><span>'+ likeAmmount +'</span><i class="fa fa-thumbs-up"></i> Like this!</button><button class="btn btn-white btn-xs" id="messageComment" data-toggle="modal" data-target="#guestMessageCommentModal" data-id="'+message._id+'"><i class="fa fa-comments"></i> Comment</button></div><button class="btn btn-white btn-xs flag-button small-type messageFlag" data-id="' + message._id + '"><i class="fa fa-flag"></i> Report inappropriate post</button></div>');
     $el.append('<div id="'+message._id+'"></div>');
     getCommentsByMessage(message._id);
